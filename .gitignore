@@ -1,0 +1,23 @@
+# Ignorar archivos y directorios generados por Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignorar archivos y directorios generados por npm
+package-lock.json
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+
+# Ignorar archivos y directorios generados por Yarn
+yarn.lock
+.pnp.*
+.pnp.js
+
+# Ignorar archivos de configuración local
+.env
+
+# Ignorar archivos de registros de errores
+error.log

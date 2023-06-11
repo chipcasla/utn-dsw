@@ -1,120 +1,130 @@
-
+let properties = [];
 const priceSpecs = {
-    pricePerSqrMeter: 100,
-    roomPriceMultiplier: 1.5,
-    parkingSpaceAdditional: 50,
-    commission: 0.1,
-  };
-  
-  const property = {
-    id: 0,
-    address: '',
-    m2: 0,
-    getPrice() {
-      return this.m2 * priceSpecs.pricePerSqrMeter;
-    },
-    getCommission() {
-      return this.getPrice() * priceSpecs.commission;
-    },
-  };
-  
-  const house = Object.create(property);
-  house.roomQtty = 0;
-  house.getPrice = function() {
-    return this.m2 * priceSpecs.pricePerSqrMeter * this.roomQtty * priceSpecs.roomPriceMultiplier;
-  };
-  
-  const service = {
-    price: 0,
-  };
-  
-  const office = Object.create(property);
-  office.services = [];
-  office.getPrice = function() {
-    const servicesPrice = this.services.reduce((sum, service) => sum + service.price, 0);
-    return this.m2 * priceSpecs.pricePerSqrMeter + servicesPrice;
-  };
-  
-  const garage = Object.create(property);
-  garage.parkingSpace = 0;
-  garage.getPrice = function() {
-    return this.m2 * priceSpecs.pricePerSqrMeter + this.parkingSpace * priceSpecs.parkingSpaceAdditional;
-  };
-  
-  const owner = {
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'johndoe@example.com',
-    properties: [],
-  };
-  
-  function createHouse() {
-    const newHouse = Object.create(house);
-    newHouse.id = prompt('Ingrese el ID de la casa:');
-    newHouse.address = prompt('Ingrese la dirección de la casa:');
-    newHouse.m2 = parseFloat(prompt('Ingrese los metros cuadrados de la casa:'));
-    newHouse.roomQtty = parseInt(prompt('Ingrese la cantidad de habitaciones de la casa:'));
-    
-    owner.properties.push(newHouse);
-    
-    console.log('Casa creada:', newHouse);
-  }
-  
-  function createService(myPrice) {
-    const newService = Object.create(service);
-    newService.price = myPrice;
-    
-    return newService;
-  }
-  
-  function createOffice() {
-    const newOffice = Object.create(office);
-    newOffice.id = prompt('Ingrese el ID de la oficina:');
-    newOffice.address = prompt('Ingrese la dirección de la oficina:');
-    newOffice.m2 = parseFloat(prompt('Ingrese los metros cuadrados de la oficina:'));
-    
-    let addService = true;
-    while (addService) {
-      const servicePrice = parseFloat(prompt('Ingrese el precio de un servicio (o ingrese 0 para terminar):'));
-      if (servicePrice === 0) {
-        addService = false;
-      } else {
-        const newService = Object.create(service);
-        newService.price = servicePrice;
-        newOffice.services.push(newService);
-      }
+  pricePerSqrMeter: 100,  
+  roomPriceMultiplier: 1.5,  
+  parkingSpaceAdditional: 50,
+  commission: 0.1,
+};
+
+const property = {
+  id: null,
+  address: null,
+  m2: null,
+  owner: null,
+  getPrice() {
+  },
+  getCommission() {
+    return this.getPrice() * priceSpecs.commission;
+  },
+};
+
+const house = Object.create(property);
+house.roomQtty = null;
+house.getPrice = function () {
+  return this.m2 * priceSpecs.pricePerSqrMeter * this.roomQtty * priceSpecs.roomPriceMultiplier;
+};
+
+const service = {
+  price: 0,
+};
+
+const office = Object.create(property, {
+  services: { value: [] },
+  getPrice: {
+    value: function() {
+      const servicesPrice = this.services.reduce((sum, service) => sum + service.price, 0);
+      return this.m2 * priceSpecs.pricePerSqrMeter + servicesPrice;
     }
-    
-    owner.properties.push(newOffice);
-    
-    console.log('Oficina creada:', newOffice);
   }
-  
-  function createGarage() {
-    const newGarage = Object.create(garage);
-    newGarage.id = prompt('Ingrese el ID del garaje:');
-    newGarage.address = prompt('Ingrese la dirección del garaje:');
-    newGarage.m2 = parseFloat(prompt('Ingrese los metros cuadrados del garaje:'));
-    newGarage.parkingSpace = parseInt(prompt('Ingrese la cantidad de espacios de estacionamiento del garaje:'));
-    
-    owner.properties.push(newGarage);
-    
-    console.log('Garaje creado:', newGarage);
+});
+
+const garage = Object.create(property, {
+  parkingSpace: { value: 0 },
+  getPrice: {
+    value: function() {
+      return this.m2 * priceSpecs.pricePerSqrMeter + this.parkingSpace * priceSpecs.parkingSpaceAdditional;
+    }
   }
-  
-  // Crear propiedades
-  createHouse();
-  createService();
-  createOffice();
-  createGarage();
-  
-  // Calcular y mostrar el precio total
-  let totalPrice = 0;
-  for (const property of owner.properties) {
-    totalPrice += property.getPrice();
-  }
-  
-  console.log('Precio total:', totalPrice);
-  
-  
+});
+
+const owner = {
+  id: null,
+  firstName: '',
+  lastName: '',
+  email: '',
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
+
+// data of my owner
+const myOwner = Object.create(owner);
+myOwner.id = 1;
+myOwner.firstName = 'Adam';
+myOwner.lastName = 'Bareiro';
+myOwner.email = 'adam9@gmail.com';
+
+// instantiate properties...
+// -----instance of house------
+const house1 = Object.create(house);
+house1.idvalue = 1;
+house1.address = 'Tucuman 380';
+house1.m2 = 150;
+house1.roomQtty = 3;
+house1.owner = myOwner;
+
+properties.push(house1);
+
+// -----instance of office------
+const office1 = {
+  __proto__: office,
+  id : 2,
+  address : 'Av. La Plata 1700',
+  m2 : 200,
+  owner : myOwner,
+  services : [],
+};
+// instance of services
+const service1 = Object.create(service, {
+  price: { value: 50 }
+});
+
+const service2 = Object.create(service, {
+  price: { value: 30 }
+});
+// add services to the office
+office1.services.push(service1,service2);
+
+properties.push(office1);
+
+// ----instance of garage----
+const myOwner2 = Object.create(owner);
+myOwner2.id = 1;
+myOwner2.firstName = 'Viggo';
+myOwner2.lastName = 'Mortensen';
+myOwner2.email = 'aragorn@gmail.com';
+
+const garage1 = Object.create(garage, {
+  id: { value: 3 },
+  address: { value: 'Francia 230' },
+  m2: { value: 100 },
+  owner: { value: myOwner2},
+  parkingSpace: { value: 2 }
+});
+properties.push(garage1);
+
+
+// calculate commissions for each property
+let totalCom = 0;
+let i = 0;
+for (const p of properties) {
+  const prototype_p = Object.getPrototypeOf(p);
+  const comission_p = p.getCommission();
+
+  console.log(++i,'-'
+    ,p.owner.getFullName(),'>>>'
+    ,prototype_p === house ? 'House' : prototype_p === office ? 'Office' : prototype_p === garage ? 'Garage' : ''
+    ,'>>> $',comission_p
+    );
+};
+
