@@ -67,7 +67,7 @@ myOwner.email = 'adam9@gmail.com';
 // instantiate properties...
 // -----instance of house------
 const house1 = Object.create(house);
-house1.idvalue = 1;
+house1.id = 1;
 house1.address = 'Tucuman 380';
 house1.m2 = 150;
 house1.roomQtty = 3;
@@ -113,16 +113,30 @@ const garage1 = Object.create(garage, {
 });
 properties.push(garage1);
 
+const office2 = {
+  __proto__: office,
+  id : 4,
+  address : 'Av. La Plata 1700',
+  m2 : 120,
+  owner : myOwner2,
+  services : [],
+};
+// instance of services
+const service3 = Object.create(service, {
+  price: { value: 10 }
+});
+
+office2.services.push(service3);
+
+properties.push(office2);
 
 // calculate commissions for each property
-let totalCom = 0;
-let i = 0;
 for (const p of properties) {
   const prototype_p = Object.getPrototypeOf(p);
   const comission_p = p.getCommission();
 
   console.log(
-    ++i,'-'
+    p.id,'-'
     ,p.owner.getFullName(),'>>>'
     ,prototype_p === house ? 'House' : prototype_p === office ? 'Office' : prototype_p === garage ? 'Garage' : ''
     ,'>>> $',comission_p
