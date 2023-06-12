@@ -131,15 +131,14 @@ office2.services.push(service3);
 properties.push(office2);
 
 // calculate commissions for each property
-for (const p of properties) {
-  const prototype_p = Object.getPrototypeOf(p);
-  const comission_p = p.getCommission();
-
-  console.log(
-    p.id,'-'
-    ,p.owner.getFullName(),'>>>'
-    ,prototype_p === house ? 'House' : prototype_p === office ? 'Office' : prototype_p === garage ? 'Garage' : ''
-    ,'>>> $',comission_p
-    );
-};
-
+properties.forEach((p) => {
+    const prototype_p = Object.getPrototypeOf(p);
+    const comission_p = p.getCommission();
+  
+    console.log(
+      p.id,'-'
+      ,p.owner.getFullName(),'>>>'
+      ,prototype_p === house ? 'House' : prototype_p === office ? 'Office' : prototype_p === garage ? 'Garage' : ''
+      ,'>>> $',comission_p
+      );
+});
