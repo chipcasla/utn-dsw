@@ -4,8 +4,9 @@ npm-debug.log
 yarn-error.log
 
 # Ignorar archivos y directorios generados por npm
-package-lock.json
-.yarn/*
+*.json
+*.yaml
+!.yarn/*
 !.yarn/patches
 !.yarn/releases
 !.yarn/plugins
