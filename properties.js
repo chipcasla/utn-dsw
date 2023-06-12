@@ -121,7 +121,8 @@ for (const p of properties) {
   const prototype_p = Object.getPrototypeOf(p);
   const comission_p = p.getCommission();
 
-  console.log(++i,'-'
+  console.log(
+    ++i,'-'
     ,p.owner.getFullName(),'>>>'
     ,prototype_p === house ? 'House' : prototype_p === office ? 'Office' : prototype_p === garage ? 'Garage' : ''
     ,'>>> $',comission_p
