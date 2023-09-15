@@ -1,0 +1,6 @@
+git clone [el linkk]
+agrega lo q hayas hecho a la carpeta clonada
+
+git add .
+git commit -m ""
+git push origin main
