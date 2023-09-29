@@ -1,0 +1,25 @@
+### obtener todas las localidades
+GET http://localhost:3000/api/localidades
+
+
+### obtener una localidad
+GET http://localhost:3000/api/localidades/1
+
+### crear una nueva localidad
+POST http://localhost:3000/api/localidades
+Content-Type: application/json
+
+{
+  "descripcion": "Villa Gesell"
+}
+
+### modificar una localidad (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/localidades/2
+Content-Type: application/json
+
+{
+  "descripcion": "Casilda"
+}
+
+### borrar una localidad
+DELETE http://localhost:3000/api/localidades/1
