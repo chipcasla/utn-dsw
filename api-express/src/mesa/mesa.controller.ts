@@ -11,11 +11,11 @@ function findAll(req: Request, res: Response) {
 
 function findOne(req: Request, res: Response) {
   const id = req.params.id;
-  const cliente = repository.findOne({ id });
-  if (!cliente) {
-    return res.status(404).send({ error: 'Cliente no encontrado' });
+  const mesa = repository.findOne({ id });
+  if (!mesa) {
+    return res.status(404).send({ error: 'Mesa no encontrada' });
   }
-  res.json({ data: cliente });
+  res.json({ data: mesa });
 }
 
 function add(req: Request, res: Response) {

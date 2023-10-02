@@ -1,6 +1,7 @@
 import express from 'express';
 import { clienteRouter } from './cliente/cliente.routes.js';
 import { mesaRouter } from './mesa/mesa.routes.js';
+import { localidadRouter } from './localidad/localidad.routes.js';
 
 const app = express();
 
@@ -8,6 +9,7 @@ app.use(express.json());
 
 app.use('/api/clientes', clienteRouter);
 app.use('/api/mesas', mesaRouter);
+app.use('/api/localidades', localidadRouter);
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' });
