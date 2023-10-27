@@ -1,45 +1,61 @@
 import { Repository } from '../shared/repository.js';
 import { Mesa } from './mesa.entity.js';
 
-const mesas = [new Mesa(1, 4, true, 'afuera')];
-
 export class MesaRepository implements Repository<Mesa> {
-  public findAll(): Mesa[] | undefined {
-    return mesas;
-  }
-
-  public findOne(item: { id: string }): Mesa | undefined {
-    return mesas.find((mesa) => mesa.id && mesa.id.toString() === item.id);
-  }
-
-  public add(item: Mesa): Mesa | undefined {
-    let nuevoId = mesas[mesas.length - 1].id;
-    nuevoId = nuevoId ? nuevoId + 1 : null;
-    item.id = nuevoId;
-    mesas.push(item);
-    return item;
-  }
-
-  public update(item: Mesa): Mesa | undefined {
-    const mesaIdx = mesas.findIndex(
-      (mesa) => item.id && mesa.id && mesa.id.toString() === item.id.toString()
-    );
-
-    if (mesaIdx !== -1) {
-      mesas[mesaIdx] = { ...mesas[mesaIdx], ...item };
+  public async findAll(): Promise<Mesa[] | undefined> {
+    try {
+      const mesas = await Mesa.findAll();
+      return mesas;
+    } catch (error) {
+      throw error;
     }
-    return mesas[mesaIdx];
   }
 
-  public delete(item: { id: string }): Mesa | undefined {
-    const mesaIdx = mesas.findIndex(
-      (mesa) => mesa.id && mesa.id.toString() === item.id
-    );
+  public async findOne(item: { id: string }): Promise<Mesa | undefined> {
+    try {
+      const mesa = await Mesa.findByPk(parseInt(item.id));
+      if (!mesa) {
+        return undefined;
+      }
+      return mesa;
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    if (mesaIdx !== -1) {
-      const deletedMesas = mesas[mesaIdx];
-      mesas.splice(mesaIdx, 1);
-      return deletedMesas;
+  public async add(item: any): Promise<Mesa | undefined> {
+    try {
+      const nuevaMesa = await Mesa.create(item);
+      return nuevaMesa;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async update(id: string, item: any): Promise<Mesa | undefined> {
+    try {
+      await Mesa.update(item, {
+        where: {
+          id: Number.parseInt(id),
+        },
+      });
+      const mesaActualizada = await this.findOne({ id });
+      return mesaActualizada;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async delete(item: { id: string }): Promise<number> {
+    try {
+      const eliminadas = await Mesa.destroy({
+        where: {
+          id: parseInt(item.id),
+        },
+      });
+      return eliminadas;
+    } catch (error) {
+      throw error;
     }
   }
 }

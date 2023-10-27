@@ -1,11 +1,17 @@
-import { Router } from 'express'
-import { findAll, findOne, add, update, remove } from './mesa.controller.js'
+import { Router } from 'express';
+import {
+  add,
+  findAll,
+  findOne,
+  remove,
+  sanitizeMesaInput,
+  update,
+} from './mesa.controller.js';
 
-export const mesaRouter = Router()
+export const mesaRouter = Router();
 
-
-mesaRouter.get('/', findAll)
-mesaRouter.get('/:id', findOne)
-mesaRouter.post('/', add)
-mesaRouter.put('/:id', update)
-mesaRouter.delete('/:id', remove)
+mesaRouter.get('/', findAll);
+mesaRouter.get('/:id', findOne);
+mesaRouter.post('/', sanitizeMesaInput, add);
+mesaRouter.put('/:id', sanitizeMesaInput, update);
+mesaRouter.delete('/:id', remove);

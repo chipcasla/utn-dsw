@@ -10,24 +10,21 @@ POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-  "dni": "20202020",
-  "nombre": "Joe",
-  "apellido": "Pesci",
-  "email": "jp@gmail.com",
-  "telefono": "0100101010"
+  "dni": "32323234",
+  "nombre": "Adam",
+  "apellido": "Bareiro",
+  "telefono": "3413334387",
+  "mail": "ab9@gmail.com",
+  "password": "asd"
 }
 
 ### modificar un cliente (PUT - recurso completo e idempotente)
-PUT http://localhost:3000/api/clientes/2
+PUT http://localhost:3000/api/clientes/1
 Content-Type: application/json
 
 {
-  "dni": "20202020",
-  "nombre": "Martin",
-  "apellido": "Pesci",
-  "mail": "mp@gmail.com",
-  "telefono": "9999"
+  "mail": "alex_am@gmail.com"
 }
 
 ### borrar un cliente
-DELETE http://localhost:3000/api/clientes/1
+DELETE http://localhost:3000/api/clientes/4

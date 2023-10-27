@@ -1,60 +1,103 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { ClienteRepository } from './cliente.repository.js';
-import { Cliente } from './cliente.entity.js';
 
 const repository = new ClienteRepository();
 
-function findAll(req: Request, res: Response) {
-  const clientes = repository.findAll();
+function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
+  req.body.sanitizedInput = {
+    dni: req.body.dni,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    telefono: req.body.telefono,
+    mail: req.body.mail,
+    password: req.body.password,
+  };
+  //more checks here
+
+  Object.keys(req.body.sanitizedInput).forEach((key) => {
+    if (req.body.sanitizedInput[key] === undefined) {
+      delete req.body.sanitizedInput[key];
+    }
+  });
+  next();
+}
+
+async function findAll(req: Request, res: Response) {
+  const clientes = await repository.findAll();
   res.json({ data: clientes });
 }
 
-function findOne(req: Request, res: Response) {
-  const id = req.params.id;
-  const cliente = repository.findOne({ id });
-  if (!cliente) {
-    return res.status(404).send({ error: 'Cliente no encontrado' });
+async function findOne(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const cliente = await repository.findOne({ id });
+    if (!cliente) {
+      return res.status(404).send({ error: 'Cliente no encontrado' });
+    }
+    res.json({ data: cliente });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al buscar cliente', error });
   }
-  res.json({ data: cliente });
 }
 
-function add(req: Request, res: Response) {
-  const { dni, nombre, apellido, telefono, email } = req.body;
-  const clienteInput = new Cliente(
+async function add(req: Request, res: Response) {
+  const { dni, nombre, apellido, telefono, mail, password } =
+    req.body.sanitizedInput;
+  const clienteInput = {
+    tipo: 'cliente',
     dni,
     nombre,
     apellido,
     telefono,
-    email,
-    null
-  ); // Inicializa id como null
-  const nuevoCliente = repository.add(clienteInput);
-  return res
-    .status(201)
-    .send({ message: 'Cliente creado', data: nuevoCliente });
+    mail,
+    password,
+  };
+  try {
+    const nuevoCliente = await repository.add(clienteInput);
+    return res
+      .status(201)
+      .json({ message: 'Cliente creado', data: nuevoCliente });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: 'Error al crear el cliente', error });
+  }
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
   const { id } = req.params;
-  req.body.id = Number.parseInt(id);
-  const clienteActualizado = repository.update(req.body);
-  if (!clienteActualizado) {
-    res.status(404).send({ error: 'Cliente no encontrado' });
-  }
-
-  return res
-    .status(200)
-    .send({ message: 'Cliente actualizado!', data: clienteActualizado });
-}
-
-function remove(req: Request, res: Response) {
-  const id = req.params.id;
-  const clienteEliminado = repository.delete({ id });
-  if (!clienteEliminado) {
-    res.status(404).send({ error: 'Cliente no encontrado' });
-  } else {
-    res.status(200).send({ message: 'Cliente eliminado correctamente' });
+  try {
+    const clienteActualizado = await repository.update(
+      id,
+      req.body.sanitizedInput
+    );
+    if (!clienteActualizado) {
+      return res.status(404).send({ error: 'Cliente no encontrado' });
+    }
+    res
+      .status(200)
+      .send({ message: 'Cliente actualizado', data: clienteActualizado });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: 'Error al actualizar cliente', error });
   }
 }
 
-export { findAll, findOne, add, update, remove };
+async function remove(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const clienteEliminado = await repository.delete({ id });
+    if (clienteEliminado == 0) {
+      res.status(404).send({ error: 'Cliente no encontrado' });
+    } else {
+      res.status(200).send({ message: 'Cliente eliminado correctamente' });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: 'Error al eliminar el cliente', error });
+  }
+}
+
+export { add, findAll, findOne, remove, sanitizeClienteInput, update };

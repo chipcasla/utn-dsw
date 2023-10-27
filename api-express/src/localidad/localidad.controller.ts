@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+/* import { Request, Response, NextFunction } from 'express';
 import { LocalidadRepository } from './localidad.repository.js';
 import { Localidad } from './localidad.entity.js';
 
@@ -53,4 +53,4 @@ function remove(req: Request, res: Response) {
   }
 }
 
-export { findAll, findOne, add, update, remove };
+export { findAll, findOne, add, update, remove }; */

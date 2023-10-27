@@ -1,4 +1,4 @@
-import { Repository } from '../shared/repository.js';
+/* import { Repository } from '../shared/repository.js';
 import { Localidad } from './localidad.entity.js';
 
 const localidades = [
@@ -47,4 +47,4 @@ export class LocalidadRepository implements Repository<Localidad> {
       return deletedLocalidades;
     }
   }
-}
+} */

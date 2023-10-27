@@ -1,0 +1,44 @@
+### Obtener todas las reservas
+GET http://localhost:3000/api/reservas
+
+### Obtener una reserva
+GET http://localhost:3000/api/reservas/9
+
+### Crear una nueva reserva
+POST http://localhost:3000/api/reservas
+Content-Type: application/json
+
+{
+  "fechaHora": "2023-10-29T22:00:00Z",
+  "cantidadPersonas": 10,
+  "estado": "Pendiente",
+  "cliente": 2,
+  "Mesas": [
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ]
+}
+
+### Modificar una reserva (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/reservas/9
+//Reemplaza con el ID de la reserva a modificar
+Content-Type: application/json
+
+{
+  "cantidadPersonas": 5,
+  "estado": "Pendiente",
+  "cliente": 2,
+  "Mesas": [
+    {
+      "id":2
+    }
+  ]
+}
+
+### Borrar una reserva
+DELETE http://localhost:3000/api/reservas/10
+//emplaza con el ID de la reserva a borrar
