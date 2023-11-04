@@ -92,6 +92,9 @@ CREATE TABLE `reserva_mesa` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+CREATE USER 'myclient'@'%' IDENTIFIED BY 'client';
+GRANT SELECT, INSERT, UPDATE, DELETE ON restaurante_db.* TO 'myclient'@'%';
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
