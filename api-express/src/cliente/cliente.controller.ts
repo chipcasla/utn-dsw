@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ClienteRepository } from './cliente.repository.js';
+import { ClienteRepository } from './cliente.data.js';
 
 const repository = new ClienteRepository();
 

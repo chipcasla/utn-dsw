@@ -1,9 +1,9 @@
 import express from 'express';
-import './cliente/cliente.entity.js';
+import './cliente/cliente.model.js';
 import { clienteRouter } from './cliente/cliente.routes.js';
-import './mesa/mesa.entity.js';
+import './mesa/mesa.model.js';
 import { mesaRouter } from './mesa/mesa.routes.js';
-import './reserva/reserva.entity.js';
+import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { sequelize } from './shared/conn.js';

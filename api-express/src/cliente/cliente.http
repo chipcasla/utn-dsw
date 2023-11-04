@@ -23,8 +23,8 @@ PUT http://localhost:3000/api/clientes/1
 Content-Type: application/json
 
 {
-  "mail": "alex_am@gmail.com"
+  "mail": "alexam@gmail.com"
 }
 
 ### borrar un cliente
-DELETE http://localhost:3000/api/clientes/4
+DELETE http://localhost:3000/api/clientes/5
