@@ -1,10 +1,6 @@
-import { throws } from 'assert';
-import { Reserva } from '../reserva/reserva.entity.js';
-import { Repository } from '../shared/repository.js';
-import { Mesa } from './mesa.entity.js';
-import { Op } from 'sequelize';
+import { Mesa } from './mesa.model.js';
 
-export class MesaRepository implements Repository<Mesa> {
+class MesaRepository {
   public async findAll(): Promise<Mesa[] | undefined> {
     try {
       const mesas = await Mesa.findAll();
@@ -88,5 +84,4 @@ export class MesaRepository implements Repository<Mesa> {
     throw error;
   }
 }
-
 }

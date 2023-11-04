@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ReservaRepository } from './reserva.repository.js';
+import { ReservaRepository } from './reserva.data.js';
 
 const repository = new ReservaRepository();
 

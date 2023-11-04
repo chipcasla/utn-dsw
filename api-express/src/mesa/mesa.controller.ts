@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { MesaRepository } from './mesa.repository.js';
+import { MesaRepository } from './mesa.data.js';
 
 const repository = new MesaRepository();
 

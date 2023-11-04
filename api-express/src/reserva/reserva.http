@@ -29,16 +29,19 @@ PUT http://localhost:3000/api/reservas/9
 Content-Type: application/json
 
 {
-  "cantidadPersonas": 5,
+  "cantidadPersonas": 4,
   "estado": "Pendiente",
   "cliente": 2,
   "Mesas": [
     {
       "id":2
+    },
+    {
+      "id":3
     }
   ]
 }
 
 ### Borrar una reserva
-DELETE http://localhost:3000/api/reservas/10
+DELETE http://localhost:3000/api/reservas/11
 //emplaza con el ID de la reserva a borrar

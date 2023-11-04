@@ -1,13 +1,14 @@
 import {
   BelongsToManyAddAssociationMixin,
   BelongsToManyGetAssociationsMixin,
+  BelongsToManySetAssociationsMixin,
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
   Model,
 } from 'sequelize';
-import { Cliente } from '../cliente/cliente.entity.js';
-import { Mesa } from '../mesa/mesa.entity.js';
+import { Cliente } from '../cliente/cliente.model.js';
+import { Mesa } from '../mesa/mesa.model.js';
 import { sequelize } from '../shared/conn.js';
 
 export class Reserva extends Model<
@@ -21,6 +22,7 @@ export class Reserva extends Model<
   declare idCliente: Number;
   public getMesas!: BelongsToManyGetAssociationsMixin<Mesa>; //this is what was missing
   public addMesa!: BelongsToManyAddAssociationMixin<Mesa, undefined>; //this is what was missing
+  public setMesas!: BelongsToManySetAssociationsMixin<Mesa, undefined>;
 }
 
 Reserva.init(

@@ -1,10 +1,9 @@
-import { Cliente } from '../cliente/cliente.entity.js';
-import { Mesa } from '../mesa/mesa.entity.js';
+import { Cliente } from '../cliente/cliente.model.js';
+import { Mesa } from '../mesa/mesa.model.js';
 import { sequelize } from '../shared/conn.js';
-import { Repository } from '../shared/repository.js';
-import { Reserva } from './reserva.entity.js';
+import { Reserva } from './reserva.model.js';
 
-export class ReservaRepository implements Repository<Reserva> {
+export class ReservaRepository {
   public async findAll(): Promise<Reserva[] | undefined> {
     try {
       const reservas = await Reserva.findAll({
@@ -71,13 +70,13 @@ export class ReservaRepository implements Repository<Reserva> {
         },
         transaction,
       });
-      const reserva: any = await this.findOne({ id });
-      await reserva.setMesas(
+      const reserva = await this.findOne({ id });
+      await reserva?.setMesas(
         item.Mesas.map((m: { id: any }) => m.id),
         { transaction }
       );
       await transaction.commit();
-      return reserva.reload();
+      return reserva?.reload();
     } catch (error) {
       throw error;
     }

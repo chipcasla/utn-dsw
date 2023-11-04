@@ -1,8 +1,6 @@
-import { where } from 'sequelize';
-import { Repository } from '../shared/repository.js';
-import { Cliente } from './cliente.entity.js';
+import { Cliente } from './cliente.model.js';
 
-export class ClienteRepository implements Repository<Cliente> {
+export class ClienteRepository {
   public async findAll(): Promise<Cliente[] | undefined> {
     try {
       const clientes = await Cliente.findAll();
