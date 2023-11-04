@@ -1,5 +1,8 @@
+import { throws } from 'assert';
+import { Reserva } from '../reserva/reserva.entity.js';
 import { Repository } from '../shared/repository.js';
 import { Mesa } from './mesa.entity.js';
+import { Op } from 'sequelize';
 
 export class MesaRepository implements Repository<Mesa> {
   public async findAll(): Promise<Mesa[] | undefined> {
@@ -58,4 +61,32 @@ export class MesaRepository implements Repository<Mesa> {
       throw error;
     }
   }
+
+  public async findMesasLibres(cantidadPersonas: number, fechaHora: Date, ubicacion: string): Promise<Mesa[] | undefined> {
+    try{
+      const mesas= await Mesa.findAll({
+        include: {model: Reserva,
+        required: false,
+        where: {
+          estado: {
+            [Op.ne]: 'Pendiente'
+          },
+          fechaHora: {
+            [Op.ne]: fechaHora
+          }
+        }
+      },
+      where: {
+        cantidadPersonas:{
+          [Op.gte]: cantidadPersonas
+        },
+        ubicacion: ubicacion
+      }
+    })
+    return mesas
+  } catch(error){
+    throw error;
+  }
+}
+
 }

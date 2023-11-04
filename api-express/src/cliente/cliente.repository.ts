@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import { Repository } from '../shared/repository.js';
 import { Cliente } from './cliente.entity.js';
 
@@ -22,6 +23,19 @@ export class ClienteRepository implements Repository<Cliente> {
       throw error;
     }
   }
+
+  public async findByDni(dni: string): Promise<Cliente | undefined>{
+    try{
+      const cliente = await Cliente.findOne({where: {dni: dni}});
+     if (!cliente || cliente.dataValues.tipo != 'cliente'){
+     return undefined;
+    }
+    return cliente;
+  } catch(error) {
+    throw error;
+  }
+}
+
 
   public async add(item: any): Promise<Cliente | undefined> {
     try {
