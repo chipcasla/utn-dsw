@@ -1,6 +1,8 @@
 import { Mesa } from './mesa.model.js';
+import { Op } from 'sequelize';
+import { Reserva } from '../reserva/reserva.model.js';
 
-class MesaRepository {
+export class MesaRepository {
   public async findAll(): Promise<Mesa[] | undefined> {
     try {
       const mesas = await Mesa.findAll();
