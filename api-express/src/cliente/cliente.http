@@ -28,3 +28,12 @@ Content-Type: application/json
 
 ### borrar un cliente
 DELETE http://localhost:3000/api/clientes/5
+
+### login
+POST http://localhost:3000/api/clientes/login
+Content-Type: application/json
+
+{
+  "dni": "23232324",
+  "password": "ashd"
+}

@@ -1,7 +1,7 @@
+import bcrypt from 'bcrypt';
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { ClienteRepository } from './cliente.data.js';
-import bcrypt from 'bcrypt';
 const repository = new ClienteRepository();
 
 function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
@@ -45,7 +45,7 @@ async function add(req: Request, res: Response) {
   const { dni, nombre, apellido, telefono, mail, password } =
     req.body.sanitizedInput;
   //encriptacion de contraseña
-  const hashedPassword= await bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10);
   const clienteInput = {
     tipo: 'cliente',
     dni,
@@ -106,20 +106,21 @@ async function remove(req: Request, res: Response) {
 async function login(req: Request, res: Response) {
   const { dni, password } = req.body;
 
-    //Validar dni
-  const cliente= await repository.findByDni(dni);
+  //Validar dni
+  const cliente = await repository.findByDni(dni);
 
   if (!cliente) {
-    return res.status(400).json({ msg: 'Cliente inexistente' });
+    return res.status(401).json({ msg: 'DNI no registrado' });
   }
 
-    //Validar password
-    const passwordValid = await bcrypt.compare(password, cliente.getDataValue(password)) //no estoy seguro si es con getDataValue 
-  if(!passwordValid){
-    return res.status(400).json({msg: 'Contraseña incorrecta'})
+  //Validar password
+  const passwordValid = await bcrypt.compare(password, cliente.get(password)); //no estoy seguro si es con get
+  if (!passwordValid) {
+    return res.status(401).json({ msg: 'Contraseña incorrecta' });
   }
-    //Generar token
-  jwt.sign({dni: dni}, process.env.SECRET_KEY || 'troleado') //el dni en el payload es temporal, despues hay que cambiarlo
+  //Generar token
+  const token = jwt.sign({ dni: dni }, process.env.SECRET_KEY || 'troleado'); //el dni en el payload es temporal, despues hay que cambiarlo
+  return res.status(200).json({ token });
 }
 
 export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };
