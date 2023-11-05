@@ -10,11 +10,11 @@ POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-  "dni": "32323234",
-  "nombre": "Adam",
-  "apellido": "Bareiro",
-  "telefono": "3413334387",
-  "mail": "ab9@gmail.com",
+  "dni": "43378663",
+  "nombre": "Nahuel",
+  "apellido": "Barrios",
+  "telefono": "3413334310",
+  "mail": "nbp@gmail.com",
   "password": "asd"
 }
 

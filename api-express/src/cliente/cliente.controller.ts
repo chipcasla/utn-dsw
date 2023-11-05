@@ -53,8 +53,9 @@ async function add(req: Request, res: Response) {
     apellido,
     telefono,
     mail,
-    hashedPassword,
+    password,
   };
+  clienteInput.password = hashedPassword;
   try {
     const nuevoCliente = await repository.add(clienteInput);
     return res
