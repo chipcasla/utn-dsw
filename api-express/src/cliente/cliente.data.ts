@@ -22,18 +22,17 @@ export class ClienteRepository {
     }
   }
 
-  public async findByDni(dni: string): Promise<Cliente | undefined>{
-    try{
-      const cliente = await Cliente.findOne({where: {dni: dni}});
-     if (!cliente || cliente.dataValues.tipo != 'cliente'){
-     return undefined;
+  public async findByDni(dni: string): Promise<Cliente | undefined> {
+    try {
+      const cliente = await Cliente.findOne({ where: { dni: dni } });
+      if (!cliente || cliente.dataValues.tipo != 'cliente') {
+        return undefined;
+      }
+      return cliente;
+    } catch (error) {
+      throw error;
     }
-    return cliente;
-  } catch(error) {
-    throw error;
   }
-}
-
 
   public async add(item: any): Promise<Cliente | undefined> {
     try {

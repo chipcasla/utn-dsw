@@ -53,9 +53,8 @@ async function add(req: Request, res: Response) {
     apellido,
     telefono,
     mail,
-    password,
+    password: hashedPassword,
   };
-  clienteInput.password = hashedPassword;
   try {
     const nuevoCliente = await repository.add(clienteInput);
     return res
@@ -109,13 +108,14 @@ async function login(req: Request, res: Response) {
 
   //Validar dni
   const cliente = await repository.findByDni(dni);
-
   if (!cliente) {
     return res.status(401).json({ msg: 'DNI no registrado' });
   }
-
   //Validar password
-  const passwordValid = await bcrypt.compare(password, cliente.get(password)); //no estoy seguro si es con get
+  const passwordValid = await bcrypt.compare(
+    password,
+    cliente.dataValues.password
+  );
   if (!passwordValid) {
     return res.status(401).json({ msg: 'Contraseña incorrecta' });
   }
