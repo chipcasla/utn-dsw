@@ -3,6 +3,7 @@ import {
   add,
   findAll,
   findOne,
+  findPendientes,
   remove,
   sanitizeReservaInput,
   update,
@@ -15,3 +16,4 @@ reservaRouter.get('/:id', findOne);
 reservaRouter.post('/', sanitizeReservaInput, add);
 reservaRouter.put('/:id', sanitizeReservaInput, update);
 reservaRouter.delete('/:id', remove);
+reservaRouter.get('/', findPendientes);

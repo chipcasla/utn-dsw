@@ -99,4 +99,14 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-export { add, findAll, findOne, remove, sanitizeReservaInput, update };
+async function findPendientes(req: Request, res: Response) {
+  const reservas = await repository.findPendientes();
+  if(!reservas){
+     res.json('No hay reservas pendientes')
+   } else{
+     res.json({data: reservas})
+   }  
+}
+
+
+export { add, findAll, findOne, remove, sanitizeReservaInput, update, findPendientes };

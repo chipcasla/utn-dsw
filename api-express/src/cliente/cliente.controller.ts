@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { ClienteRepository } from './cliente.data.js';
+import bcrypt from 'bcrypt';
 const repository = new ClienteRepository();
 
 function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
@@ -43,6 +44,8 @@ async function findOne(req: Request, res: Response) {
 async function add(req: Request, res: Response) {
   const { dni, nombre, apellido, telefono, mail, password } =
     req.body.sanitizedInput;
+  //encriptacion de contraseña
+  const hashedPassword= await bcrypt.hash(password, 10)
   const clienteInput = {
     tipo: 'cliente',
     dni,
@@ -50,7 +53,7 @@ async function add(req: Request, res: Response) {
     apellido,
     telefono,
     mail,
-    password,
+    hashedPassword,
   };
   try {
     const nuevoCliente = await repository.add(clienteInput);
@@ -103,19 +106,20 @@ async function remove(req: Request, res: Response) {
 async function login(req: Request, res: Response) {
   const { dni, password } = req.body;
 
-  //Validar dni
-  const cliente = await repository.findOne({ id: dni });
+    //Validar dni
+  const cliente= await repository.findByDni(dni);
 
   if (!cliente) {
     return res.status(400).json({ msg: 'Cliente inexistente' });
   }
 
-  //Validar password
-  if (password != cliente.getDataValue('password'))
-    return res.status(400).json({ msg: 'Contraseña incorrecta' });
-
-  //Generar token
-  jwt.sign({ dni: dni }, process.env.SECRET_KEY || 'troleado'); //el dni en el payload es temporal, despues hay que cambiarlo
+    //Validar password
+    const passwordValid = await bcrypt.compare(password, cliente.getDataValue(password)) //no estoy seguro si es con getDataValue 
+  if(!passwordValid){
+    return res.status(400).json({msg: 'Contraseña incorrecta'})
+  }
+    //Generar token
+  jwt.sign({dni: dni}, process.env.SECRET_KEY || 'troleado') //el dni en el payload es temporal, despues hay que cambiarlo
 }
 
 export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };
