@@ -94,4 +94,17 @@ export class ReservaRepository {
       throw error;
     }
   }
+
+  public async findPendientes(): Promise<Reserva[] | undefined>{
+    try{
+      const reservas = await Reserva.findAll({
+        where: {
+          estado: 'Pendiente'
+        },
+    });
+    return reservas;
+    } catch(error){
+      throw(error)
+    }
+  }
 }
