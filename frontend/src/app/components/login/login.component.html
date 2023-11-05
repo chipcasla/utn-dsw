@@ -1,0 +1,55 @@
+<div
+  class="flex min-h-full flex-col justify-center px-1 lg:px-6 py-12 lg:px-8 bg-gray-400 min-h-screen"
+>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form
+      class="space-y-6 bg-gray-700 p-3 lg:p-5 shadow-xl shadow-gray-300 rounded-xl"
+      (submit)="login()"
+    >
+      <div class="pb-2 border-b border-b-gray-400">
+        <h1 class="text-fakegold-100 text-center text-3xl">Iniciar sesión</h1>
+      </div>
+      <div class="mb-6">
+        <label
+          for="dni"
+          class="block mb-2 text-sm font-medium text-fakegold-50 dark:text-white"
+          >DNI</label
+        >
+        <input
+          type="text"
+          [(ngModel)]="user.dni"
+          id="dni"
+          name="dni"
+          class="bg-fakegold-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:bg-fakegold-50 focus:ring-gray-900 focus:border-gray-800 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="DNI"
+          required
+          autofocus
+        />
+      </div>
+      <div class="mb-6">
+        <label
+          for="password"
+          class="block mb-2 text-sm font-medium text-fakegold-50 dark:text-white"
+          >Contraseña</label
+        >
+        <input
+          type="password"
+          [(ngModel)]="user.password"
+          id="password"
+          name="password"
+          class="bg-fakegold-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:bg-fakegold-50 focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Constraseña"
+          required
+        />
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="flex w-full justify-center rounded-xl bg-fakegold-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fakegold-400 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
+        >
+          Ingresar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
