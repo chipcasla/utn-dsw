@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { ClienteRepository } from './cliente.data.js';
 import bcrypt from 'bcrypt';
+import { Cliente } from './cliente.model.js';
 const repository = new ClienteRepository();
 
 function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
@@ -53,8 +54,9 @@ async function add(req: Request, res: Response) {
     apellido,
     telefono,
     mail,
-    hashedPassword,
+    password
   };
+  clienteInput.password=hashedPassword
   try {
     const nuevoCliente = await repository.add(clienteInput);
     return res

@@ -27,4 +27,4 @@ Content-Type: application/json
 }
 
 ### borrar un cliente
-DELETE http://localhost:3000/api/clientes/5
+DELETE http://localhost:3000/api/clientes/12
