@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import './cliente/cliente.model.js';
 import { clienteRouter } from './cliente/cliente.routes.js';
@@ -9,7 +10,7 @@ import './reserva/reserva_mesa.entity.js';
 import { sequelize } from './shared/conn.js';
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/clientes', clienteRouter);

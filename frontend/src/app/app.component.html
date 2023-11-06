@@ -88,5 +88,6 @@
 
 <router-outlet></router-outlet>
 
-<script src="../path/to/flowbite/dist/flowbite.min.js"></script>
-<script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
+<ng-container *ngIf="!esPaginaLogin">
+  <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+</ng-container>
