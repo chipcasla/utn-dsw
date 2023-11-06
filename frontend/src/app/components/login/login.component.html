@@ -9,6 +9,7 @@
       <div class="pb-2 border-b border-b-gray-400">
         <h1 class="text-fakegold-100 text-center text-3xl">Iniciar sesión</h1>
       </div>
+      <div *ngIf="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
       <div class="mb-6">
         <label
           for="dni"
@@ -20,6 +21,7 @@
           [(ngModel)]="user.dni"
           id="dni"
           name="dni"
+          [class.border-red-500]="error"
           class="bg-fakegold-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:bg-fakegold-50 focus:ring-gray-900 focus:border-gray-800 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="DNI"
           required
@@ -37,6 +39,7 @@
           [(ngModel)]="user.password"
           id="password"
           name="password"
+          [class.border-red-500]="error"
           class="bg-fakegold-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:bg-fakegold-50 focus:ring-gray-900 focus:border-gray-900 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Constraseña"
           required
