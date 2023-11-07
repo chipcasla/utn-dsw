@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MesaService } from 'app/services/mesa.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+//Habria que cambiar el nombre del component a otra cosa, no solo mesa
 @Component({
   selector: 'app-mesa',
   templateUrl: './mesa.component.html',
