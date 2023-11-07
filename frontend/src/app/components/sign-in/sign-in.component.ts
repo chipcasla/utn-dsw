@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignInService } from 'app/services/sign-in.service';
 import { first, repeat } from 'rxjs';
 
@@ -15,30 +15,22 @@ export class SignInComponent {
     this.formularioRegistro = this.formBuilder.group({
       dni:['', Validators.required],
       password:['', Validators.required],
-      repeatPassword:['', Validators.required],
+      repeatPassword:['', [Validators.required, this.verifyPassword]],
       nombre:['', Validators.required],
       apellido:['', Validators.required],
       telefono:['', Validators.required],
       mail:['', Validators.required]
-    }, 
-    {
-      validators: this.verifyPassword('password', 'repeatPassword')
     })
     }
 
-  verifyPassword(password: string, repeatPassword: string){
-    return(group: FormGroup) =>{
-      const firstPassword = group.get(password)?.value;
-      const secondPassword = group.get(repeatPassword)?.value;
+  verifyPassword(control: AbstractControl): {[key: string]: any} | null {
+    const firstPassword = this.formularioRegistro.get('password')?.value;
+    const secondPassword = control.value;
 
-      if (firstPassword!=secondPassword){
-        group.get(repeatPassword)?.setErrors({noCoinciden: true});
-        alert('Las contraseñas no coinciden');
-      }else{
-        group.get(repeatPassword)?.setErrors(null);
-      }
-    return null;
+    if (firstPassword != secondPassword){
+      return {noCoinciden: true};
     }
+    return null
   }
 
   addCliente(){
