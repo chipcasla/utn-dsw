@@ -10,6 +10,8 @@ import { ClienteComponent } from './components/cliente/cliente.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { MesaComponent } from './components/mesa/mesa.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ReservaComponent } from './components/reserva/reserva.component';
     ReservaComponent,
     ClienteDetalleComponent,
     LoginComponent,
+    MesaComponent,
+    SignInComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
