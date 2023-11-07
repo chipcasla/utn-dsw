@@ -10,20 +10,20 @@ Plato.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    fecha: {
+    /*fecha: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
+    },*/
     ingredientes: {
-      type: DataTypes.ARRAY,
-      allowNull: false,
+      type: DataTypes.STRING,
+      //type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
     descripcion: {
       type: DataTypes.STRING,
     },
-    imagen: {
+    /*imagen: {
         type: DataTypes.BLOB
-    }
+    }*/
   },
   {
     sequelize,

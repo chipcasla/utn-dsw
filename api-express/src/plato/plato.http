@@ -1,0 +1,27 @@
+### obtener todos los platos
+GET http://localhost:3000/api/platos
+
+
+### obtener un plato
+GET http://localhost:3000/api/platos/1
+
+### crear un plato
+POST http://localhost:3000/api/platos
+Content-Type: application/json
+
+{
+    "ingredientes": "pollo, puerro, papas, crema de leche",
+    "descripcion": "Pollo al puerro con papas"
+}
+
+### modificar un plato 
+PUT http://localhost:3000/api/platos/2
+Content-Type: application/json
+
+{
+    "ingredientes": "tallarines, salsa de tomate, carne picada",
+    "descripcion": "Spaghetti"
+}
+
+### borrar un plato
+DELETE http://localhost:3000/api/platos/2

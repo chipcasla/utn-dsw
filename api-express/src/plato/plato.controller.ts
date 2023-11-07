@@ -41,6 +41,7 @@ async function add(req: Request, res: Response) {
   const platoInput = {
     ingredientes,
     descripcion,
+   // imagen,
   };
   try {
     const nuevoPlato = await repository.add(platoInput);
@@ -62,7 +63,7 @@ async function update(req: Request, res: Response) {
     }
     res
       .status(200)
-      .send({ message: 'Mesa actualizada', data: platoActualizado });
+      .send({ message: 'Plato actualizado', data: platoActualizado });
   } catch (error) {
     return res.status(500).json({ message: 'Error al actualizar plato', error });
   }

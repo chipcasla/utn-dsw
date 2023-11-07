@@ -1,4 +1,3 @@
-import { parseArgs } from 'util';
 import { Plato } from './plato.model.js';
 //import { Op } from 'sequelize';
 
