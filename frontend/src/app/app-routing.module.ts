@@ -3,13 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClienteDetalleComponent } from './components/cliente-detalle/cliente-detalle.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MesaComponent } from './components/mesa/mesa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'reservas', component: ReservaComponent },
-  { path: 'misdatos', component: ClienteDetalleComponent },
+  { path: 'reservas', component: ReservaComponent, canActivate: [authGuard] },
+  {
+    path: 'misdatos',
+    component: ClienteDetalleComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'nuevaReserva',
+    component: MesaComponent,
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({

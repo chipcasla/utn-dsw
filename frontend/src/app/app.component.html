@@ -2,7 +2,7 @@
   <nav class="bg-gray-900">
     <div class="w-full mx-auto">
       <div class="flex flex-wrap items-center justify-between">
-        <a routerLink="" class="flex">
+        <a routerLink="/" class="flex">
           <span
             class="text-amber-500 self-center text-lg font-semibold whitespace-nowrap"
             >FlowBite</span
@@ -74,7 +74,7 @@
             </li>
             <li>
               <a
-                routerLink=""
+                (click)="logout()"
                 class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
                 >Salir</a
               >
@@ -90,4 +90,5 @@
 
 <ng-container *ngIf="!esPaginaLogin">
   <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+  <script src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></script>
 </ng-container>

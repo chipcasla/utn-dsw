@@ -28,7 +28,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js",
               "src/assets/custom-init.js"
             ]
           },

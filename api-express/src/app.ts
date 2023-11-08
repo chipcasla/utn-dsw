@@ -4,11 +4,11 @@ import './cliente/cliente.model.js';
 import { clienteRouter } from './cliente/cliente.routes.js';
 import './mesa/mesa.model.js';
 import { mesaRouter } from './mesa/mesa.routes.js';
+import { platoRouter } from './plato/plato.routes.js';
 import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { sequelize } from './shared/conn.js';
-import { platoRouter } from './plato/plato.routes.js';
 
 const app = express();
 app.use(cors());
@@ -26,7 +26,7 @@ app.use((_, res) => {
 
 app.listen(3000, async () => {
   try {
-    await sequelize.sync({ alter: false });
+    await sequelize.sync({ alter: true });
     console.log('Server running on http://localhost:3000/');
   } catch (error) {
     console.error('Error synchronizing database:', error);

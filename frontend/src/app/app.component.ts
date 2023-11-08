@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   esPaginaLogin: boolean = false;
   title = 'web-app';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngAfterViewInit() {
     initFlowbite();
@@ -23,13 +24,11 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.esPaginaLogin = event.url === '/login';
       }
     });
-    const flowbiteScript = document.createElement('script');
-    flowbiteScript.src =
-      'https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js';
-    flowbiteScript.onload = () => {
-      initFlowbite();
-    };
 
-    document.body.appendChild(flowbiteScript);
+    initFlowbite();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
