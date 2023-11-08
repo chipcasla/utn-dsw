@@ -83,8 +83,8 @@ async function remove(req: Request, res: Response) {
 }
 
 async function findMesasLibres(req:Request, res:Response){
-  const{cantidadPersonas, ubicacion} = req.body
-  const mesas=await repository.findMesasLibres(cantidadPersonas, ubicacion)
+  const{cantidadPersonas, fechaHora, ubicacion} = req.body
+  const mesas=await repository.findMesasLibres(cantidadPersonas, fechaHora, ubicacion)
 
   if (!mesas){
     res.json('No hay mesas disponibles')
