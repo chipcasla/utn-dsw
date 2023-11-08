@@ -60,7 +60,7 @@ export class MesaRepository {
     }
   }
 
-  public async findMesasLibres(cantidadPersonas: number, fechaHora: Date, ubicacion: string): Promise<Mesa[] | undefined> {
+  public async findMesasLibres(cantidadPersonas: number, ubicacion: string): Promise<Mesa[] | undefined> {
     try{
       const mesas= await Mesa.findAll({
         include: {model: Reserva,
@@ -69,9 +69,6 @@ export class MesaRepository {
           estado: {
             [Op.ne]: 'Pendiente'
           },
-          fechaHora: {
-            [Op.ne]: fechaHora
-          }
         }
       },
       where: {
