@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MesaService } from 'app/services/mesa.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
 
 //Habria que cambiar el nombre del component a otra cosa, no solo mesa
 @Component({
@@ -13,7 +14,7 @@ export class MesaComponent{
   formulario: FormGroup;
   mesasDisponibles: any;
 
-  constructor(private formBuilder: FormBuilder, private mesaService: MesaService, private router: Router){
+  constructor(private formBuilder: FormBuilder, private mesaService: MesaService, private router: Router, private AuthService: AuthService){
     this.formulario= this.formBuilder.group({
       cantPersonas:['', Validators.required],
       fechaHora:['', Validators.required],
@@ -37,7 +38,8 @@ export class MesaComponent{
   }
 
   reservarMesa(idMesa: number, fechaHora: Date){
-    this.router.navigate(['/reserva', {idMesa, fechaHora}]);
+    const dniCliente = this.AuthService.getDni();
+    this.router.navigate(['/reserva', dniCliente, idMesa, fechaHora.toISOString()]);
   }
 }
 

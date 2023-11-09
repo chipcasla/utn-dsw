@@ -8,11 +8,13 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isAuthenticated: boolean = false;
   private userRole: string = '';
+  private dniCliente: string | null = null;
   private URL = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(user: { dni: string; password: string }) {
+    this.setDni(user.dni);
     return this.http.post<any>(this.URL + '/clientes/login', user);
     // Lógica de autenticación aquí. Verifica el nombre de usuario y contraseña en tu backend.
     // Establece el estado de autenticación y el rol del usuario.
@@ -42,5 +44,13 @@ export class AuthService {
 
   getUserRole(): string {
     return this.userRole;
+  }
+
+  setDni(dni: string){
+    this.dniCliente = dni;
+  }
+
+  getDni(): string | null{
+    return this.dniCliente;
   }
 }

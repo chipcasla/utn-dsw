@@ -8,17 +8,18 @@ import { AddReservaService } from 'app/services/add-reserva.service';
   styleUrls: ['./reserva.component.css']
 })
 export class ReservaComponent implements OnInit {
-  idMesa: number;
-  fechaHora: Date;
 
-  constructor(private route: ActivatedRoute, addReservaService: AddReservaService){}
+  constructor(private route: ActivatedRoute, private addReservaService: AddReservaService){}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params)=>{
-      this.idMesa = params['idMesa'],
-      this.fechaHora = new Date(params['fechaHora'])
+  ngOnInit() {
+    this.route.params.subscribe(params =>{
+      const dniCliente = params['dniCliente']
+      const idMesa = +params['idMesa'];
+      const fechaHora = new Date(params['fechaHora']);
+    
+    
 
-      this.AddReservaService.addReserva(this.getDniCliente(), this.idMesa, this.fechaHora).subscribe(); //Agregar feedback
+      this.addReservaService.addReserva(dniCliente, idMesa, fechaHora).subscribe(); //agregar feedback
     })
   }
 
