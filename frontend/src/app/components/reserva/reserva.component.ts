@@ -13,13 +13,13 @@ export class ReservaComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params =>{
-      const dniCliente = params['dniCliente']
+      const idCliente = +params['idCliente']
       const idMesa = +params['idMesa'];
       const fechaHora = new Date(params['fechaHora']);
     
     
 
-      this.addReservaService.addReserva(dniCliente, idMesa, fechaHora).subscribe(); //agregar feedback
+      this.addReservaService.addReserva(idCliente, idMesa, fechaHora).subscribe(); //agregar feedback
     })
   }
 

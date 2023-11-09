@@ -38,8 +38,8 @@ export class MesaComponent{
   }
 
   reservarMesa(idMesa: number, fechaHora: Date){
-    const dniCliente = this.AuthService.getDni();
-    this.router.navigate(['/reserva', dniCliente, idMesa, fechaHora.toISOString()]);
+    const idCliente = this.AuthService.getClienteId();
+    this.router.navigate(['/reserva', idCliente, idMesa, fechaHora.toISOString()]);
   }
 }
 

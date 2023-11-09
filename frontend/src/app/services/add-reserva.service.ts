@@ -10,9 +10,9 @@ export class AddReservaService {
 
   constructor(private http: HttpClient) {};
 
-  addReserva(dniCliente:string, idMesa: number, fechaHora: Date, ): Observable<any>{
+  addReserva(idCliente:number, idMesa: number, fechaHora: Date, ): Observable<any>{
     const datosReserva = {
-      dniCliente: dniCliente,
+      idCliente: idCliente,
       idMesa: idMesa,
       fechaHora: fechaHora.toISOString()
     }
