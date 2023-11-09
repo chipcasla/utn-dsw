@@ -16,7 +16,8 @@
     <h2>Mesas Disponibles:</h2>
     <ul>
       <li *ngFor="let mesa of mesasDisponibles">
-        {{ mesa.id }} - {{ mesa.descripcion }}
+        {{ mesa.id }} - {{mesa.ubicacion}} - {{mesa.cantPersonas}}
+        <button (click)="reservarMesa(mesa.id, mesa.fechaHora)">Reservar</button>
       </li>
     </ul>
   </div>
