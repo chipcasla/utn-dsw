@@ -16,7 +16,9 @@ export class MesaComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private mesaService: MesaService
+    private mesaService: MesaService,
+    private router: Router,
+    private AuthService: AuthService
   ) {
     this.formulario = this.formBuilder.group({
       cantPersonas: ['', Validators.required],
@@ -41,7 +43,7 @@ export class MesaComponent {
 
   reservarMesa(idMesa: number, fechaHora: Date){
     const idCliente = this.AuthService.getClienteId();
-    this.router.navigate(['/reserva', idCliente, idMesa, fechaHora.toISOString()]);
+    this.router.navigate(['/add-reserva', idCliente, idMesa, fechaHora.toISOString()]);
   }
 }
 

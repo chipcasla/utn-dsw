@@ -16,6 +16,6 @@ export class AddReservaService {
       idMesa: idMesa,
       fechaHora: fechaHora.toISOString()
     }
-    return this.http.post(`${this.URL}/addReserva`, datosReserva)
+    return this.http.post(`${this.URL}/reservas`, datosReserva)
   }
 }
