@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { MesaRepository } from './mesa.data.js'
+import { MesaRepository } from './mesa.data.js';
 
 const repository = new MesaRepository();
 
@@ -82,17 +82,27 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-async function findMesasLibres(req:Request, res:Response){
-  const{cantidadPersonas, fechaHora, ubicacion} = req.body
-  const mesas=await repository.findMesasLibres(cantidadPersonas, fechaHora, ubicacion)
+async function findMesasLibres(req: Request, res: Response) {
+  const { cantidadPersonas, fechaHora, ubicacion } = req.params;
+  const mesas = await repository.findMesasLibres(
+    Number.parseInt(cantidadPersonas),
+    new Date(fechaHora),
+    ubicacion
+  );
 
-  if (!mesas){
-    res.json('No hay mesas disponibles')
-  }else{
-    res.json({data: mesas})
+  if (!mesas) {
+    res.json('No hay mesas disponibles');
+  } else {
+    res.json({ data: mesas });
   }
 }
-  
 
-
-export { add, findAll, findOne, remove, sanitizeMesaInput, update, findMesasLibres };
+export {
+  add,
+  findAll,
+  findMesasLibres,
+  findOne,
+  remove,
+  sanitizeMesaInput,
+  update,
+};

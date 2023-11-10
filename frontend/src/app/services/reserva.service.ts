@@ -18,8 +18,8 @@ export class ReservaService {
     return this.http.get<any>(url);
   }
 
-  cancelarReserva(id: number) {
+  cancelarReserva(id: number, reserva: { estado: string }) {
     const url = `${this.URL}/reservas/${id}`;
-    return this.http.delete<any>(url);
+    return this.http.put<any>(url, reserva);
   }
 }

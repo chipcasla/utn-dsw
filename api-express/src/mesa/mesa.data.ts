@@ -1,6 +1,6 @@
-import { Mesa } from './mesa.model.js';
-import { Op } from 'sequelize';
+import { Op, col, fn, literal } from 'sequelize';
 import { Reserva } from '../reserva/reserva.model.js';
+import { Mesa } from './mesa.model.js';
 
 export class MesaRepository {
   public async findAll(): Promise<Mesa[] | undefined> {
@@ -60,28 +60,40 @@ export class MesaRepository {
     }
   }
 
-  public async findMesasLibres(cantidadPersonas: number, fechaHora: Date, ubicacion: string): Promise<Mesa[] | undefined> {
-    try{
-      const mesas= await Mesa.findAll({
-        include: {model: Reserva,
-        required: false,
-        where: {
-          estado: {
-            [Op.ne]: 'Pendiente'
+  public async findMesasLibres(
+    cantidadPersonas: number,
+    fechaHora: Date,
+    ubicacion: string
+  ): Promise<Mesa[] | undefined> {
+    try {
+      const mesas = await Mesa.findAll({
+        attributes: [
+          'id',
+          'capacidad',
+          'ubicacion',
+          [fn('COUNT', col('Reservas.id')), 'reservasCount'],
+        ],
+        include: {
+          model: Reserva,
+          required: false,
+          where: {
+            estado: 'Pendiente',
+            fechaHora: fechaHora,
           },
-          fechaHora: fechaHora
-        }
-      },
-      where: {
-        cantidadPersonas:{
-          [Op.gte]: cantidadPersonas
         },
-        ubicacion: ubicacion
-      }
-    })
-    return mesas
-  } catch(error){
-    throw error;
+        where: {
+          capacidad: {
+            [Op.gte]: cantidadPersonas,
+          },
+          ubicacion: ubicacion,
+        },
+        group: ['Mesa.id'],
+        having: literal('COUNT(Reservas.id) = 0'),
+      });
+
+      return mesas;
+    } catch (error) {
+      throw error;
+    }
   }
-}
 }

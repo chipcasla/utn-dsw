@@ -64,19 +64,25 @@ export class ReservaRepository {
     const transaction = await sequelize.transaction();
     try {
       const { Mesas, ...ReservaRow } = item;
+      console.log(item);
+      console.log(ReservaRow);
+      console.log(Mesas);
       await Reserva.update(ReservaRow, {
         where: {
           id: Number.parseInt(id),
         },
         transaction,
       });
+      console.log('se actuaizoo');
       const reserva = await this.findOne({ id });
-      await reserva?.setMesas(
-        item.Mesas.map((m: { id: any }) => m.id),
-        { transaction }
-      );
+      if (Mesas) {
+        await reserva?.setMesas(
+          item.Mesas.map((m: { id: any }) => m.id),
+          { transaction }
+        );
+      }
       await transaction.commit();
-      return reserva?.reload();
+      return await reserva?.reload();
     } catch (error) {
       throw error;
     }
@@ -95,16 +101,16 @@ export class ReservaRepository {
     }
   }
 
-  public async findPendientes(): Promise<Reserva[] | undefined>{
-    try{
+  public async findPendientes(): Promise<Reserva[] | undefined> {
+    try {
       const reservas = await Reserva.findAll({
         where: {
-          estado: 'Pendiente'
+          estado: 'Pendiente',
         },
-    });
-    return reservas;
-    } catch(error){
-      throw(error)
+      });
+      return reservas;
+    } catch (error) {
+      throw error;
     }
   }
 }

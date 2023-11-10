@@ -1,0 +1,9 @@
+<div class="reservation-details">
+  <h3>Detalles de la Reserva</h3>
+
+  <div *ngIf="reservation">
+    <p>Fecha: {{ reservation.date }}</p>
+    <p>Restaurante: {{ reservation.restaurant }}</p>
+    <!-- Otros campos de reserva -->
+  </div>
+</div>

@@ -1,38 +1,55 @@
 <div class="reservations">
-  <h3 class="text-lg font-semibold mb-4">Mis Reservas</h3>
+  <h3 class="text-2xl font-bold mb-4">Mis Reservas</h3>
 
-  <table class="min-w-full border border-gray-200">
-    <thead>
-      <tr>
-        <th class="border-b">Fecha</th>
-        <th class="border-b">Restaurante</th>
-        <th class="border-b"></th>
-        <!-- Para el botón de ver detalles -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reservation of reservations">
-        <td class="border-b px-4 py-2">{{ reservation.fechaHora }}</td>
-        <td class="border-b px-4 py-2">{{ reservation.estado }}</td>
-        <td class="border-b px-4 py-2">
-          <a
-            [routerLink]="['/reserva', reservation.id]"
-            class="text-blue-500 hover:underline"
-            >Ver Detalles</a
+  <div class="overflow-x-auto">
+    <table
+      class="min-w-full border border-gray-200 bg-white rounded-lg overflow-hidden"
+    >
+      <thead>
+        <tr>
+          <th
+            class="border-b px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
           >
-        </td>
-        <td
-          class="border-b px-4 py-2"
-          *ngIf="reservation.status === 'pendiente'"
-        >
-          <button
-            (click)="cancelReservation(reservation.id)"
-            class="bg-red-500 text-white px-2 py-1 rounded"
+            Fecha
+          </th>
+          <th
+            class="border-b px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
           >
-            Cancelar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+            Restaurante
+          </th>
+          <th class="border-b px-6 py-3 bg-gray-100"></th>
+          <!-- Para el botón de ver detalles -->
+          <th class="border-b px-6 py-3 bg-gray-100"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td class="border-b px-6 py-4 whitespace-no-wrap">
+            {{ reservation.fechaHora | date : "dd/MM/yyyy HH:mm" }}
+          </td>
+          <td class="border-b px-6 py-4 whitespace-no-wrap">
+            {{ reservation.estado }}
+          </td>
+          <td class="border-b px-6 py-4 whitespace-no-wrap">
+            <a
+              [routerLink]="['/reserva', reservation.id]"
+              class="text-blue-500 hover:underline"
+              >Ver Detalles</a
+            >
+          </td>
+          <td
+            class="border-b px-6 py-4 whitespace-no-wrap"
+            *ngIf="reservation.estado === 'Pendiente'"
+          >
+            <button
+              (click)="cancelReservation(reservation.id)"
+              class="bg-red-500 text-white px-4 py-2 rounded"
+            >
+              Cancelar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,23 +1,61 @@
-<form [formGroup] ="formulario" (ngSubmit)="buscarMesasLibres()">
-    <label for="cantPersonas">Cantidad de Personas:</label>
-    <input type="number" id="cantPersonas" formControlName="cantPersonas">
-    <br>
-    <label for="fechaHora">Fecha y Hora:</label>
-    <input type="datetime-local" id="fechaHora" formControlName="fechaHora">
-    <br>
-    <label for="ubicacion">Ubicación:</label>
-    <input type="text" id="ubicacion" formControlName="ubicacion">
-    <br>
-    <button type="submit">Buscar Mesas Libres</button>
-  </form>
-  
-
-  <div *ngIf="mesasDisponibles">
-    <h2>Mesas Disponibles:</h2>
-    <ul>
-      <li *ngFor="let mesa of mesasDisponibles">
-        {{ mesa.id }} - {{ mesa.descripcion }}
-      </li>
-    </ul>
+<form
+  [formGroup]="formulario"
+  (ngSubmit)="buscarMesasLibres()"
+  class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+>
+  <div class="mb-4">
+    <label for="cantPersonas" class="block text-gray-700 text-sm font-bold mb-2"
+      >Cantidad de Personas:</label
+    >
+    <input
+      type="number"
+      id="cantPersonas"
+      formControlName="cantPersonas"
+      class="w-full p-2 border rounded-md"
+    />
   </div>
-  
+
+  <div class="mb-4">
+    <label for="fechaHora" class="block text-gray-700 text-sm font-bold mb-2"
+      >Fecha y Hora:</label
+    >
+    <input
+      type="datetime-local"
+      id="fechaHora"
+      formControlName="fechaHora"
+      class="w-full p-2 border rounded-md"
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
+      >Ubicación:</label
+    >
+    <input
+      type="text"
+      id="ubicacion"
+      formControlName="ubicacion"
+      class="w-full p-2 border rounded-md"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+  >
+    Buscar Mesas Libres
+  </button>
+</form>
+
+<div *ngIf="mesasDisponibles" class="mt-8 max-w-md mx-auto">
+  <h2 class="text-white text-2xl font-bold mb-4">Mesas Disponibles:</h2>
+  <ul>
+    <li
+      *ngFor="let mesa of mesasDisponibles"
+      class="mb-2 text-white text-center"
+    >
+      <span class="font-bold">{{ mesa.id }}</span> - Capacidad:
+      {{ mesa.capacidad }}
+    </li>
+  </ul>
+</div>

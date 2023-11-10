@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReservaService } from 'app/services/reserva.service';
 
@@ -8,8 +9,14 @@ import { ReservaService } from 'app/services/reserva.service';
 })
 export class ReservaComponent implements OnInit {
   reservations: any[] = [];
+  reserva = {
+    estado: 'Cancelada',
+  };
 
-  constructor(private reservaService: ReservaService) {}
+  constructor(
+    private reservaService: ReservaService,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit() {
     this.loadUserReservations();
@@ -28,7 +35,7 @@ export class ReservaComponent implements OnInit {
 
   cancelReservation(idReserva: number): void {
     if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
-      this.reservaService.cancelarReserva(idReserva).subscribe(
+      this.reservaService.cancelarReserva(idReserva, this.reserva).subscribe(
         () => {
           // Actualizar la lista de reservas después de la cancelación
           this.loadUserReservations();

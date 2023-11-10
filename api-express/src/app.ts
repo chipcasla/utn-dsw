@@ -26,7 +26,7 @@ app.use((_, res) => {
 
 app.listen(3000, async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: false });
     console.log('Server running on http://localhost:3000/');
   } catch (error) {
     console.error('Error synchronizing database:', error);

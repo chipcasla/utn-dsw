@@ -24,22 +24,12 @@ Content-Type: application/json
 }
 
 ### Modificar una reserva (PUT - recurso completo e idempotente)
+
 PUT http://localhost:3000/api/reservas/9
-//Reemplaza con el ID de la reserva a modificar
 Content-Type: application/json
 
 {
-  "cantidadPersonas": 4,
-  "estado": "Pendiente",
-  "cliente": 2,
-  "Mesas": [
-    {
-      "id":2
-    },
-    {
-      "id":3
-    }
-  ]
+  "estado": "Pendiente"
 }
 
 ### Borrar una reserva

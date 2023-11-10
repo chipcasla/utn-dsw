@@ -1,40 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { MesaService } from 'app/services/mesa.service';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MesaService } from 'app/services/mesa.service';
 
 //Habria que cambiar el nombre del component a otra cosa, no solo mesa
 @Component({
   selector: 'app-mesa',
   templateUrl: './mesa.component.html',
-  styleUrls: ['./mesa.component.css']
+  styleUrls: ['./mesa.component.css'],
 })
-export class MesaComponent{
+export class MesaComponent {
   formulario: FormGroup;
   mesasDisponibles: any;
 
-  constructor(private formBuilder: FormBuilder, private mesaService: MesaService){
-    this.formulario= this.formBuilder.group({
-      cantPersonas:['', Validators.required],
-      fechaHora:['', Validators.required],
-      ubicacion:['', Validators.required]
+  constructor(
+    private formBuilder: FormBuilder,
+    private mesaService: MesaService
+  ) {
+    this.formulario = this.formBuilder.group({
+      cantPersonas: ['', Validators.required],
+      fechaHora: ['', Validators.required],
+      ubicacion: ['', Validators.required],
     });
-
   }
 
-  buscarMesasLibres(){
+  buscarMesasLibres() {
     const datosFormularios = this.formulario.value;
 
-    const params={
+    const params = {
       cantPersonas: datosFormularios.cantPersonas,
       fechaHora: datosFormularios.fechaHora,
-      ubicacion: datosFormularios.ubicacion
+      ubicacion: datosFormularios.ubicacion,
     };
 
-    this.mesaService.findMesasLibres(params).subscribe((mesasLibres) =>{
-      this.mesasDisponibles=mesasLibres;
-    })
+    this.mesaService.findMesasLibres(params).subscribe((mesasLibres) => {
+      this.mesasDisponibles = mesasLibres.data;
+    });
   }
 }
-
-
-
