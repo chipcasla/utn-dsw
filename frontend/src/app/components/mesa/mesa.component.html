@@ -56,6 +56,7 @@
     >
       <span class="font-bold">{{ mesa.id }}</span> - Capacidad:
       {{ mesa.capacidad }}
+      <button (click)="reservarMesa(mesa.id, mesa.fechaHora)">Reservar</button>
     </li>
   </ul>
 </div>

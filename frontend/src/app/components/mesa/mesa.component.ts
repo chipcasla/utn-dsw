@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MesaService } from 'app/services/mesa.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
 
 //Habria que cambiar el nombre del component a otra cosa, no solo mesa
 @Component({
@@ -32,8 +34,16 @@ export class MesaComponent {
       ubicacion: datosFormularios.ubicacion,
     };
 
-    this.mesaService.findMesasLibres(params).subscribe((mesasLibres) => {
-      this.mesasDisponibles = mesasLibres.data;
-    });
+    this.mesaService.findMesasLibres(params).subscribe((mesasLibres) =>{
+      this.mesasDisponibles=mesasLibres.data;
+    })
+  }
+
+  reservarMesa(idMesa: number, fechaHora: Date){
+    const idCliente = this.AuthService.getClienteId();
+    this.router.navigate(['/reserva', idCliente, idMesa, fechaHora.toISOString()]);
   }
 }
+
+
+
