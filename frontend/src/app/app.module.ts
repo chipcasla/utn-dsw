@@ -14,7 +14,6 @@ import { MesaComponent } from './components/mesa/mesa.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ReservaDetalleComponent } from './components/reserva-detalle/reserva-detalle.component';
-import { AddReservaComponent } from './components/add-reserva/add-reserva.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { AddReservaComponent } from './components/add-reserva/add-reserva.compon
     MesaComponent,
     SignInComponent,
     ReservaDetalleComponent,
-    AddReservaComponent,
   ],
   imports: [
     BrowserModule,

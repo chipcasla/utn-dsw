@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { JsonWebTokenError} from 'jsonwebtoken';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +9,6 @@ export class AuthService {
   private isAuthenticated: boolean = false;
   private userRole: string = '';
   private URL = 'http://localhost:3000/api';
-  private jwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -45,14 +42,5 @@ export class AuthService {
 
   getUserRole(): string {
     return this.userRole;
-  }
-
-  getClienteId(){
-    const token = localStorage.getItem('token');
-    if (token){
-      const decodedToken = this.jwtHelperService.decodeToken(token);
-      return decodedToken?.id
-    }
-    return null;
   }
 }

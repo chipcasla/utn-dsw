@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ReservaService } from 'app/services/reserva.service.js';
+import { ReservaService } from 'app/services/reserva.service';
 
 @Component({
   selector: 'app-reserva-detalle',
