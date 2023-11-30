@@ -1,9 +1,88 @@
-<div class="reservation-details">
-  <h3>Detalles de la Reserva</h3>
-
-  <div *ngIf="reservation">
-    <p>Fecha: {{ reservation.date }}</p>
-    <p>Restaurante: {{ reservation.restaurant }}</p>
-    <!-- Otros campos de reserva -->
+<div class="flex min-h-full justify-center mt-5">
+  <div
+    class="w-full max-w-md p-4 bg-gray-800 border border-gray-600 rounded-lg shadow sm:p-8 dark:bg-gray-500 dark:border-gray-700"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <h5 class="text-xl font-bold leading-none text-white">RESERVA</h5>
+      <a
+        [routerLink]="['/reservas']"
+        class="text-sm font-medium text-fakegold-300 hover:underline hover:text-fakegold-500"
+      >
+        Volver
+      </a>
+    </div>
+    <div class="flow-root">
+      <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium truncate text-white">Fecha</p>
+            </div>
+            <div
+              class="inline-flex items-center text-base font-semibold text-white"
+            >
+              {{ reservation.fechaHora | date : "dd/MM/yyyy" }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium truncate text-white">Hora</p>
+            </div>
+            <div
+              class="inline-flex items-center text-base font-semibold text-white"
+            >
+              {{ reservation.fechaHora | date : "HH:mm" }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium truncate text-white">Estado</p>
+            </div>
+            <div
+              class="inline-flex items-center text-base font-semibold text-white"
+            >
+              {{ reservation.estado }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium truncate text-white">
+                Cantidad de personas
+              </p>
+            </div>
+            <div
+              class="inline-flex items-center text-base font-semibold text-white"
+            >
+              {{ reservation.cantidadPersonas }}
+            </div>
+          </div>
+        </li>
+        <li class="py-3 sm:py-4">
+          <div class="flex items-center">
+            <div class="flex-1 min-w-0 ms-4">
+              <p class="text-sm font-medium truncate text-white">Mesas</p>
+            </div>
+            <div class="flex-1 min-w-0 ms-4">
+              <div *ngFor="let mesa of reservation.Mesas">
+                <div class="inline-block text-bold">
+                  <h5 class="mb-1 text-base font-medium text-white">
+                    Nro. {{ mesa.id }}
+                    <span class="text-sm text-gray-400 inline md:inline-block"
+                      >Ubicación: {{ formatoTexto(mesa.ubicacion) }}</span
+                    >
+                  </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

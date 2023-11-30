@@ -8,7 +8,7 @@ import { ReservaService } from 'app/services/reserva.service';
   styleUrls: ['./reserva-detalle.component.css'],
 })
 export class ReservaDetalleComponent implements OnInit {
-  reservationId: number = 0;
+  reservationId: string = '0';
   reservation: any;
 
   constructor(
@@ -26,11 +26,16 @@ export class ReservaDetalleComponent implements OnInit {
   loadReservationDetails(): void {
     this.reservaService.getReservationDetails(this.reservationId).subscribe(
       (reservation) => {
-        this.reservation = reservation;
+        console.log(reservation);
+        this.reservation = reservation.data;
       },
       (error) => {
         console.error('Error loading reservation details', error);
       }
     );
+  }
+
+  formatoTexto(texto: string): string {
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
   }
 }

@@ -13,7 +13,7 @@ export class ReservaService {
     return this.http.get<any>(this.URL + '/reservas');
   }
 
-  getReservationDetails(id: number) {
+  getReservationDetails(id: string) {
     const url = `${this.URL}/reservas/${id}`;
     return this.http.get<any>(url);
   }

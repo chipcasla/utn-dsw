@@ -63,16 +63,12 @@ export class ReservaRepository {
         const transaction = await sequelize.transaction();
         try {
             const { Mesas, ...ReservaRow } = item;
-            console.log(item);
-            console.log(ReservaRow);
-            console.log(Mesas);
             await Reserva.update(ReservaRow, {
                 where: {
                     id: Number.parseInt(id),
                 },
                 transaction,
             });
-            console.log('se actuaizoo');
             const reserva = await this.findOne({ id });
             if (Mesas) {
                 await reserva?.setMesas(item.Mesas.map((m) => m.id), { transaction });
