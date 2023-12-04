@@ -51,7 +51,7 @@ export class MesaManagementComponent {
   addMesa(){
     if (this.createForm.valid){
       const datosFormulario = this.createForm.value;
-      this.mesaService.addMesa(datosFormulario);
+      this.mesaService.addMesa(datosFormulario).subscribe();
     }
   }
 
