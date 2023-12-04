@@ -30,4 +30,16 @@ export class MesaService {
     reservation.cliente = this.clienteService.getUserId();
     return this.http.post<any>(this.URL + `/reservas`, reservation);
   }
+
+  findAll(){
+    return this.http.get<any>(this.URL + `/mesas`);
+  }
+
+  addMesa(datosMesa: any){
+    return this.http.post(`${this.URL}/mesas`, datosMesa);
+  }
+
+  deleteMesa(idMesa: number){
+    return this.http.delete(`${this.URL}/mesas/${idMesa}`)
+  }
 }

@@ -1,0 +1,57 @@
+<h1>mesa management works!</h1>
+<h2>{{action}} mesa</h2>
+<!--Agregar una nueva mesa-->
+<div *ngIf="action === 'crear'">
+    <form
+    [formGroup]="createForm"
+    (ngSubmit)="addMesa()"
+    class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+  >
+    <div class="mb-4">
+      <label
+        for="capacidad"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Capacidad</label
+      >
+      <input
+        type="number"
+        id="capacidad"
+        name="capacidad"
+        formControlName="capacidad"
+        class="w-full p-2 border rounded-md"
+      />
+    </div>
+    <div class="mb-4">
+        <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
+          >Ubicación:</label
+        >
+        <select
+          id="ubicacion"
+          formControlName="ubicacion"
+          class="w-full p-2 border rounded-md"
+        >
+          <option value="" disabled>Selecciona una opción</option>
+          <option value="afuera">Afuera</option>
+          <option value="adentro">Adentro</option>
+        </select>
+      </div>
+  
+      <button
+        type="submit"
+        class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+      >
+        Agregar mesa
+      </button>
+    </form>
+</div>
+
+
+<!--Ver todas las mesas y poder borrar una-->
+<div *ngIf="action === 'verTodos'">
+    <ul>
+        <li *ngFor="let mesa of mesas">
+            <span class="font-bold">{{ mesa.id }}</span> - Capacidad: {{ mesa.capacidad }} - Ubicacion : {{mesa.ubicacion}}
+            <button (click)="borrarMesa(mesa.id)">Borrar</button> 
+        </li>
+    </ul>
+</div>

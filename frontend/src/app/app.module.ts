@@ -14,6 +14,8 @@ import { MesaComponent } from './components/mesa/mesa.component';
 import { ReservaDetalleComponent } from './components/reserva-detalle/reserva-detalle.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
+import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
     MesaComponent,
     SignInComponent,
     ReservaDetalleComponent,
+    MenuAdminComponent,
+    MesaManagementComponent,
   ],
   imports: [
     BrowserModule,

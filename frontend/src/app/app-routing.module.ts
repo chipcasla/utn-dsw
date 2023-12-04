@@ -7,6 +7,8 @@ import { MesaComponent } from './components/mesa/mesa.component';
 import { ReservaDetalleComponent } from './components/reserva-detalle/reserva-detalle.component';
 import { ReservaComponent } from './components/reserva/reserva.component';
 import { authGuard } from './guards/auth.guard';
+import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
+import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -27,7 +29,11 @@ const routes: Routes = [
     component: MesaComponent,
     canActivate: [authGuard],
   },
-];
+
+  { path: 'admin', component: MenuAdminComponent},
+  { path: 'admin/mesas', component: MesaManagementComponent},
+  { path: 'admin/mesas/:action', component: MesaManagementComponent },
+    ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
