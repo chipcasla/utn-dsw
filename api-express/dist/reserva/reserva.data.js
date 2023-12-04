@@ -56,6 +56,7 @@ export class ReservaRepository {
             return reserva;
         }
         catch (error) {
+            await transaction.rollback();
             throw error;
         }
     }

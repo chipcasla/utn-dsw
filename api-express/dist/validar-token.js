@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-const validateToken = (req, res, next) => {
+export const validateToken = (req, res, next) => {
     const headerToken = req.headers['authorization'];
     if (headerToken != undefined) { //puedo ponerle que tambien empiece con Bearer
         try {

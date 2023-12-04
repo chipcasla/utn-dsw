@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ClienteService } from './cliente.service';
 //Habria que cambiar el nombre del servicio a otra cosa, no solo mesa.
 @Injectable({
   providedIn: 'root',
@@ -7,16 +9,25 @@ import { Injectable } from '@angular/core';
 export class MesaService {
   private URL = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private clienteService: ClienteService
+  ) {}
 
   findMesasLibres(params: {
     cantPersonas: number;
     fechaHora: Date;
     ubicacion: String;
   }) {
+    console.log(typeof this.clienteService.getUserId());
     return this.http.get<any>(
       this.URL +
         `/mesas/libres/${params.cantPersonas}/${params.fechaHora}/${params.ubicacion}`
     );
+  }
+
+  addReservation(reservation: any): Observable<any> {
+    reservation.cliente = this.clienteService.getUserId();
+    return this.http.post<any>(this.URL + `/reservas`, reservation);
   }
 }

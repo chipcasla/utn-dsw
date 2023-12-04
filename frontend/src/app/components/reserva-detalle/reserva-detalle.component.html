@@ -8,7 +8,7 @@
         [routerLink]="['/reservas']"
         class="text-sm font-medium text-fakegold-300 hover:underline hover:text-fakegold-500"
       >
-        Volver
+        Ver mis reservas
       </a>
     </div>
     <div class="flow-root">
@@ -68,12 +68,12 @@
             <div class="flex-1 min-w-0 ms-4">
               <p class="text-sm font-medium truncate text-white">Mesas</p>
             </div>
-            <div class="flex-1 min-w-0 ms-4">
+            <div class="flex justify-end flex-1 min-w-0">
               <div *ngFor="let mesa of reservation.Mesas">
-                <div class="inline-block text-bold">
+                <div class="inline-block text-bold text-right">
                   <h5 class="mb-1 text-base font-medium text-white">
                     Nro. {{ mesa.id }}
-                    <span class="text-sm text-gray-400 inline md:inline-block"
+                    <span class="text-sm text-gray-400 md:inline block"
                       >Ubicación: {{ formatoTexto(mesa.ubicacion) }}</span
                     >
                   </h5>

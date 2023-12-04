@@ -6,12 +6,14 @@ import {
   findOne,
   remove,
   sanitizeMesaInput,
+  sanitizeReservaInputReservar,
   update,
 } from './mesa.controller.js';
 
 export const mesaRouter = Router();
 mesaRouter.get(
   '/libres/:cantidadPersonas/:fechaHora/:ubicacion',
+  sanitizeReservaInputReservar,
   findMesasLibres
 );
 mesaRouter.get('/', findAll);

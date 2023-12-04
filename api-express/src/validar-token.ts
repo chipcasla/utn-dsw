@@ -1,7 +1,7 @@
-import {Request, Response, NextFunction} from 'express'
-import jwt from 'jsonwebtoken'
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-const validateToken = (req: Request, res:Response, next:NextFunction) => {
+export const validateToken = (req: Request, res:Response, next:NextFunction) => {
     const headerToken= req.headers['authorization'];
     if(headerToken != undefined){ //puedo ponerle que tambien empiece con Bearer
         try{

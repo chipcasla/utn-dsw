@@ -1,61 +1,117 @@
-<form
-  [formGroup]="formulario"
-  (ngSubmit)="buscarMesasLibres()"
-  class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
->
-  <div class="mb-4">
-    <label for="cantPersonas" class="block text-gray-700 text-sm font-bold mb-2"
-      >Cantidad de Personas:</label
-    >
-    <input
-      type="number"
-      id="cantPersonas"
-      formControlName="cantPersonas"
-      class="w-full p-2 border rounded-md"
-    />
-  </div>
-
-  <div class="mb-4">
-    <label for="fechaHora" class="block text-gray-700 text-sm font-bold mb-2"
-      >Fecha y Hora:</label
-    >
-    <input
-      type="datetime-local"
-      id="fechaHora"
-      formControlName="fechaHora"
-      class="w-full p-2 border rounded-md"
-    />
-  </div>
-
-  <div class="mb-4">
-    <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
-      >Ubicación:</label
-    >
-    <input
-      type="text"
-      id="ubicacion"
-      formControlName="ubicacion"
-      class="w-full p-2 border rounded-md"
-    />
-  </div>
-
-  <button
-    type="submit"
-    class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+<div *ngIf="!confirmaReserva">
+  <form
+    [formGroup]="formulario"
+    (ngSubmit)="buscarMesasLibres()"
+    class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
   >
-    Buscar Mesas Libres
-  </button>
-</form>
-
-<div *ngIf="mesasDisponibles" class="mt-8 max-w-md mx-auto">
-  <h2 class="text-white text-2xl font-bold mb-4">Mesas Disponibles:</h2>
-  <ul>
-    <li
-      *ngFor="let mesa of mesasDisponibles"
-      class="mb-2 text-white text-center"
+    <div
+      *ngIf="errorMessage"
+      class="bg-red-100 text-red-600 p-3 rounded-md mb-4"
     >
-      <span class="font-bold">{{ mesa.id }}</span> - Capacidad:
-      {{ mesa.capacidad }}
-    </li>
-  </ul>
+      {{ errorMessage }}
+    </div>
+    <div class="mb-4">
+      <label
+        for="cantPersonas"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Cantidad de Personas:</label
+      >
+      <input
+        type="number"
+        id="cantPersonas"
+        name="cantidadPersonas"
+        (focus)="ocultarPanelMesas()"
+        [(ngModel)]="reserva.cantidadPersonas"
+        formControlName="cantPersonas"
+        class="w-full p-2 border rounded-md"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="fechaHora" class="block text-gray-700 text-sm font-bold mb-2"
+        >Fecha y Hora:</label
+      >
+      <input
+        type="datetime-local"
+        id="fechaHora"
+        name="fechaHora"
+        (focus)="ocultarPanelMesas()"
+        [(ngModel)]="reserva.fechaHora"
+        formControlName="fechaHora"
+        class="w-full p-2 border rounded-md"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
+        >Ubicación:</label
+      >
+      <select
+        id="ubicacion"
+        formControlName="ubicacion"
+        (focus)="ocultarPanelMesas()"
+        class="w-full p-2 border rounded-md"
+      >
+        <option value="" disabled>Selecciona una opción</option>
+        <option value="afuera">Afuera</option>
+        <option value="adentro">Adentro</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+    >
+      Buscar Mesas Libres
+    </button>
+  </form>
+
+  <div *ngIf="mesasDisponibles" class="mt-8 max-w-md mx-auto">
+    <h2 class="text-white text-2xl font-bold mb-4">Mesas Disponibles:</h2>
+    <ul>
+      <li
+        *ngFor="let mesa of mesasDisponibles"
+        class="mb-2 text-white text-center"
+      >
+        <span class="font-bold">{{ mesa.id }}</span> - Capacidad:
+        {{ mesa.capacidad }}
+        <button (click)="reservarMesa(mesa.id)">Reservar</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="confirmaReserva" class="mensaje-confirmacion">
+  <div class="flex min-h-screen items-center justify-center">
+    <div class="rounded-lg bg-gray-800 px-16 py-14">
+      <div class="flex justify-center">
+        <div class="rounded-full bg-green-200 p-6">
+          <div
+            class="flex h-16 w-16 items-center justify-center rounded-full bg-green-500 p-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-8 w-8 text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <h3 class="my-4 text-center text-3xl font-semibold text-white">
+        Reservado!!!
+      </h3>
+      <p class="w-[230px] text-center font-normal text-gray-200">
+        Su reserva ha sido registrada exitosamente.
+      </p>
+    </div>
+  </div>
 </div>

@@ -18,6 +18,71 @@ function sanitizeMesaInput(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
+function sanitizeReservaInputReservar(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { cantidadPersonas, fechaHora, ubicacion } = req.params;
+  req.body.sanitizedInputReservar = {
+    fechaHora: fechaHora,
+    cantidadPersonas: cantidadPersonas,
+    ubicacion: ubicacion,
+  };
+
+  if (
+    !req.body.sanitizedInputReservar.fechaHora ||
+    !req.body.sanitizedInputReservar.cantidadPersonas ||
+    !req.body.sanitizedInputReservar.ubicacion
+  ) {
+    return res.status(400).json({ message: 'Faltan campos requeridos' });
+  }
+
+  // Verificar si cantidadPersonas es un número válido
+  if (
+    !Number.isInteger(
+      Number.parseInt(req.body.sanitizedInputReservar.cantidadPersonas)
+    ) ||
+    req.body.sanitizedInputReservar.cantidadPersonas < 1 ||
+    req.body.sanitizedInputReservar.cantidadPersonas > 6
+  ) {
+    return res.status(400).json({
+      message: 'La cantidad de personas debe ser un número entre 1 y 6',
+    });
+  }
+
+  // Verificar si fechaHora es una fecha y hora válidas
+  if (!isValidDateTime(req.body.sanitizedInputReservar.fechaHora)) {
+    return res
+      .status(400)
+      .json({ message: 'Debe ingresar una fecha y hora válidas' });
+  }
+
+  // Verificar si fechaHora es una fecha y hora válidas
+  if (
+    req.body.sanitizedInputReservar.ubicacion.toLowerCase() != 'afuera' &&
+    req.body.sanitizedInputReservar.ubicacion.toLowerCase() != 'adentro'
+  ) {
+    return res
+      .status(400)
+      .json({ message: 'Debe ingresar ubicación: afuera o adentro' });
+  }
+
+  Object.keys(req.body.sanitizedInputReservar).forEach((key) => {
+    if (req.body.sanitizedInputReservar[key] === undefined) {
+      delete req.body.sanitizedInputReservar[key];
+    }
+  });
+  next();
+}
+
+// Función para verificar si fechaHora es una fecha y hora válidas
+function isValidDateTime(dateTimeString: string) {
+  const dateTime = Date.parse(dateTimeString); // Intenta convertir la cadena a un objeto Date
+  const [datePart, timePart] = dateTimeString.split('T');
+  return !isNaN(dateTime) && datePart && timePart; // Si el resultado no es NaN, es una fecha y hora válidas
+}
+
 async function findAll(req: Request, res: Response) {
   const mesas = await repository.findAll();
   res.json({ data: mesas });
@@ -83,7 +148,8 @@ async function remove(req: Request, res: Response) {
 }
 
 async function findMesasLibres(req: Request, res: Response) {
-  const { cantidadPersonas, fechaHora, ubicacion } = req.params;
+  const { cantidadPersonas, fechaHora, ubicacion } =
+    req.body.sanitizedInputReservar;
   const mesas = await repository.findMesasLibres(
     Number.parseInt(cantidadPersonas),
     new Date(fechaHora),
@@ -104,5 +170,6 @@ export {
   findOne,
   remove,
   sanitizeMesaInput,
+  sanitizeReservaInputReservar,
   update,
 };

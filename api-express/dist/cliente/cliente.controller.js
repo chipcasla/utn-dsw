@@ -107,8 +107,9 @@ async function login(req, res) {
     if (!passwordValid) {
         return res.status(401).json({ msg: 'Contraseña incorrecta' });
     }
+    const idCliente = cliente.dataValues.id;
     //Generar token
-    const token = jwt.sign({ dni: dni }, process.env.SECRET_KEY || 'troleado'); //el dni en el payload es temporal, despues hay que cambiarlo
+    const token = jwt.sign({ id: idCliente }, process.env.SECRET_KEY || 'troleado');
     return res.status(200).json({ token });
 }
 export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };

@@ -11,7 +11,33 @@ function sanitizeReservaInput(req: Request, res: Response, next: NextFunction) {
     idCliente: req.body.cliente,
     Mesas: req.body.Mesas,
   };
-  //more checks here
+
+  if (
+    !req.body.sanitizedInput.fechaHora ||
+    !req.body.sanitizedInput.cantidadPersonas
+  ) {
+    return res.status(400).json({ message: 'Faltan campos requeridos' });
+  }
+
+  // Verificar si cantidadPersonas es un número válido
+  if (
+    !Number.isInteger(req.body.sanitizedInput.cantidadPersonas) ||
+    req.body.sanitizedInput.cantidadPersonas < 1 ||
+    req.body.sanitizedInput.cantidadPersonas > 6
+  ) {
+    return res
+      .status(400)
+      .json({
+        message: 'La cantidad de personas debe ser un número entre 1 y 6',
+      });
+  }
+
+  // Verificar si fechaHora es una fecha y hora válidas
+  if (!isValidDateTime(req.body.sanitizedInput.fechaHora)) {
+    return res
+      .status(400)
+      .json({ message: 'Debe ingresar una fecha y hora válidas' });
+  }
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
@@ -19,6 +45,13 @@ function sanitizeReservaInput(req: Request, res: Response, next: NextFunction) {
     }
   });
   next();
+}
+
+// Función para verificar si fechaHora es una fecha y hora válidas
+function isValidDateTime(dateTimeString: string) {
+  const dateTime = Date.parse(dateTimeString); // Intenta convertir la cadena a un objeto Date
+  const [datePart, timePart] = dateTimeString.split('T');
+  return !isNaN(dateTime) && datePart && timePart; // Si el resultado no es NaN, es una fecha y hora válidas
 }
 
 async function findAll(req: Request, res: Response) {
@@ -51,6 +84,7 @@ async function add(req: Request, res: Response) {
     idCliente,
     Mesas,
   };
+  console.log(reservaInput);
   try {
     const nuevaReserva = await repository.add(reservaInput);
     return res
@@ -101,12 +135,20 @@ async function remove(req: Request, res: Response) {
 
 async function findPendientes(req: Request, res: Response) {
   const reservas = await repository.findPendientes();
-  if(!reservas){
-     res.json('No hay reservas pendientes')
-   } else{
-     res.json({data: reservas})
-   }  
+  if (!reservas) {
+    res.json('No hay reservas pendientes');
+  } else {
+    res.json({ data: reservas });
+  }
 }
 
+export {
+  add,
+  findAll,
+  findOne,
+  findPendientes,
+  remove,
+  sanitizeReservaInput,
+  update
+};
 
-export { add, findAll, findOne, remove, sanitizeReservaInput, update, findPendientes };

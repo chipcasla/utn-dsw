@@ -16,4 +16,4 @@ reservaRouter.get('/:id', findOne);
 reservaRouter.post('/', sanitizeReservaInput, add);
 reservaRouter.put('/:id', sanitizeReservaInput, update);
 reservaRouter.delete('/:id', remove);
-reservaRouter.get('/', findPendientes);
+reservaRouter.get('/', sanitizeReservaInput, findPendientes);
