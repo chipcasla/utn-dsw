@@ -1,1 +1,13 @@
-<p>reserva-management works!</p>
+<div>
+    <ul>
+        <li *ngFor="let reserva of reservas">
+            <span class="font-bold">{{ reserva.id }}</span> - Fecha y Hora: {{reserva.fechaHora}} - Cantidad de personas: {{reserva.cantidadPersonas}}
+            estado: {{reserva.estado}} - Id de cliente: {{reserva.idCliente}} 
+            <button *ngIf="reserva.estado!='Completa'" (click)="completarReserva(reserva.id)">Completar reserva</button>
+            <button *ngIf="reserva.estado!='Cancelada'" (click)="cancelarReserva(reserva.id)">Cancelar reserva</button>
+
+        </li>
+    </ul>
+
+    <button (click)="redirect()">Volver</button>
+</div>

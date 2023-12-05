@@ -64,7 +64,7 @@ export class ReservaRepository {
   public async update(id: string, item: any): Promise<Reserva | undefined> {
     const transaction = await sequelize.transaction();
     try {
-      const { Mesas, ...ReservaRow } = item;
+      const { ...ReservaRow } = item;
       await Reserva.update(ReservaRow, {
         where: {
           id: Number.parseInt(id),
@@ -72,12 +72,12 @@ export class ReservaRepository {
         transaction,
       });
       const reserva = await this.findOne({ id });
-      if (Mesas) {
+      /*if (Mesas) {
         await reserva?.setMesas(
           item.Mesas.map((m: { id: any }) => m.id),
           { transaction }
         );
-      }
+      }*/
       await transaction.commit();
       return await reserva?.reload();
     } catch (error) {

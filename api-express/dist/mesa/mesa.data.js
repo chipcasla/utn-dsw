@@ -82,7 +82,7 @@ export class MesaRepository {
                     },
                     ubicacion: ubicacion,
                 },
-                group: ['Mesa.id'],
+                group: ['Mesa.id', 'Reservas.id'],
                 having: literal('COUNT(Reservas.id) = 0'),
             });
             return mesas;

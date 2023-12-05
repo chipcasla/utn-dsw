@@ -22,13 +22,11 @@ export class ClienteRepository {
     }
   }
 
-  public async findByDni(dni: string): Promise<Cliente | undefined> {
+  public async findByDni(dni: String): Promise<Cliente | undefined> {
     try {
-      const cliente = await Cliente.findOne({ where: { dni: dni } });
-      if (!cliente || cliente.dataValues.tipo != 'cliente') {
-        return undefined;
-      }
-      return cliente;
+      const cliente = await Cliente.findOne({ where: {dni: dni} })
+      if(cliente)
+        return cliente;
     } catch (error) {
       throw error;
     }

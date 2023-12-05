@@ -1,4 +1,4 @@
-<form [formGroup]="createForm" (ngSubmit)="addCliente()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+<form [formGroup]="formularioRegistro" (ngSubmit)="addCliente()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
 
     <div class="mb-4">
       <label for="dni" class="block text-gray-700 text-sm font-bold mb-2">DNI:</label>
@@ -35,6 +35,6 @@
       <input type="email" id="mail" formControlName="mail" class="w-full p-2 border rounded-md" required>
     </div>
         
-    <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Registrar</button>
+    <button type="submit"  class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Registrar</button>
   
   </form>

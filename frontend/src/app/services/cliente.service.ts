@@ -37,4 +37,8 @@ export class ClienteService {
   findOne(idCliente: number){
     return this.http.get(`${this.URL}/clientes/${idCliente}`)
   }
+
+  findByDni(dniCliente: string){
+    return this.http.get(`${this.URL}/clientes/dni/${dniCliente}`)
+  }
 }

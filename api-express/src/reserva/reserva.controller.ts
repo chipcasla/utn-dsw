@@ -15,7 +15,7 @@ function sanitizeReservaInput(req: Request, res: Response, next: NextFunction) {
   if (
     !req.body.sanitizedInput.fechaHora ||
     !req.body.sanitizedInput.cantidadPersonas
-  ) {
+  ) { console.log(req.body.sanitizedInput)
     return res.status(400).json({ message: 'Faltan campos requeridos' });
   }
 
@@ -102,7 +102,7 @@ async function update(req: Request, res: Response) {
   try {
     const reservaActualizada = await repository.update(
       id,
-      req.body.sanitizedInput
+      req.body
     );
     if (!reservaActualizada) {
       return res.status(404).send({ error: 'Reserva no encontrada' });
@@ -111,6 +111,7 @@ async function update(req: Request, res: Response) {
       .status(200)
       .send({ message: 'Reserva actualizada', data: reservaActualizada });
   } catch (error) {
+    console.log(error)
     return res
       .status(500)
       .json({ message: 'Error al actualizar reserva', error });
@@ -151,4 +152,3 @@ export {
   sanitizeReservaInput,
   update
 };
-

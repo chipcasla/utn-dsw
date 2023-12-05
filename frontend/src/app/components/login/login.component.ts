@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   };
   error: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {}
 
@@ -40,5 +40,9 @@ export class LoginComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  redirect(){
+    this.router.navigate(['../registro'], {relativeTo: this.route})
   }
 }
