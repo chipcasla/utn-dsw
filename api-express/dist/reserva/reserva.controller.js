@@ -8,6 +8,14 @@ function sanitizeReservaInput(req, res, next) {
         idCliente: req.body.cliente,
         Mesas: req.body.Mesas,
     };
+<<<<<<< HEAD
+=======
+    if (!req.body.sanitizedInput.fechaHora ||
+        !req.body.sanitizedInput.cantidadPersonas) {
+        console.log(req.body.sanitizedInput);
+        return res.status(400).json({ message: 'Faltan campos requeridos' });
+    }
+>>>>>>> d4a718b825a1a547c8b4fe1186e44577ff1e554b
     // Verificar si cantidadPersonas es un número válido
     if (req.body.sanitizedInput.cantidadPersonas) {
         if (!Number.isInteger(req.body.sanitizedInput.cantidadPersonas) ||
@@ -83,7 +91,7 @@ async function add(req, res) {
 async function update(req, res) {
     const { id } = req.params;
     try {
-        const reservaActualizada = await repository.update(id, req.body.sanitizedInput);
+        const reservaActualizada = await repository.update(id, req.body);
         if (!reservaActualizada) {
             return res.status(404).send({ error: 'Reserva no encontrada' });
         }
@@ -92,6 +100,7 @@ async function update(req, res) {
             .send({ message: 'Reserva actualizada', data: reservaActualizada });
     }
     catch (error) {
+        console.log(error);
         return res
             .status(500)
             .json({ message: 'Error al actualizar reserva', error });

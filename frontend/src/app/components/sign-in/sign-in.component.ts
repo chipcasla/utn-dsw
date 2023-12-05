@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignInService } from 'app/services/sign-in.service';
-import { first, repeat } from 'rxjs';
+import { AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from 'app/services/cliente.service';
+import { Observable, catchError, first, from, map, of, repeat } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,11 +12,11 @@ import { first, repeat } from 'rxjs';
 export class SignInComponent {
   formularioRegistro: FormGroup;
   
-  constructor(private formBuilder: FormBuilder, private signInService: SignInService){
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private clienteService: ClienteService){
     this.formularioRegistro = this.formBuilder.group({
       dni:['', Validators.required],
       password:['', Validators.required],
-      repeatPassword:['', [Validators.required, this.verifyPassword]],
+      repeatPassword:['', [Validators.required, this.verifyPassword.bind(this)]],
       nombre:['', Validators.required],
       apellido:['', Validators.required],
       telefono:['', Validators.required],
@@ -23,9 +24,9 @@ export class SignInComponent {
     })
     }
 
-  verifyPassword(control: AbstractControl): {[key: string]: any} | null {
-    const firstPassword = this.formularioRegistro.get('password')?.value;
-    const secondPassword = control.value;
+  verifyPassword(){
+    const firstPassword = this.formularioRegistro?.get('password')?.value;
+    const secondPassword = this.formularioRegistro?.get('repeatPassword')?.value;
 
     if (firstPassword != secondPassword){
       return {noCoinciden: true};
@@ -33,14 +34,28 @@ export class SignInComponent {
     return null
   }
 
-  addCliente(){
-    if (this.formularioRegistro.valid){
-      const datosFormulario = this.formularioRegistro.value;
-      this.signInService.addCliente(datosFormulario).subscribe() //habria que agregar algun tipo de feedback, que redirija a home o diga cliente creado
+  addCliente() {
+    if (this.formularioRegistro.valid) {
+      const dni = this.formularioRegistro?.get('dni')?.value;
+      console.log('t1')
+      this.itExists(dni).subscribe((exists) => {
+        console.log('t2')
+        if (exists) {
+          console.log('t3')
+          const datosFormulario = this.formularioRegistro.value;
+          this.clienteService.addCliente(datosFormulario).subscribe(() => {
+            this.router.navigate(['../login'], { relativeTo: this.route });
+          });
+        }
+        // Insertar mensaje de error
+      });
     }
   }
-};
 
-
-  
-
+  itExists(dni: string): Observable<boolean> {
+    return this.clienteService.findByDni(dni).pipe(
+      map((cliente) => !!cliente), 
+      catchError(() => of(false))
+    );
+  }
+}

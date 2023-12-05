@@ -24,10 +24,8 @@ export class ClienteRepository {
     async findByDni(dni) {
         try {
             const cliente = await Cliente.findOne({ where: { dni: dni } });
-            if (!cliente || cliente.dataValues.tipo != 'cliente') {
-                return undefined;
-            }
-            return cliente;
+            if (cliente)
+                return cliente;
         }
         catch (error) {
             throw error;

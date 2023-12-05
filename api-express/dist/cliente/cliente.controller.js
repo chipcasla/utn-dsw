@@ -127,6 +127,14 @@ async function remove(req, res) {
             .json({ message: 'Error al eliminar el cliente', error });
     }
 }
+async function findByDni(req, res) {
+    const dni = req.params.dni;
+    const cliente = await repository.findByDni(dni);
+    if (!cliente) {
+        return res.status(200).send({ message: 'Dni no registrado' });
+    }
+    return res.status(401).json({ msg: 'Dni ya registrado' });
+}
 async function login(req, res) {
     const { dni, password } = req.body;
     //Validar dni
@@ -147,5 +155,5 @@ async function login(req, res) {
     });
     return res.status(200).json({ token, data: cliente });
 }
-export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };
+export { add, findAll, findOne, login, remove, sanitizeClienteInput, update, findByDni };
 //# sourceMappingURL=cliente.controller.js.map

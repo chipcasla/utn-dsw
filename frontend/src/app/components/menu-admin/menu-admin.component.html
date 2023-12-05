@@ -1,16 +1,8 @@
 <div>
     <h1>Menu Admin</h1>
     <ul>
-      <li (click)="selectOption('clientes')">Clientes</li>
-      <li (click)="selectOption('mesas')">Mesas</li>
-      <li (click)="selectOption('reservas')">Reservas</li>
+      <li> <button (click)="redirect('clientes')">Clientes</button></li>
+      <li> <button (click)="redirect('mesas')">Mesas</button></li>
+      <li> <button (click)="redirect('reservas')">Reservas</button></li>
     </ul>
-
-    <div *ngIf="selectedOption">
-      <h2>{{ selectedOption }}</h2>
-      <ul>
-        <li> <button (click)="redirect('crear')">Crear</button></li>
-        <li> <button (click)="redirect('verTodos')">Ver Todos</button></li>
-      </ul>
-    </div>
-  </div>
+</div>

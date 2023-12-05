@@ -95,10 +95,7 @@ async function add(req: Request, res: Response) {
 async function update(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    const reservaActualizada = await repository.update(
-      id,
-      req.body.sanitizedInput
-    );
+    const reservaActualizada = await repository.update(id, req.body);
     if (!reservaActualizada) {
       return res.status(404).send({ error: 'Reserva no encontrada' });
     }
@@ -106,6 +103,7 @@ async function update(req: Request, res: Response) {
       .status(200)
       .send({ message: 'Reserva actualizada', data: reservaActualizada });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ message: 'Error al actualizar reserva', error });

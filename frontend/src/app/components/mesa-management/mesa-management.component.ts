@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MesaService } from 'app/services/mesa.service';
 
 @Component({
@@ -9,12 +9,14 @@ import { MesaService } from 'app/services/mesa.service';
   styleUrls: ['./mesa-management.component.css']
 })
 export class MesaManagementComponent {
-  action: string = '';
+  crear: boolean=false;
   mesas: any;
   createForm: FormGroup;
 
+
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private router: Router, 
     private mesaService: MesaService,
     private formBuilder: FormBuilder,
     ){
@@ -33,13 +35,7 @@ export class MesaManagementComponent {
     }
 
   ngOnInit(){
-    this.route.paramMap.subscribe(params => {
-      this.action = params.get('action') || '';
-    });
-
-    if (this.action==='verTodos'){
-      this.cargarMesas();
-    }
+    this.cargarMesas();
   }
 
   cargarMesas(){
@@ -51,7 +47,9 @@ export class MesaManagementComponent {
   addMesa(){
     if (this.createForm.valid){
       const datosFormulario = this.createForm.value;
-      this.mesaService.addMesa(datosFormulario).subscribe();
+      this.mesaService.addMesa(datosFormulario).subscribe(()=>{
+        this.cargarMesas();
+      });
     }
   }
 
@@ -59,5 +57,9 @@ export class MesaManagementComponent {
     this.mesaService.deleteMesa(idMesa).subscribe(()=>{
       this.cargarMesas();
     })
+  }
+
+  redirect(){
+    this.router.navigate(['../'], {relativeTo: this.route})
   }
 }

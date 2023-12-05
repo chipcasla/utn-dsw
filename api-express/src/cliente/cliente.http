@@ -37,3 +37,7 @@ Content-Type: application/json
   "dni": "43378663",
   "password": "asd"
 }
+
+## findbyDni
+GET http://localhost:3000/api/clientes/dni/23232324
+Content-Type: application/json

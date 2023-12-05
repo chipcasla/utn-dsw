@@ -140,6 +140,16 @@ async function remove(req: Request, res: Response) {
   }
 }
 
+async function findByDni(req: Request, res:Response){
+  const dni = req.params.dni;
+
+  const cliente = await repository.findByDni(dni);
+  if (!cliente){
+    return res.status(200).send({message: 'Dni no registrado'})
+  }
+  return res.status(401).json({msg: 'Dni ya registrado'});
+}
+
 async function login(req: Request, res: Response) {
   const { dni, password } = req.body;
 
@@ -169,4 +179,4 @@ async function login(req: Request, res: Response) {
   return res.status(200).json({ token, data: cliente });
 }
 
-export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };
+export { add, findAll, findOne, login, remove, sanitizeClienteInput, update, findByDni};
