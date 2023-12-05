@@ -12,31 +12,26 @@ function sanitizeReservaInput(req: Request, res: Response, next: NextFunction) {
     Mesas: req.body.Mesas,
   };
 
-  if (
-    !req.body.sanitizedInput.fechaHora ||
-    !req.body.sanitizedInput.cantidadPersonas
-  ) {
-    return res.status(400).json({ message: 'Faltan campos requeridos' });
-  }
-
   // Verificar si cantidadPersonas es un número válido
-  if (
-    !Number.isInteger(req.body.sanitizedInput.cantidadPersonas) ||
-    req.body.sanitizedInput.cantidadPersonas < 1 ||
-    req.body.sanitizedInput.cantidadPersonas > 6
-  ) {
-    return res
-      .status(400)
-      .json({
+  if (req.body.sanitizedInput.cantidadPersonas) {
+    if (
+      !Number.isInteger(req.body.sanitizedInput.cantidadPersonas) ||
+      req.body.sanitizedInput.cantidadPersonas < 1 ||
+      req.body.sanitizedInput.cantidadPersonas > 6
+    ) {
+      return res.status(400).json({
         message: 'La cantidad de personas debe ser un número entre 1 y 6',
       });
+    }
   }
 
   // Verificar si fechaHora es una fecha y hora válidas
-  if (!isValidDateTime(req.body.sanitizedInput.fechaHora)) {
-    return res
-      .status(400)
-      .json({ message: 'Debe ingresar una fecha y hora válidas' });
+  if (req.body.sanitizedInput.fechaHora) {
+    if (!isValidDateTime(req.body.sanitizedInput.fechaHora)) {
+      return res
+        .status(400)
+        .json({ message: 'Debe ingresar una fecha y hora válidas' });
+    }
   }
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -149,6 +144,5 @@ export {
   findPendientes,
   remove,
   sanitizeReservaInput,
-  update
+  update,
 };
-

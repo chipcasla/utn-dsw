@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
@@ -11,9 +12,9 @@ import {
 
 export const clienteRouter = Router();
 
-clienteRouter.get('/', findAll);
-clienteRouter.get('/:id', findOne);
-clienteRouter.post('/', sanitizeClienteInput, add);
-clienteRouter.put('/:id', sanitizeClienteInput, update);
-clienteRouter.delete('/:id', remove);
+clienteRouter.get('/', validateToken, findAll);
+clienteRouter.get('/:id', validateToken, findOne);
+clienteRouter.post('/', validateToken, sanitizeClienteInput, add);
+clienteRouter.put('/:id', validateToken, sanitizeClienteInput, update);
+clienteRouter.delete('/:id', validateToken, remove);
 clienteRouter.post('/login', login);

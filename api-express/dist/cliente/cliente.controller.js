@@ -11,13 +11,45 @@ function sanitizeClienteInput(req, res, next) {
         mail: req.body.mail,
         password: req.body.password,
     };
-    //more checks here
+    // Validar el formato del DNI
+    if (req.body.sanitizedInput.dni) {
+        if (!validateDNI(req.body.sanitizedInput.dni)) {
+            return res
+                .status(400)
+                .json({ message: 'El formato del DNI es incorrecto' });
+        }
+    }
+    // Validar el formato del teléfono
+    if (req.body.sanitizedInput.telefono) {
+        if (!validateTelefono(req.body.sanitizedInput.telefono)) {
+            return res
+                .status(400)
+                .json({ message: 'El formato del teléfono es incorrecto' });
+        }
+    }
+    // Validar el formato del correo electrónico
+    if (req.body.sanitizedInput.mail) {
+        if (!validateEmail(req.body.sanitizedInput.mail)) {
+            return res
+                .status(400)
+                .json({ message: 'El formato del correo electrónico es incorrecto' });
+        }
+    }
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
             delete req.body.sanitizedInput[key];
         }
     });
     next();
+}
+function validateDNI(dni) {
+    return /^\d{8}$/.test(dni);
+}
+function validateTelefono(telefono) {
+    return /^\d{7,14}$/.test(telefono);
+}
+function validateEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
 }
 async function findAll(req, res) {
     const clientes = await repository.findAll();
@@ -108,9 +140,12 @@ async function login(req, res) {
         return res.status(401).json({ msg: 'Contraseña incorrecta' });
     }
     const idCliente = cliente.dataValues.id;
+    const rolCliente = cliente.dataValues.tipo;
     //Generar token
-    const token = jwt.sign({ id: idCliente }, process.env.SECRET_KEY || 'troleado');
-    return res.status(200).json({ token });
+    const token = jwt.sign({ id: idCliente, rol: rolCliente }, process.env.SECRET_KEY || 'troleado', {
+        expiresIn: 60 * 60,
+    });
+    return res.status(200).json({ token, data: cliente });
 }
 export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };
 //# sourceMappingURL=cliente.controller.js.map

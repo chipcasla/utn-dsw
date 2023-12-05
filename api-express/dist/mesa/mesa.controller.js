@@ -5,7 +5,20 @@ function sanitizeMesaInput(req, res, next) {
         capacidad: req.body.capacidad,
         ubicacion: req.body.ubicacion,
     };
-    //more checks here
+    const capNum = parseInt(req.body.sanitizedInput.capacidad);
+    // Verificar si cantidadPersonas es un número válido
+    if (isNaN(capNum)) {
+        return res.status(400).json({
+            message: 'La cantidad de personas debe ser un número entero',
+        });
+    }
+    // Verificar si ubicacion es válida
+    if (req.body.sanitizedInput.ubicacion.toLowerCase() != 'afuera' &&
+        req.body.sanitizedInput.ubicacion.toLowerCase() != 'adentro') {
+        return res
+            .status(400)
+            .json({ message: 'Debe ingresar ubicación: afuera o adentro' });
+    }
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
             delete req.body.sanitizedInput[key];
@@ -26,9 +39,7 @@ function sanitizeReservaInputReservar(req, res, next) {
         return res.status(400).json({ message: 'Faltan campos requeridos' });
     }
     // Verificar si cantidadPersonas es un número válido
-    if (!Number.isInteger(Number.parseInt(req.body.sanitizedInputReservar.cantidadPersonas)) ||
-        req.body.sanitizedInputReservar.cantidadPersonas < 1 ||
-        req.body.sanitizedInputReservar.cantidadPersonas > 6) {
+    if (!validarCapacidad(req.body.sanitizedInputReservar.cantidadPersonas)) {
         return res.status(400).json({
             message: 'La cantidad de personas debe ser un número entre 1 y 6',
         });
@@ -39,7 +50,7 @@ function sanitizeReservaInputReservar(req, res, next) {
             .status(400)
             .json({ message: 'Debe ingresar una fecha y hora válidas' });
     }
-    // Verificar si fechaHora es una fecha y hora válidas
+    // Verificar si ubicacion es válida
     if (req.body.sanitizedInputReservar.ubicacion.toLowerCase() != 'afuera' &&
         req.body.sanitizedInputReservar.ubicacion.toLowerCase() != 'adentro') {
         return res
@@ -52,6 +63,11 @@ function sanitizeReservaInputReservar(req, res, next) {
         }
     });
     next();
+}
+//validar capacidad
+function validarCapacidad(cap) {
+    const capNum = parseInt(cap);
+    return !isNaN(capNum) && capNum >= 1 && capNum <= 6;
 }
 // Función para verificar si fechaHora es una fecha y hora válidas
 function isValidDateTime(dateTimeString) {
@@ -124,7 +140,7 @@ async function findMesasLibres(req, res) {
     const { cantidadPersonas, fechaHora, ubicacion } = req.body.sanitizedInputReservar;
     const mesas = await repository.findMesasLibres(Number.parseInt(cantidadPersonas), new Date(fechaHora), ubicacion);
     if (!mesas) {
-        res.json('No hay mesas disponibles');
+        res.json({ message: 'No hay mesas disponibles' });
     }
     else {
         res.json({ data: mesas });

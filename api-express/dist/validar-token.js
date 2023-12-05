@@ -1,14 +1,18 @@
 import jwt from 'jsonwebtoken';
 export const validateToken = (req, res, next) => {
     const headerToken = req.headers['authorization'];
-    if (headerToken != undefined) { //puedo ponerle que tambien empiece con Bearer
+    if (headerToken != undefined && headerToken.startsWith('Bearer ')) {
+        //tiene token
         try {
             const BearerToken = headerToken.slice(7);
             jwt.verify(BearerToken, process.env.SECRET_KEY || 'troleado');
             next();
         }
         catch (error) {
-            res.status(401).json({ msg: 'token no valido' });
+            if (error.name == 'TokenExpiredError') {
+                res.status(401).json({ msg: 'Sesión expirada', error });
+            }
+            res.status(401).json({ msg: 'Token no valido', error });
         }
     }
     else {

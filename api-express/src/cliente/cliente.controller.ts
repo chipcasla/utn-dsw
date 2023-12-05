@@ -13,7 +13,33 @@ function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
     mail: req.body.mail,
     password: req.body.password,
   };
-  //more checks here
+
+  // Validar el formato del DNI
+  if (req.body.sanitizedInput.dni) {
+    if (!validateDNI(req.body.sanitizedInput.dni)) {
+      return res
+        .status(400)
+        .json({ message: 'El formato del DNI es incorrecto' });
+    }
+  }
+
+  // Validar el formato del teléfono
+  if (req.body.sanitizedInput.telefono) {
+    if (!validateTelefono(req.body.sanitizedInput.telefono)) {
+      return res
+        .status(400)
+        .json({ message: 'El formato del teléfono es incorrecto' });
+    }
+  }
+
+  // Validar el formato del correo electrónico
+  if (req.body.sanitizedInput.mail) {
+    if (!validateEmail(req.body.sanitizedInput.mail)) {
+      return res
+        .status(400)
+        .json({ message: 'El formato del correo electrónico es incorrecto' });
+    }
+  }
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
@@ -23,6 +49,17 @@ function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
+function validateDNI(dni: string): boolean {
+  return /^\d{8}$/.test(dni);
+}
+
+function validateTelefono(telefono: string): boolean {
+  return /^\d{7,14}$/.test(telefono);
+}
+
+function validateEmail(email: string): boolean {
+  return /\S+@\S+\.\S+/.test(email);
+}
 async function findAll(req: Request, res: Response) {
   const clientes = await repository.findAll();
   res.json({ data: clientes });
@@ -120,12 +157,16 @@ async function login(req: Request, res: Response) {
     return res.status(401).json({ msg: 'Contraseña incorrecta' });
   }
   const idCliente = cliente.dataValues.id;
+  const rolCliente = cliente.dataValues.tipo;
   //Generar token
   const token = jwt.sign(
-    { id: idCliente },
-    process.env.SECRET_KEY || 'troleado'
+    { id: idCliente, rol: rolCliente },
+    process.env.SECRET_KEY || 'troleado',
+    {
+      expiresIn: 60 * 60,
+    }
   );
-  return res.status(200).json({ token });
+  return res.status(200).json({ token, data: cliente });
 }
 
 export { add, findAll, findOne, login, remove, sanitizeClienteInput, update };

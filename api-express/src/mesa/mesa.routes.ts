@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
@@ -16,8 +17,8 @@ mesaRouter.get(
   sanitizeReservaInputReservar,
   findMesasLibres
 );
-mesaRouter.get('/', findAll);
-mesaRouter.get('/:id', findOne);
-mesaRouter.post('/', sanitizeMesaInput, add);
-mesaRouter.put('/:id', sanitizeMesaInput, update);
-mesaRouter.delete('/:id', remove);
+mesaRouter.get('/', validateToken, findAll);
+mesaRouter.get('/:id', validateToken, findOne);
+mesaRouter.post('/', validateToken, sanitizeMesaInput, add);
+mesaRouter.put('/:id', validateToken, sanitizeMesaInput, update);
+mesaRouter.delete('/:id', validateToken, remove);

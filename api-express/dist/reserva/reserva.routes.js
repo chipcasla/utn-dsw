@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import { add, findAll, findOne, findPendientes, remove, sanitizeReservaInput, update, } from './reserva.controller.js';
+import { validateToken } from '../validar-token.js';
+import { add, findAll, findOne, remove, sanitizeReservaInput, update, } from './reserva.controller.js';
 export const reservaRouter = Router();
-reservaRouter.get('/', findAll);
-reservaRouter.get('/:id', findOne);
-reservaRouter.post('/', sanitizeReservaInput, add);
-reservaRouter.put('/:id', sanitizeReservaInput, update);
-reservaRouter.delete('/:id', remove);
-reservaRouter.get('/', sanitizeReservaInput, findPendientes);
+reservaRouter.get('/', validateToken, findAll);
+reservaRouter.get('/:id', validateToken, findOne);
+reservaRouter.post('/', validateToken, sanitizeReservaInput, add);
+reservaRouter.put('/:id', validateToken, sanitizeReservaInput, update);
+reservaRouter.delete('/:id', validateToken, remove);
 //# sourceMappingURL=reserva.routes.js.map
