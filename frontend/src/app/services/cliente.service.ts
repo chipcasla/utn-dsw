@@ -33,4 +33,12 @@ export class ClienteService {
   deleteCliente(idCliente: number){
     return this.http.delete(`${this.URL}/clientes/${idCliente}`)
   }
+
+  findOne(idCliente: number){
+    return this.http.get(`${this.URL}/clientes/${idCliente}`)
+  }
+
+  findByDni(dniCliente: string){
+    return this.http.get(`${this.URL}/clientes/dni/${dniCliente}`)
+  }
 }

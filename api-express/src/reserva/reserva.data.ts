@@ -64,7 +64,7 @@ export class ReservaRepository {
   public async update(id: string, item: any): Promise<Reserva | undefined> {
     const transaction = await sequelize.transaction();
     try {
-      const { Mesas, ...ReservaRow } = item;
+      const {Mesas, ...ReservaRow } = item;
       await Reserva.update(ReservaRow, {
         where: {
           id: Number.parseInt(id),

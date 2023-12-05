@@ -10,6 +10,8 @@ import { authGuard } from './guards/auth.guard';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -31,9 +33,12 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
 
+  { path: 'registro', component: SignInComponent},
+
   { path: 'admin', component: MenuAdminComponent},
   { path: 'admin/mesas', component: MesaManagementComponent},
-  {path: 'admin/clientes', component: ClienteManagementComponent},
+  { path: 'admin/clientes', component: ClienteManagementComponent},
+  { path: 'admin/reservas', component: ReservaManagementComponent},
     ];
 
 @NgModule({

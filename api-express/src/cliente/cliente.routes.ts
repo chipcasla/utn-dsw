@@ -3,6 +3,7 @@ import {
   add,
   findAll,
   findOne,
+  findByDni,
   login,
   remove,
   sanitizeClienteInput,
@@ -17,3 +18,4 @@ clienteRouter.post('/', sanitizeClienteInput, add);
 clienteRouter.put('/:id', sanitizeClienteInput, update);
 clienteRouter.delete('/:id', remove);
 clienteRouter.post('/login', login);
+clienteRouter.get('/dni/:dni', findByDni);
