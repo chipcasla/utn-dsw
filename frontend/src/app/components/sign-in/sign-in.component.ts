@@ -10,6 +10,7 @@ import { first, repeat } from 'rxjs';
 })
 export class SignInComponent {
   formularioRegistro: FormGroup;
+  oldCliente: any;
   
   constructor(private formBuilder: FormBuilder, private clienteService: ClienteService){
     this.formularioRegistro = this.formBuilder.group({
@@ -38,6 +39,11 @@ export class SignInComponent {
       const datosFormulario = this.formularioRegistro.value;
       this.clienteService.addCliente(datosFormulario).subscribe() //habria que agregar algun tipo de feedback, que redirija a home o diga cliente creado
     }
+  }
+
+  itExists(clienteId: number){
+    this.oldCliente= this.clienteService.findOne(clienteId)
+    return (this.formularioRegistro.get('dni')?.value == this.oldCliente.dni)
   }
 };
 

@@ -17,6 +17,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
 import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
+import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ClienteManagementComponent } from './components/cliente-management/clie
     MenuAdminComponent,
     MesaManagementComponent,
     ClienteManagementComponent,
+    ReservaManagementComponent,
   ],
   imports: [
     BrowserModule,
