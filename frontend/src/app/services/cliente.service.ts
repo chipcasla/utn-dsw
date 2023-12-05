@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 
@@ -5,7 +6,11 @@ import { jwtDecode } from 'jwt-decode';
   providedIn: 'root',
 })
 export class ClienteService {
-  constructor() {}
+  private URL = 'http://localhost:3000/api';
+
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getUserId() {
     const token = localStorage.getItem('token');
@@ -15,5 +20,17 @@ export class ClienteService {
       return userId;
     }
     return null;
+  }
+
+  findAll(){
+    return this.http.get<any>(this.URL+`/clientes`)
+  }
+
+  addCliente(datosCliente: any){
+    return this.http.post(`${this.URL}/clientes`, datosCliente);
+  }
+
+  deleteCliente(idCliente: number){
+    return this.http.delete(`${this.URL}/clientes/${idCliente}`)
   }
 }

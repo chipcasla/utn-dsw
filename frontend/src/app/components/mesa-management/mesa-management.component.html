@@ -1,7 +1,6 @@
 <h1>mesa management works!</h1>
-<h2>{{action}} mesa</h2>
 <!--Agregar una nueva mesa-->
-<div *ngIf="action === 'crear'">
+<div *ngIf="crear">
     <form
     [formGroup]="createForm"
     (ngSubmit)="addMesa()"
@@ -43,15 +42,19 @@
         Agregar mesa
       </button>
     </form>
+    <button (click)="crear = !crear">Cerrar</button>
 </div>
 
 
 <!--Ver todas las mesas y poder borrar una-->
-<div *ngIf="action === 'verTodos'">
+<div>
+  <button (click)="crear=!crear">Crear mesa</button>
     <ul>
         <li *ngFor="let mesa of mesas">
             <span class="font-bold">{{ mesa.id }}</span> - Capacidad: {{ mesa.capacidad }} - Ubicacion : {{mesa.ubicacion}}
             <button (click)="borrarMesa(mesa.id)">Borrar</button> 
         </li>
     </ul>
+
+    <button (click)="redirect()">Volver</button>
 </div>

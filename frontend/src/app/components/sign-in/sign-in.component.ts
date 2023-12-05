@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignInService } from 'app/services/sign-in.service';
+import { ClienteService } from 'app/services/cliente.service';
 import { first, repeat } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { first, repeat } from 'rxjs';
 export class SignInComponent {
   formularioRegistro: FormGroup;
   
-  constructor(private formBuilder: FormBuilder, private signInService: SignInService){
+  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService){
     this.formularioRegistro = this.formBuilder.group({
       dni:['', Validators.required],
       password:['', Validators.required],
@@ -36,7 +36,7 @@ export class SignInComponent {
   addCliente(){
     if (this.formularioRegistro.valid){
       const datosFormulario = this.formularioRegistro.value;
-      this.signInService.addCliente(datosFormulario).subscribe() //habria que agregar algun tipo de feedback, que redirija a home o diga cliente creado
+      this.clienteService.addCliente(datosFormulario).subscribe() //habria que agregar algun tipo de feedback, que redirija a home o diga cliente creado
     }
   }
 };

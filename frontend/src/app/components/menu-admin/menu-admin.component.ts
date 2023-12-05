@@ -7,17 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu-admin.component.css']
 })
 export class MenuAdminComponent {
-  selectedOption: string | null = null;
 
   constructor(private router: Router){};
   
-  selectOption(option: string) {
-    this.selectedOption=option;
-  }
+
 
   redirect(action: string){
-    if (this.selectedOption){
-      this.router.navigate(['/admin', this.selectedOption, action]);
-    }
+      this.router.navigate(['/admin', action]);
   }
 }
