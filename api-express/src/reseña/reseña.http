@@ -1,22 +1,22 @@
 ### Obtener todas las reseñas
-GET http://localhost:3000/api/reseñas
+GET http://localhost:3000/api/resenias
 
 ### Obtener una reseña
-GET http://localhost:3000/api/reseñas/2
+GET http://localhost:3000/api/resenias/2
 
 ### Crear una nueva reseña
-POST http://localhost:3000/api/reseñas/
+POST http://localhost:3000/api/resenias/
 Content-Type: application/json
 
 {
   "comentario": "Buena atencion",
   "puntaje": 3,
-  "cliente": 2,
+  "cliente": 2
 }
 
 ### Modificar una reseña (PUT - recurso completo e idempotente)
 
-PUT http://localhost:3000/api/reseñas/2
+PUT http://localhost:3000/api/resenias/2
 Content-Type: application/json
 
 {
@@ -24,5 +24,5 @@ Content-Type: application/json
 }
 
 ### Borrar una reseña
-DELETE http://localhost:3000/api/reseñas/4
+DELETE http://localhost:3000/api/resenias/4
 //Remplaza con el ID de la reseña a borrar

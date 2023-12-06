@@ -20,7 +20,7 @@ app.use('/api/mesas', mesaRouter);
 // app.use('/api/localidades', localidadRouter);
 app.use('/api/reservas', reservaRouter);
 app.use('/api/platos', platoRouter);
-app.use('/api/reseñas', reseñaRouter);
+app.use('/api/resenias', reseñaRouter);
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' });
