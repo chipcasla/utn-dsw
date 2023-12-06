@@ -32,6 +32,17 @@ export class ReseñaRepository {
     }
   }
 
+  public async findByCliente(idCliente: number){
+    try{
+      const reseña = await Reseña.findOne({where: {idCliente: idCliente}})
+      if(reseña){
+        return reseña;
+      } 
+    } catch(error){
+      throw error;
+    }
+  }
+
   public async add(item: any): Promise<Reseña | undefined> {
     try {
       const reseña = await Reseña.create(item);

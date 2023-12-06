@@ -4,6 +4,8 @@ GET http://localhost:3000/api/resenias
 ### Obtener una reseña
 GET http://localhost:3000/api/resenias/2
 
+### Obtener resela por id de cliente
+GET http://localhost:3000/api/resenias/id/2
 ### Crear una nueva reseña
 POST http://localhost:3000/api/resenias/
 Content-Type: application/json
@@ -24,5 +26,5 @@ Content-Type: application/json
 }
 
 ### Borrar una reseña
-DELETE http://localhost:3000/api/resenias/4
+DELETE http://localhost:3000/api/resenias/5
 //Remplaza con el ID de la reseña a borrar
