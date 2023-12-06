@@ -9,6 +9,7 @@ import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { sequelize } from './shared/conn.js';
+import {reseñaRouter} from './reseña/reseña.routes.js';
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use('/api/mesas', mesaRouter);
 // app.use('/api/localidades', localidadRouter);
 app.use('/api/reservas', reservaRouter);
 app.use('/api/platos', platoRouter);
+app.use('/api/reseñas', reseñaRouter);
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' });
