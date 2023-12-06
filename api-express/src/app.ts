@@ -9,7 +9,7 @@ import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { sequelize } from './shared/conn.js';
-import {reseñaRouter} from './reseña/reseña.routes.js';
+import { reseñaRouter } from './reseña/reseña.routes.js';
 
 const app = express();
 app.use(cors());
