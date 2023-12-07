@@ -10,8 +10,9 @@ POST http://localhost:3000/api/platos
 Content-Type: application/json
 
 {
-    "ingredientes": "pollo, puerro, papas, crema de leche",
-    "descripcion": "Pollo al puerro con papas"
+    "ingredientes": "salchicha, pan",
+    "descripcion": "pancho cuestionable",
+    "imagen": "https://www.misjuguetes.com.ar/wp-content/uploads/2019/10/Pancho1.jpg"
 }
 
 ### modificar un plato 
@@ -24,4 +25,4 @@ Content-Type: application/json
 }
 
 ### borrar un plato
-DELETE http://localhost:3000/api/platos/2
+DELETE http://localhost:3000/api/platos/1

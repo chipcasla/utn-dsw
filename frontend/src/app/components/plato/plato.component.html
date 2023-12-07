@@ -1,0 +1,10 @@
+<p>plato works!</p>
+<div>
+    <ul>
+        <li *ngFor="let plato of platos">
+            <p>{{plato.descripcion}}</p>
+            <p>{{plato.ingredientes}}</p>
+            <p><img [src]="plato.imagen"> </p>
+        </li>
+    </ul>
+</div>

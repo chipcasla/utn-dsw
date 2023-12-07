@@ -20,6 +20,8 @@ import { ClienteManagementComponent } from './components/cliente-management/clie
 import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
 import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component'
 import { ReseniasComponent } from './components/resenias/resenias.component';
+import { PlatoComponent } from './components/plato/plato.component';
+import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ReseniasComponent } from './components/resenias/resenias.component';
     ReservaManagementComponent,
     MenuReseniaComponent,
     ReseniasComponent,
+    PlatoComponent,
+    PlatoManagementComponent,
   ],
   imports: [
     BrowserModule,
