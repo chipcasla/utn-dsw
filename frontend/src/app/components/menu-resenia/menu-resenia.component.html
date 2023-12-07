@@ -2,10 +2,10 @@
     <li>
         <button (click)="crear = !crear">Crear reseña</button>
         <div *ngIf="crear">
-            <div *ngIf="reseñaAgregada">
+            <div *ngIf="reseniaAgregada">
                 <p class="mensaje-exito">¡Reseña agregada correctamente!</p>
             </div>
-            <form [formGroup]="reseñaForm" (ngSubmit)="submitReseña()">
+            <form [formGroup]="reseniaForm" (ngSubmit)="submitResenia()">
                 <div class="form-group">
                   <label for="puntaje">Puntaje:</label>
                   <select id="puntaje" formControlName="puntaje">
@@ -29,11 +29,21 @@
     </li>
 
     <li>
-        <button><a routerLink='/all'>Ver reseñas</a></button>
+        <button><a routerLink='all'>Ver reseñas</a></button>
     </li>
 
     <li>
-        <button (click)="miReseña = !miReseña">Ver mi reseña</button>
+        <button (click)= "miResenia = !miResenia">Ver mi reseña</button>
+        <div *ngIf="miResenia">
+          <div *ngIf="hasResenia">
+            <p>Puntaje: {{resenia.puntaje}}</p>
+            <p>Comentario: {{resenia.comentario}}</p>
+            <pre>{{ resenia | json }}</pre>
+            <button (click)="deleteResenia(resenia.id)">Borrar reseña</button>
+          </div>
+
+          <div *ngIf="!hasResenia">No has realizado una reseña</div>
+        </div>
     </li>
 
 </ul>
