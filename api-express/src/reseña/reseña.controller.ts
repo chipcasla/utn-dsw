@@ -73,7 +73,7 @@ async function findByCliente(req: Request, res: Response){
 
 async function add(req: Request, res: Response) {
   const { comentario, puntaje, idCliente} =
-    req.body.sanitizedInput;
+    req.body;
   const reseñaInput = {
     comentario,
     puntaje,

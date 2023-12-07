@@ -1,0 +1,11 @@
+<div>
+    <ul>
+        <li *ngFor="let resenia of resenias">
+            <p>Puntaje: {{ resenia.puntaje }}</p>
+            <p>Cliente: {{resenia.Cliente.nombre}} {{resenia.Cliente.apellido}}</p>
+            <p>{{ resenia.comentario }}</p>
+        </li>
+        <br>
+    </ul>
+    <button><a routerLink='../'>Volver</a></button>
+</div>

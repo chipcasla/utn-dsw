@@ -6,6 +6,10 @@ GET http://localhost:3000/api/resenias/2
 
 ### Obtener resela por id de cliente
 GET http://localhost:3000/api/resenias/id/2
+
+### Obtener resela por id de cliente
+GET http://localhost:3000/api/resenias/id/2
+
 ### Crear una nueva reseña
 POST http://localhost:3000/api/resenias/
 Content-Type: application/json

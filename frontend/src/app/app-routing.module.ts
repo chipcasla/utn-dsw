@@ -12,6 +12,8 @@ import { MesaManagementComponent } from './components/mesa-management/mesa-manag
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
+import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component';
+import { ReseniasComponent } from './components/resenias/resenias.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -32,6 +34,9 @@ const routes: Routes = [
     component: MesaComponent,
     canActivate: [authGuard],
   },
+
+  { path: 'resenias', component: MenuReseniaComponent},
+  { path: 'resenias/all', component: ReseniasComponent},
 
   { path: 'registro', component: SignInComponent},
 

@@ -18,6 +18,8 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
 import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
 import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
+import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component'
+import { ReseniasComponent } from './components/resenias/resenias.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ReservaManagementComponent } from './components/reserva-management/rese
     MesaManagementComponent,
     ClienteManagementComponent,
     ReservaManagementComponent,
+    MenuReseniaComponent,
+    ReseniasComponent,
   ],
   imports: [
     BrowserModule,
