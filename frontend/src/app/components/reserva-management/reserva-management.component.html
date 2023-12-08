@@ -1,12 +1,19 @@
-<div>
-    <ul>
-        <li *ngFor="let reserva of reservas">
-            <span class="font-bold">{{ reserva.id }}</span> - Fecha y Hora: {{reserva.fechaHora}} - Cantidad de personas: {{reserva.cantidadPersonas}}
-            estado: {{reserva.estado}} - Id de cliente: {{reserva.idCliente}} 
-            <button *ngIf="reserva.estado!='Cancelada'" (click)="cancelarReserva(reserva.id)">Cancelar reserva</button>
-            <button *ngIf="reserva.estado!='Completa'" (click)="completarReserva(reserva.id)">Completar reserva</button>
+<app-navbar></app-navbar>
+<div class="container mx-auto my-8">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <li *ngFor="let reserva of reservas" class="bg-white p-6 rounded-md shadow-md mb-4">
+            <p class="text-lg font-bold mb-2">Reserva {{ reserva.id }}</p>
+            <p>Fecha y Hora: {{ reserva.fechaHora }}</p>
+            <p>Cantidad de Personas: {{ reserva.cantidadPersonas }}</p>
+            <p>Estado: {{ reserva.estado }}</p>
+            <p>ID de Cliente: {{ reserva.idCliente }}</p>
+            <div class="mt-4">
+                <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Cancelar reserva</button>
+                <button *ngIf="reserva.estado !== 'Completa'" (click)="completarReserva(reserva.id)" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Completar reserva</button>
+            </div>
         </li>
     </ul>
 
-    <button (click)="redirect()">Volver</button>
+    <button (click)="redirect()" class="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Volver</button>
 </div>
+

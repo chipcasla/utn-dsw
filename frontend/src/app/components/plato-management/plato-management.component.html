@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
     <form [formGroup]="platoForm" (ngSubmit)="submitPlato()">
       <div class="mb-4">
@@ -19,15 +20,15 @@
     </form>
   </div>
 
-<div>
-    <button (click)="verPlatos=!verPlatos; loadPlatos()">Ver platos</button>
-    <ul *ngIf="verPlatos">
-
-        <li *ngFor="let plato of platos">
-            <p>id: {{plato.id}}</p>
-            <p>descripcion: {{plato.descripcion}}</p>
-            <button (click)="deletePlato(plato.id)">Borrar plato</button>
-        </li>
-
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <button (click)="verPlatos=!verPlatos; loadPlatos()" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Ver platos</button>
+  
+    <ul *ngIf="verPlatos" class="mt-4 space-y-4">
+      <li *ngFor="let plato of platos" class="bg-white p-4 rounded-md shadow-md max-w-xs">
+        <p class="font-bold">ID: {{plato.id}}</p>
+        <p>Descripción: {{plato.descripcion}}</p>
+        <button (click)="deletePlato(plato.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar plato</button>
+      </li>
     </ul>
-</div>
+  </div>
+  
