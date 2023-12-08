@@ -6,6 +6,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY
 GET http://localhost:3000/api/reservas/9
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
 
+###Obtener reserva de cliente
+GET http://localhost:3000/api/reservas/id/1
 ### Crear una nueva reserva
 POST http://localhost:3000/api/reservas
 Content-Type: application/json

@@ -14,6 +14,10 @@ export class ReservaService {
     return this.http.get<any>(this.URL + '/reservas');
   }
 
+  getByUser(idCliente: number){
+    return this.http.get<any>(`${this.URL}/reservas/id/${idCliente}`)
+  }
+
   getReservationDetails(id: string) {
     const url = `${this.URL}/reservas/${id}`;
     return this.http.get<any>(url);

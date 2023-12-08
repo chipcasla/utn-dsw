@@ -18,6 +18,21 @@ export class ReservaRepository {
     }
   }
 
+  public async findByUser(idCliente: number): Promise<Reserva[] | undefined> {
+    try{
+      const reservas = await Reserva.findAll({
+        include: [
+          { model: Mesa, through: { attributes: []} },
+          { model: Cliente },
+        ],
+        where: { idCliente: idCliente }
+      });
+      return reservas;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   public async findOne(item: { id: string }): Promise<Reserva | undefined> {
     try {
       const reserva = await Reserva.findByPk(parseInt(item.id), {

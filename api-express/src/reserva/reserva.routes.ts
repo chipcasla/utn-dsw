@@ -3,6 +3,7 @@ import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
+  findByUser,
   findOne,
   remove,
   sanitizeReservaInput,
@@ -12,6 +13,7 @@ import {
 export const reservaRouter = Router();
 
 reservaRouter.get('/', validateToken, findAll);
+reservaRouter.get('/id/:idCliente', validateToken, findByUser);
 reservaRouter.get('/:id', validateToken, findOne);
 reservaRouter.post('/', validateToken, sanitizeReservaInput, add);
 reservaRouter.put('/:id', validateToken, sanitizeReservaInput, update);

@@ -28,7 +28,7 @@
               
                 <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Enviar Reseña</button>
               </form>
-                <button (click)="crear = !crear">Cerrar</button>
+                <button (click)="crear = !crear" class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600">Cerrar</button>
           </div>
       </li>
 
@@ -38,18 +38,18 @@
 
       <li>
         <button (click)="miResenia = !miResenia" class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700">Ver mi reseña</button>
-        <div class="container mx-auto mt-8">
-            <div *ngIf="miResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">
-              <div *ngIf="hasResenia">
-                <p class="text-lg font-bold">Puntaje: {{ resenia.data.puntaje }}</p>
-                <p class="text-gray-800">Comentario: {{ resenia.data.comentario }}</p>
-                <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700" (click)="deleteResenia(resenia.data.id)">
-                  Borrar reseña
-                </button>
-              </div>
-              <div *ngIf="!hasResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">No has realizado una reseña</div>
+        <div class="container mx-auto mt-8 flex justify-center">
+          <div *ngIf="miResenia" class="mb-4 p-4 bg-white shadow-md rounded-md max-w-md flex flex-col items-center">
+            <div *ngIf="hasResenia" class="text-left">
+              <p class="text-lg font-bold">Puntaje: {{ resenia.data.puntaje }}</p>
+              <p class="text-gray-800">Comentario: {{ resenia.data.comentario }}</p>
+              <p><button class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 ml-auto text-sm" (click)="deleteResenia(resenia.data.id)">
+                Borrar reseña
+              </button></p>
             </div>
           </div>
+              <div *ngIf="!hasResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">No has realizado una reseña</div>
+            </div>
       </li>
   </ul>
 </div>

@@ -70,13 +70,13 @@
   <div *ngIf="mesasDisponibles" class="mt-8 max-w-md mx-auto">
     <h2 class="text-white text-2xl font-bold mb-4">Mesas Disponibles:</h2>
     <ul>
-      <li
-        *ngFor="let mesa of mesasDisponibles"
-        class="mb-2 text-white text-center"
-      >
-        <span class="font-bold">{{ mesa.id }}</span> - Capacidad:
-        {{ mesa.capacidad }}
-        <button (click)="reservarMesa(mesa.id)">Reservar</button>
+      <li *ngFor="let mesa of mesasDisponibles" class="mb-2 bg-white text-black p-4 rounded-md flex justify-between items-center">
+        <div>
+          <span class="font-bold">Mesa {{ mesa.id }}</span> - Capacidad: {{ mesa.capacidad }}
+        </div>
+        <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700" (click)="reservarMesa(mesa.id)">
+          Reservar
+        </button>
       </li>
     </ul>
   </div>

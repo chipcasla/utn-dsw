@@ -17,6 +17,21 @@ export class ReservaRepository {
             throw error;
         }
     }
+    async findByUser(idCliente) {
+        try {
+            const reservas = await Reserva.findAll({
+                include: [
+                    { model: Mesa, through: { attributes: [] } },
+                    { model: Cliente },
+                ],
+                where: { idCliente: idCliente }
+            });
+            return reservas;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
     async findOne(item) {
         try {
             const reserva = await Reserva.findByPk(parseInt(item.id), {

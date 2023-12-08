@@ -54,6 +54,11 @@ async function findAll(req: Request, res: Response) {
   res.json({ data: reservas });
 }
 
+async function findByUser(req: Request, res: Response){
+  const reservas = await repository.findByUser(parseInt(req.params.idCliente));
+  res.json({ data: reservas});
+}
+
 async function findOne(req: Request, res: Response) {
   try {
     const id = req.params.id;
@@ -138,6 +143,7 @@ async function findPendientes(req: Request, res: Response) {
 export {
   add,
   findAll,
+  findByUser,
   findOne,
   findPendientes,
   remove,

@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
-<h1>Clientes</h1>
+<div class="text-center mt-8">
+<h1 class="text-3xl font-bold mb-4">Clientes</h1>
+</div>
 <div *ngIf="crear">
     <form [formGroup]="createForm" (ngSubmit)="addCliente()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
 
@@ -34,20 +36,20 @@
         </div>
             
         <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Registrar</button>
-        <button (click)="crear = !crear" class="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Cerrar</button>
+        <button (click)="crear = !crear" class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Cerrar</button>
       </form>
       
 </div>
 <div class="container mx-auto my-8">
-  <button (click)="crear = !crear" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">Crear cliente</button>
+  <button (click)="crear = !crear" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear cliente</button>
 
   <ul class="mt-4">
       <li *ngFor="let cliente of clientes" class="bg-white p-6 rounded-md shadow-md mb-4">
-          <span class="font-bold">{{ cliente.id }}</span> - Tipo: {{ cliente.tipo }} - DNI: {{ cliente.dni }} - Nombre: {{ cliente.nombre }} {{ cliente.apellido }}
-          Teléfono: {{ cliente.telefono }} - Email: {{ cliente.mail }}
-          <button (click)="deleteCliente(cliente.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 ml-2">Borrar cliente</button>
+          <p><span class="font-bold">{{ cliente.id }}</span> - Tipo: {{ cliente.tipo }} - DNI: {{ cliente.dni }} - Nombre: {{ cliente.nombre }} {{ cliente.apellido }}
+          Teléfono: {{ cliente.telefono }} - Email: {{ cliente.mail }} </p>
+          <p><button (click)="deleteCliente(cliente.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 ml-auto">Borrar cliente</button></p>
       </li>
   </ul>
 
-  <button (click)="redirect()" class="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Volver</button>
+  <button (click)="redirect()" class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Volver</button>
 </div>
