@@ -14,9 +14,9 @@ import {
 export const clienteRouter = Router();
 
 clienteRouter.get('/', validateToken, findAll);
-clienteRouter.get('/:id', validateToken, findOne);
+clienteRouter.get('/:id', findOne);
 clienteRouter.post('/', validateToken, sanitizeClienteInput, add);
-clienteRouter.put('/:id', validateToken, sanitizeClienteInput, update);
+clienteRouter.put('/:id', sanitizeClienteInput, update);
 clienteRouter.delete('/:id', validateToken, remove);
 clienteRouter.post('/login', login);
 clienteRouter.get('/dni/:dni', findByDni);

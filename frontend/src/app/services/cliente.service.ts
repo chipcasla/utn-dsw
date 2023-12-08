@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -41,4 +42,15 @@ export class ClienteService {
   findByDni(dniCliente: string){
     return this.http.get(`${this.URL}/clientes/dni/${dniCliente}`)
   }
-}
+
+  updateCliente(idCliente:number, cliente: any){
+    return this.http.get<any>(`${this.URL}/clientes/${idCliente}`).pipe(
+    switchMap((oldCliente)=>{
+      const updatedCliente = {...oldCliente, ...cliente};
+      console.log(updatedCliente)
+      return this.http.put(`${this.URL}/clientes/${idCliente}`, updatedCliente);
+        })
+      )
+    }
+  }
+

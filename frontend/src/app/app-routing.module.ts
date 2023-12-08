@@ -16,6 +16,7 @@ import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.com
 import { ReseniasComponent } from './components/resenias/resenias.component';
 import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
 import { PlatoComponent } from './components/plato/plato.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -31,6 +32,8 @@ const routes: Routes = [
     component: ClienteDetalleComponent,
     canActivate: [authGuard],
   },
+  { path: 'misdatos/edit', component: ClienteEditComponent},
+  
   {
     path: 'nuevaReserva',
     component: MesaComponent,

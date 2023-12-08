@@ -1,11 +1,13 @@
-<div>
+<div class="container mx-auto mt-8">
     <ul>
-        <li *ngFor="let resenia of resenias">
-            <p>Puntaje: {{ resenia.puntaje }}</p>
-            <p>Cliente: {{resenia.Cliente.nombre}} {{resenia.Cliente.apellido}}</p>
-            <p>{{ resenia.comentario }}</p>
-        </li>
-        <br>
+      <li *ngFor="let resenia of resenias" class="mb-4 p-4 bg-white shadow-md rounded-md">
+        <p class="text-lg font-bold">Puntaje: {{ resenia.puntaje }}</p>
+        <p class="text-gray-700">Cliente: {{ resenia.Cliente.nombre }} {{ resenia.Cliente.apellido }}</p>
+        <p class="text-gray-800">{{ resenia.comentario }}</p>
+      </li>
     </ul>
-    <button><a routerLink='../'>Volver</a></button>
-</div>
+    <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">
+      <a routerLink="../">Volver</a>
+    </button>
+  </div>
+  

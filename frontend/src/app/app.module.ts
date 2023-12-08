@@ -22,6 +22,7 @@ import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.com
 import { ReseniasComponent } from './components/resenias/resenias.component';
 import { PlatoComponent } from './components/plato/plato.component';
 import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PlatoManagementComponent } from './components/plato-management/plato-ma
     ReseniasComponent,
     PlatoComponent,
     PlatoManagementComponent,
+    ClienteEditComponent,
   ],
   imports: [
     BrowserModule,
