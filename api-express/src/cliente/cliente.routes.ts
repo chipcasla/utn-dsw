@@ -3,8 +3,8 @@ import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
-  findOne,
   findByDni,
+  findOne,
   login,
   remove,
   sanitizeClienteInput,

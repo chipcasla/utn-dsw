@@ -4,7 +4,7 @@ function sanitizePlatoInput(req, res, next) {
     req.body.sanitizedInput = {
         ingredientes: req.body.ingredientes,
         descripcion: req.body.descripcion,
-        //imagen: req.body.imagen,
+        imagen: req.body.imagen,
     };
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
@@ -31,11 +31,11 @@ async function findOne(req, res) {
     }
 }
 async function add(req, res) {
-    const { ingredientes, descripcion, /*imagen*/ } = req.body.sanitizedInput;
+    const { ingredientes, descripcion, imagen } = req.body.sanitizedInput;
     const platoInput = {
         ingredientes,
         descripcion,
-        // imagen,
+        imagen,
     };
     try {
         const nuevoPlato = await repository.add(platoInput);

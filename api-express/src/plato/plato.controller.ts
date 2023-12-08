@@ -7,7 +7,7 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
     ingredientes: req.body.ingredientes,
     descripcion: req.body.descripcion,
-    //imagen: req.body.imagen,
+    imagen: req.body.imagen,
   };
 
   Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -37,11 +37,11 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function add(req: Request, res: Response) {
-  const { ingredientes, descripcion, /*imagen*/ } = req.body.sanitizedInput;
+  const { ingredientes, descripcion, imagen } = req.body.sanitizedInput;
   const platoInput = {
     ingredientes,
     descripcion,
-   // imagen,
+    imagen,
   };
   try {
     const nuevoPlato = await repository.add(platoInput);

@@ -1,0 +1,33 @@
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <form [formGroup]="platoForm" (ngSubmit)="submitPlato()">
+      <div class="mb-4">
+        <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción del plato:</label>
+        <textarea id="descripcion" formControlName="descripcion" class="w-full p-2 border rounded-md"></textarea>
+      </div>
+  
+      <div class="mb-4">
+        <label for="ingredientes" class="block text-gray-700 text-sm font-bold mb-2">Ingredientes:</label>
+        <textarea id="ingredientes" formControlName="ingredientes" class="w-full p-2 border rounded-md"></textarea>
+      </div>
+  
+      <div class="mb-4">
+        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">URL de la imagen:</label>
+        <input id="imagen" formControlName="imagen" class="w-full p-2 border rounded-md" />
+      </div>
+  
+      <button type="submit" [disabled]="platoForm.invalid" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Guardar</button>
+    </form>
+  </div>
+
+<div>
+    <button (click)="verPlatos=!verPlatos; loadPlatos()">Ver platos</button>
+    <ul *ngIf="verPlatos">
+
+        <li *ngFor="let plato of platos">
+            <p>id: {{plato.id}}</p>
+            <p>descripcion: {{plato.descripcion}}</p>
+            <button (click)="deletePlato(plato.id)">Borrar plato</button>
+        </li>
+
+    </ul>
+</div>

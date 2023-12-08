@@ -1,0 +1,54 @@
+<ul>
+    <li>
+        <button (click)="crear = !crear">Crear reseña</button>
+        <div *ngIf="crear">
+            <div *ngIf="reseniaAgregada">
+                <p class="mensaje-exito">¡Reseña agregada correctamente!</p>
+            </div>
+            <form [formGroup]="reseniaForm" (ngSubmit)="submitResenia()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+
+              <div class="mb-4">
+                <label for="puntaje" class="block text-gray-700 text-sm font-bold mb-2">Puntaje:</label>
+                <select id="puntaje" formControlName="puntaje" class="w-full p-2 border rounded-md">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            
+              <div class="mb-4">
+                <label for="comentario" class="block text-gray-700 text-sm font-bold mb-2">Comentario:</label>
+                <textarea id="comentario" formControlName="comentario" class="w-full p-2 border rounded-md"></textarea>
+              </div>
+            
+              <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Enviar Reseña</button>
+            </form>
+              <button (click)="crear = !crear">Cerrar</button>
+        </div>
+    </li>
+
+    <li>
+        <button><a routerLink='all'>Ver reseñas</a></button>
+    </li>
+
+    <li>
+        <button (click)= "miResenia = !miResenia">Ver mi reseña</button>
+        <div class="container mx-auto mt-8">
+          <div *ngIf="miResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">
+            <div *ngIf="hasResenia">
+              <p class="text-lg font-bold">Puntaje: {{ resenia.data.puntaje }}</p>
+              <p class="text-gray-800">Comentario: {{ resenia.data.comentario }}</p>
+              <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700" (click)="deleteResenia(resenia.data.id)">
+                Borrar reseña
+              </button>
+            </div>
+          </div>
+        </div>
+        
+
+          <div *ngIf="!hasResenia">No has realizado una reseña</div>
+    </li>
+
+</ul>

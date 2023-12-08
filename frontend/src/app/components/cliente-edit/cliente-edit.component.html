@@ -1,0 +1,30 @@
+<div class="container mx-auto mt-8">
+  <h1 class="text-3xl font-bold mb-4">Editar Cliente</h1>
+
+  <form [formGroup]="editForm" (ngSubmit)="updateCliente()" class="bg-white p-6 rounded-md shadow-md">
+
+    <div class="mb-4">
+      <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Nombre:</label>
+      <input id="nombre" formControlName="nombre" />
+    </div>
+
+    <div class="mb-4">
+      <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Apellido:</label>
+      <input id="apellido" formControlName="apellido" />
+    </div>
+
+    <div class="mb-4">
+      <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Telefono:</label>
+      <input id="telefono"  formControlName="telefono" />
+    </div>
+
+    <div class="mb-4">
+      <label for="mail" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Correo Electrónico:</label>
+      <input id="mail"  formControlName="mail" />
+    </div>
+
+    <button type="submit" class="w-32 h-full bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700">Guardar Cambios</button>
+    <button class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700"><a routerLink="../">Cancelar</a></button>
+
+  </form>
+</div>

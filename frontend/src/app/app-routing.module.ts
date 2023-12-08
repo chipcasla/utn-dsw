@@ -12,6 +12,11 @@ import { MesaManagementComponent } from './components/mesa-management/mesa-manag
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
+import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component';
+import { ReseniasComponent } from './components/resenias/resenias.component';
+import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
+import { PlatoComponent } from './components/plato/plato.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -27,18 +32,26 @@ const routes: Routes = [
     component: ClienteDetalleComponent,
     canActivate: [authGuard],
   },
+  { path: 'misdatos/edit', component: ClienteEditComponent},
+  
   {
     path: 'nuevaReserva',
     component: MesaComponent,
     canActivate: [authGuard],
   },
 
+  { path: 'resenias', component: MenuReseniaComponent},
+  { path: 'resenias/all', component: ReseniasComponent},
+
   { path: 'registro', component: SignInComponent},
+
+  { path: 'platos', component: PlatoComponent},
 
   { path: 'admin', component: MenuAdminComponent},
   { path: 'admin/mesas', component: MesaManagementComponent},
   { path: 'admin/clientes', component: ClienteManagementComponent},
   { path: 'admin/reservas', component: ReservaManagementComponent},
+  { path: 'admin/platos', component: PlatoManagementComponent},
     ];
 
 @NgModule({
