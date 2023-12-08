@@ -1,6 +1,6 @@
 ### obtener todos los clientes
 GET http://localhost:3000/api/clientes
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
 
 ### obtener un cliente
 GET http://localhost:3000/api/clientes/1

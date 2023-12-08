@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  input {
+    @apply border border-gray-300 focus:border-none focus:outline-none focus:border-transparent focus:shadow-md focus:shadow-fakegold-500 focus:ring-2 focus:ring-fakegold-500 focus:ring-opacity-50 p-2 rounded-md;
+  }
+}
+
+input:focus {
+  outline: none; /* Elimina el contorno al enfocar */
+  border-color: transparent !important; /* Establece el borde como transparente al enfocar */
+  box-shadow: 0 0 0 2px #f59e0b !important;
+}

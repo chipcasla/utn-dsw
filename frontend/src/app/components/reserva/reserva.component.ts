@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http/index.js';
 import { Component, OnInit } from '@angular/core';
 import { ReservaService } from 'app/services/reserva.service';
 
@@ -27,7 +28,7 @@ export class ReservaComponent implements OnInit {
       (reservations) => {
         this.reservations = reservations.data;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error('Error loading reservations', error);
       }
     );

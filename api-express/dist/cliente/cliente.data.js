@@ -26,6 +26,7 @@ export class ClienteRepository {
             const cliente = await Cliente.findOne({ where: { dni: dni } });
             if (cliente)
                 return cliente;
+            return undefined;
         }
         catch (error) {
             throw error;

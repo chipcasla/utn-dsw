@@ -17,6 +17,10 @@ export class AuthService {
     return this.http.post<any>(this.URL + '/clientes/login', user);
   }
 
+  goToHome() {
+    this.router.navigate(['']);
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     this.isAuthenticated = false;

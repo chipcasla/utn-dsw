@@ -10,7 +10,7 @@ export const validateToken = (req, res, next) => {
         }
         catch (error) {
             if (error.name == 'TokenExpiredError') {
-                res.status(401).json({ msg: 'Sesión expirada', error });
+                return res.status(401).json({ msg: 'Sesión expirada', error });
             }
             res.status(401).json({ msg: 'Token no valido', error });
         }

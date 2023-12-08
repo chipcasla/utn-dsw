@@ -10,12 +10,12 @@ GET http://localhost:3000/api/mesas/libres/1/2023-10-29T19:00:00/afuera
 
 ### crear una nueva mesa
 POST http://localhost:3000/api/mesas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgwNDQ2OSwiZXhwIjoxNzAxODA4MDY5fQ.n9kkcwfqYqk6PvH1HE6m4iWHatA03bZHSlHfDhXyTDw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
 Content-Type: application/json
 
 {
-  "capacidad": "6",
-  "ubicacion": "afuera"
+  "capacidad": "2",
+  "ubicacion": "adentro"
 }
 
 ### modificar una mesa (PUT - recurso completo e idempotente)

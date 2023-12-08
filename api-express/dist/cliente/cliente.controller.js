@@ -68,15 +68,22 @@ async function findOne(req, res) {
         return res.status(500).json({ message: 'Error al buscar cliente', error });
     }
 }
+function convertirACamelCase(str) {
+    if (!str)
+        return '';
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+}
 async function add(req, res) {
     const { dni, nombre, apellido, telefono, mail, password } = req.body.sanitizedInput;
     //encriptacion de contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
+    const nombreFormato = convertirACamelCase(nombre);
+    const apellidoFormato = convertirACamelCase(apellido);
     const clienteInput = {
         tipo: 'cliente',
         dni,
-        nombre,
-        apellido,
+        nombre: nombreFormato,
+        apellido: apellidoFormato,
         telefono,
         mail,
         password: hashedPassword,
@@ -133,19 +140,19 @@ async function findByDni(req, res) {
     if (!cliente) {
         return res.status(200).send({ message: 'Dni no registrado' });
     }
-    return res.status(401).json({ msg: 'Dni ya registrado' });
+    return res.status(400).json({ message: 'Dni ya registrado' });
 }
 async function login(req, res) {
     const { dni, password } = req.body;
     //Validar dni
     const cliente = await repository.findByDni(dni);
     if (!cliente) {
-        return res.status(401).json({ msg: 'DNI no registrado' });
+        return res.status(401).json({ message: 'DNI no registrado' });
     }
     //Validar password
     const passwordValid = await bcrypt.compare(password, cliente.dataValues.password);
     if (!passwordValid) {
-        return res.status(401).json({ msg: 'Contraseña incorrecta' });
+        return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
     const idCliente = cliente.dataValues.id;
     const rolCliente = cliente.dataValues.tipo;
@@ -155,5 +162,5 @@ async function login(req, res) {
     });
     return res.status(200).json({ token, data: cliente });
 }
-export { add, findAll, findOne, login, remove, sanitizeClienteInput, update, findByDni };
+export { add, findAll, findByDni, findOne, login, remove, sanitizeClienteInput, update, };
 //# sourceMappingURL=cliente.controller.js.map

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorService } from 'app/services/error.service';
+import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -15,34 +17,48 @@ export class LoginComponent implements OnInit {
     password: '',
   };
   error: string | null = null;
+  loading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private errorService: ErrorService
+  ) {}
 
   ngOnInit() {}
 
   login() {
+    if (this.user.dni == '' || this.user.password == '') {
+      this.toastr.error('Complete todos los campos', 'Error');
+      return;
+    }
+    this.loading = true;
     this.authService
       .login(this.user)
       .pipe(
         tap((res) => {
+          this.loading = false;
           localStorage.setItem('token', res.token);
-          this.router.navigate(['/']).then(() => {
+
+          this.router.navigate(['/']);
+          /*
+          .then(() => {
             window.location.reload();
           });
+          */
         }),
         catchError((err) => {
-          if (err.error.msg) {
-            this.error = err.error.msg;
-          } else {
-            this.error = 'Error al iniciar sesión. Intente nuevamente';
-          }
+          this.loading = false;
+          this.errorService.messageError(err);
           return of(null);
         })
       )
       .subscribe();
   }
 
-  redirect(){
-    this.router.navigate(['../registro'], {relativeTo: this.route})
+  redirect() {
+    this.router.navigate(['../registro'], { relativeTo: this.route });
   }
 }

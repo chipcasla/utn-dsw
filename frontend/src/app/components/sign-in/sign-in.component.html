@@ -1,40 +1,181 @@
-<form [formGroup]="formularioRegistro" (ngSubmit)="addCliente()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+<form
+  *ngIf="!loading"
+  [formGroup]="formularioRegistro"
+  (ngSubmit)="addCliente()"
+  class="max-w-md mx-auto mx-2 mt-8 mb-5 p-4 pb-3 bg-gray-700 shadow-xl shadow-gray-300 rounded-xl"
+>
+  <div class="pb-2 mb-2 border-b border-b-gray-400">
+    <h1 class="text-fakegold-100 text-center font-semibold text-3xl">
+      Registrarse
+    </h1>
+  </div>
+  <div class="mb-4">
+    <label for="dni" class="block text-white text-sm font-bold mb-2"
+      >DNI:</label
+    >
+    <input
+      type="text"
+      id="dni"
+      formControlName="dni"
+      class="w-full p-2 border rounded-md"
+      required
+      maxlength="8"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('dni')?.invalid &&
+          formularioRegistro.get('dni')?.touched,
+        'border-red-500':
+          formularioRegistro.get('dni')?.invalid &&
+          formularioRegistro.get('dni')?.touched
+      }"
+    />
+  </div>
 
-    <div class="mb-4">
-      <label for="dni" class="block text-gray-700 text-sm font-bold mb-2">DNI:</label>
-      <input type="text" id="dni" formControlName="dni" class="w-full p-2 border rounded-md" required>
-    </div>
+  <div class="mb-4">
+    <label for="password" class="block text-white text-sm font-bold mb-2"
+      >Contraseña:</label
+    >
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('password')?.errors?.['required'] &&
+          formularioRegistro.get('password')?.touched,
+        'border-red-500':
+          formularioRegistro.get('password')?.errors?.['required'] &&
+          formularioRegistro.get('password')?.touched
+      }"
+      required
+    />
+  </div>
 
-    <div class="mb-4">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña:</label>
-        <input type="password" id="password" formControlName="password" class="w-full p-2 border rounded-md" required>
-    </div>
+  <div class="mb-4">
+    <label for="password" class="block text-white text-sm font-bold mb-2"
+      >Repetir contraseña:</label
+    >
+    <input
+      type="password"
+      id="repeatPassword"
+      formControlName="repeatPassword"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          (formularioRegistro.get('repeatPassword')?.invalid &&
+            formularioRegistro.get('repeatPassword')?.touched) ||
+          (formularioRegistro.get('password')?.invalid &&
+            formularioRegistro.get('repeatPassword')?.touched),
+        'border-red-500':
+          (formularioRegistro.get('repeatPassword')?.invalid &&
+            formularioRegistro.get('repeatPassword')?.touched) ||
+          (formularioRegistro.get('password')?.invalid &&
+            formularioRegistro.get('repeatPassword')?.touched)
+      }"
+      required
+    />
+  </div>
 
-    <div class="mb-4">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña:</label>
-        <input type="password" id="password" formControlName="repeatPassword" class="w-full p-2 border rounded-md" required>
-    </div>
-  
-    <div class="mb-4">
-      <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-      <input type="text" id="nombre" formControlName="nombre" class="w-full p-2 border rounded-md" required>
-    </div>
-  
-    <div class="mb-4">
-      <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido:</label>
-      <input type="text" id="apellido" formControlName="apellido" class="w-full p-2 border rounded-md" required>
-    </div>
-  
-    <div class="mb-4">
-      <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
-      <input type="tel" id="telefono" formControlName="telefono" class="w-full p-2 border rounded-md" required>
-    </div>
-  
-    <div class="mb-4">
-      <label for="mail" class="block text-gray-700 text-sm font-bold mb-2">Correo Electrónico:</label>
-      <input type="email" id="mail" formControlName="mail" class="w-full p-2 border rounded-md" required>
-    </div>
-        
-    <button type="submit"  class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Registrar</button>
-  
-  </form>
+  <div class="mb-4">
+    <label for="nombre" class="block text-white text-sm font-bold mb-2"
+      >Nombre:</label
+    >
+    <input
+      type="text"
+      id="nombre"
+      formControlName="nombre"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('nombre')?.invalid &&
+          formularioRegistro.get('nombre')?.touched,
+        'border-red-500':
+          formularioRegistro.get('nombre')?.invalid &&
+          formularioRegistro.get('nombre')?.touched
+      }"
+      required
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="apellido" class="block text-white text-sm font-bold mb-2"
+      >Apellido:</label
+    >
+    <input
+      type="text"
+      id="apellido"
+      formControlName="apellido"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('apellido')?.invalid &&
+          formularioRegistro.get('apellido')?.touched,
+        'border-red-500':
+          formularioRegistro.get('apellido')?.invalid &&
+          formularioRegistro.get('apellido')?.touched
+      }"
+      required
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="telefono" class="block text-white text-sm font-bold mb-2"
+      >Teléfono:</label
+    >
+    <input
+      type="tel"
+      id="telefono"
+      formControlName="telefono"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('telefono')?.invalid &&
+          formularioRegistro.get('telefono')?.touched,
+        'border-red-500':
+          formularioRegistro.get('telefono')?.invalid &&
+          formularioRegistro.get('telefono')?.touched
+      }"
+      required
+    />
+  </div>
+
+  <div class="mb-4">
+    <label for="mail" class="block text-white text-sm font-bold mb-2"
+      >Correo Electrónico:</label
+    >
+    <input
+      type="email"
+      id="mail"
+      formControlName="mail"
+      class="w-full p-2 border rounded-md"
+      [ngClass]="{
+        'border-4':
+          formularioRegistro.get('mail')?.invalid &&
+          formularioRegistro.get('mail')?.touched,
+        'border-red-500':
+          formularioRegistro.get('mail')?.invalid &&
+          formularioRegistro.get('mail')?.touched
+      }"
+      required
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="w-full bg-fakegold-500 text-white text-md font-semibold p-2 mt-5 rounded-xl hover:bg-fakegold-700"
+  >
+    Registrar
+  </button>
+  <p class="mt-12 mb-5 text-gray-200 text-center">
+    ¿Ya tienes una cuenta?
+    <button
+      class="rounded-xl bg-fakegold-300 px-3 py-1 ml-2 text-sm font-medium text-center text-gray-800 shadow-sm hover:bg-fakegold-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
+      (click)="redirect()"
+    >
+      Iniciar sesión
+    </button>
+  </p>
+</form>
+
+<app-spinner *ngIf="loading"></app-spinner>

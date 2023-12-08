@@ -1,19 +1,20 @@
 <div
+  *ngIf="!loading"
   class="flex min-h-full flex-col justify-center px-1 lg:px-6 py-12 lg:px-8 bg-gray-400 min-h-screen"
 >
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form
-      class="space-y-6 bg-gray-700 p-3 lg:p-5 shadow-xl shadow-gray-300 rounded-xl"
+      class="space-y-6 bg-gray-700 p-3 pb-8 pt-5 lg:p-5 shadow-xl shadow-gray-300 rounded-xl"
       (submit)="login()"
     >
       <div class="pb-2 border-b border-b-gray-400">
         <h1 class="text-fakegold-100 text-center text-3xl">Iniciar sesión</h1>
       </div>
       <div *ngIf="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
-      <div class="mb-6">
+      <div class="mb-2">
         <label
           for="dni"
-          class="block mb-2 text-sm font-medium text-fakegold-50 dark:text-white"
+          class="block mb-1 text-sm font-medium text-fakegold-50 dark:text-white"
           >DNI</label
         >
         <input
@@ -28,10 +29,10 @@
           autofocus
         />
       </div>
-      <div class="mb-6">
+      <div class="mb-8">
         <label
           for="password"
-          class="block mb-2 text-sm font-medium text-fakegold-50 dark:text-white"
+          class="block mb-1 text-sm font-medium text-fakegold-50 dark:text-white"
           >Contraseña</label
         >
         <input
@@ -45,20 +46,26 @@
           required
         />
       </div>
-      <div>
+      <div class="mb-5">
         <button
           type="submit"
-          class="flex w-full justify-center rounded-xl bg-fakegold-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fakegold-400 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
+          class="flex w-full justify-center rounded-xl bg-fakegold-500 px-3 py-2 mt-8 text-md font-semibold leading-6 text-white shadow-sm hover:bg-fakegold-400 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
         >
           Ingresar
         </button>
-
+      </div>
+      <div class="my-5">
+        <p class="mt-8 text-gray-200 text-center">
+          ¿No tienes cuenta?
+          <button
+            class="rounded-xl bg-fakegold-400 px-3 py-1 ml-1 text-sm font-medium text-center text-gray-800 shadow-sm hover:bg-fakegold-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
+            (click)="redirect()"
+          >
+            Registrarse
+          </button>
+        </p>
       </div>
     </form>
-    <br>
-    <button class="flex w-full justify-center rounded-xl bg-fakegold-500 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-fakegold-400 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus:bg-fakegold-600 focus:text-white"
-    (click)="redirect()">
-    Registrarse
-    </button>
   </div>
 </div>
+<app-spinner *ngIf="loading"></app-spinner>

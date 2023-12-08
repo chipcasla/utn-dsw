@@ -78,16 +78,23 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
+function convertirACamelCase(str: string | undefined): string {
+  if (!str) return '';
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 async function add(req: Request, res: Response) {
   const { dni, nombre, apellido, telefono, mail, password } =
     req.body.sanitizedInput;
   //encriptacion de contraseña
   const hashedPassword = await bcrypt.hash(password, 10);
+  const nombreFormato = convertirACamelCase(nombre);
+  const apellidoFormato = convertirACamelCase(apellido);
   const clienteInput = {
     tipo: 'cliente',
     dni,
-    nombre,
-    apellido,
+    nombre: nombreFormato,
+    apellido: apellidoFormato,
     telefono,
     mail,
     password: hashedPassword,
@@ -140,14 +147,14 @@ async function remove(req: Request, res: Response) {
   }
 }
 
-async function findByDni(req: Request, res:Response){
+async function findByDni(req: Request, res: Response) {
   const dni = req.params.dni;
 
   const cliente = await repository.findByDni(dni);
-  if (!cliente){
-    return res.status(200).send({message: 'Dni no registrado'})
+  if (!cliente) {
+    return res.status(200).send({ message: 'Dni no registrado' });
   }
-  return res.status(401).json({msg: 'Dni ya registrado'});
+  return res.status(400).json({ message: 'Dni ya registrado' });
 }
 
 async function login(req: Request, res: Response) {
@@ -156,7 +163,7 @@ async function login(req: Request, res: Response) {
   //Validar dni
   const cliente = await repository.findByDni(dni);
   if (!cliente) {
-    return res.status(401).json({ msg: 'DNI no registrado' });
+    return res.status(401).json({ message: 'DNI no registrado' });
   }
   //Validar password
   const passwordValid = await bcrypt.compare(
@@ -164,7 +171,7 @@ async function login(req: Request, res: Response) {
     cliente.dataValues.password
   );
   if (!passwordValid) {
-    return res.status(401).json({ msg: 'Contraseña incorrecta' });
+    return res.status(401).json({ message: 'Contraseña incorrecta' });
   }
   const idCliente = cliente.dataValues.id;
   const rolCliente = cliente.dataValues.tipo;
@@ -179,4 +186,13 @@ async function login(req: Request, res: Response) {
   return res.status(200).json({ token, data: cliente });
 }
 
-export { add, findAll, findOne, login, remove, sanitizeClienteInput, update, findByDni};
+export {
+  add,
+  findAll,
+  findByDni,
+  findOne,
+  login,
+  remove,
+  sanitizeClienteInput,
+  update,
+};

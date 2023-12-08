@@ -24,9 +24,9 @@ export class ClienteRepository {
 
   public async findByDni(dni: String): Promise<Cliente | undefined> {
     try {
-      const cliente = await Cliente.findOne({ where: {dni: dni} })
-      if(cliente)
-        return cliente;
+      const cliente = await Cliente.findOne({ where: { dni: dni } });
+      if (cliente) return cliente;
+      return undefined;
     } catch (error) {
       throw error;
     }
