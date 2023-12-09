@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http/index.js';
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from 'app/services/cliente.service';
 import { ReservaService } from 'app/services/reserva.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class ReservaComponent implements OnInit {
 
   constructor(
     private reservaService: ReservaService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit() {
@@ -24,14 +26,18 @@ export class ReservaComponent implements OnInit {
   }
 
   loadUserReservations(): void {
-    this.reservaService.getReservas().subscribe(
-      (reservations) => {
-        this.reservations = reservations.data;
-      },
-      (error: HttpErrorResponse) => {
-        console.error('Error loading reservations', error);
+    const idCliente = this.clienteService.getUserId();
+    this.reservaService.getByUser(idCliente).subscribe(
+      {
+        next: reservations=>{
+          this.reservations = reservations.data
+        },
+
+        error: (error: HttpErrorResponse)=>{
+          console.error('Error loading reservations', error);
+        }
       }
-    );
+    )
   }
 
   cancelReservation(idReserva: number): void {

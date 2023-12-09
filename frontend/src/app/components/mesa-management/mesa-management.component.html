@@ -1,4 +1,4 @@
-<h1>mesa management works!</h1>
+<app-navbar></app-navbar>
 <!--Agregar una nueva mesa-->
 <div *ngIf="crear">
     <form
@@ -41,20 +41,26 @@
       >
         Agregar mesa
       </button>
+      <button (click)="crear = !crear" class="mt-4 bg-gray-500 text-white p-2 rounded-md hover:bg-gray-700">Cerrar</button>
     </form>
-    <button (click)="crear = !crear">Cerrar</button>
+   
 </div>
 
 
 <!--Ver todas las mesas y poder borrar una-->
-<div>
-  <button (click)="crear=!crear">Crear mesa</button>
-    <ul>
-        <li *ngFor="let mesa of mesas">
-            <span class="font-bold">{{ mesa.id }}</span> - Capacidad: {{ mesa.capacidad }} - Ubicacion : {{mesa.ubicacion}}
-            <button (click)="borrarMesa(mesa.id)">Borrar</button> 
-        </li>
-    </ul>
+<div class="mt-8">
+  <button (click)="crear=!crear" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear mesa</button>
 
-    <button (click)="redirect()">Volver</button>
+  <div class="mt-4 flex flex-wrap -mx-2">
+    <div *ngFor="let mesa of mesas" class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 mb-4">
+      <div class="bg-white p-4 rounded-md shadow-md">
+        <p class="font-bold">ID: {{mesa.id}}</p>
+        <p>Capacidad: {{mesa.capacidad}}</p>
+        <p>Ubicación: {{mesa.ubicacion}}</p>
+        <button (click)="borrarMesa(mesa.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar</button>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="redirect()" class="mt-4 bg-stone-600 text-white p-2 rounded-md hover:bg-stone-700">Volver</button>
 </div>

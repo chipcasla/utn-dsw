@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
     <form [formGroup]="platoForm" (ngSubmit)="submitPlato()">
       <div class="mb-4">
@@ -12,22 +13,27 @@
   
       <div class="mb-4">
         <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">URL de la imagen:</label>
-        <input id="imagen" formControlName="imagen" class="w-full p-2 border rounded-md" />
+        <textarea id="imagen" formControlName="imagen" class="w-full p-2 border rounded-md" ></textarea>
       </div>
   
       <button type="submit" [disabled]="platoForm.invalid" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Guardar</button>
     </form>
   </div>
 
-<div>
-    <button (click)="verPlatos=!verPlatos; loadPlatos()">Ver platos</button>
-    <ul *ngIf="verPlatos">
-
-        <li *ngFor="let plato of platos">
-            <p>id: {{plato.id}}</p>
-            <p>descripcion: {{plato.descripcion}}</p>
-            <button (click)="deletePlato(plato.id)">Borrar plato</button>
-        </li>
-
+<div class="space-y-4 max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+  <div class="flex flex-col items-center">
+    <button (click)="verPlatos=!verPlatos; loadPlatos()" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Ver platos</button>
+  </div>
+    <ul *ngIf="verPlatos" class="mt-4 space-y-4">
+      <li *ngFor="let plato of platos" class="bg-white p-4 rounded-md shadow-md max-w-xs">
+        <p class="font-bold">ID: {{plato.id}}</p>
+        <p>Descripción: {{plato.descripcion}}</p>
+        <p>Ingrerdientes: {{plato.ingredientes}}</p>
+        <div class="space-x-4">
+        <button (click)="redirect(plato.id)" class="text-white bg-fakegold-500 p-2 rounded-md hover:bg-fakegold-700">Editar</button>
+        <button (click)="deletePlato(plato.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar plato</button>
+        </div>
+      </li>
     </ul>
-</div>
+  </div>
+  

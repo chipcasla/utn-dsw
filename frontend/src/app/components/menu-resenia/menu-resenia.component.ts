@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'app/services/cliente.service';
 import { ReseñaService } from 'app/services/reseña.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-resenia',
@@ -16,7 +17,7 @@ export class MenuReseniaComponent {
   hasResenia: boolean=false;
   resenia: any;
 
-  constructor(private formBuilder: FormBuilder, private reseñaService: ReseñaService, private clienteService: ClienteService ){
+  constructor(private formBuilder: FormBuilder, private reseñaService: ReseñaService, private clienteService: ClienteService, private toastrService: ToastrService ){
     this.reseniaForm= this.formBuilder.group({
       puntaje: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
       comentario: ['', Validators.required]
@@ -55,6 +56,8 @@ export class MenuReseniaComponent {
             this.reseniaAgregada=false;
           }, 3000);
         })
+      } else {
+        this.toastrService.error('Ya ha realizado una reseña', 'Error')
       }
     }
   }

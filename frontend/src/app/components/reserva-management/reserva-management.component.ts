@@ -9,6 +9,7 @@ import { ReservaService } from 'app/services/reserva.service';
 })
 export class ReservaManagementComponent {
   reservas: any;
+  pendientes: boolean=false;
 
   constructor(
   private router: Router,
@@ -24,6 +25,12 @@ export class ReservaManagementComponent {
   this.reservaService.getReservas().subscribe((response: any)=>{
     this.reservas = response.data;
   })
+  }
+  
+  verPendientes(){
+    this.reservaService.getPendientes().subscribe((reservas: any)=>{
+      this.reservas = reservas.data
+    })
   }
 
   cancelarReserva(idReserva: number){

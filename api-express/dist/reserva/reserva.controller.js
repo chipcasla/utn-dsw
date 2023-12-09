@@ -43,6 +43,10 @@ async function findAll(req, res) {
     const reservas = await repository.findAll();
     res.json({ data: reservas });
 }
+async function findByUser(req, res) {
+    const reservas = await repository.findByUser(parseInt(req.params.idCliente));
+    res.json({ data: reservas });
+}
 async function findOne(req, res) {
     try {
         const id = req.params.id;
@@ -124,5 +128,5 @@ async function findPendientes(req, res) {
         res.json({ data: reservas });
     }
 }
-export { add, findAll, findOne, findPendientes, remove, sanitizeReservaInput, update, };
+export { add, findAll, findByUser, findOne, findPendientes, remove, sanitizeReservaInput, update, };
 //# sourceMappingURL=reserva.controller.js.map

@@ -9,6 +9,7 @@ import { MenuAdminComponent } from './components/menu-admin/menu-admin.component
 import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component';
 import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
 import { MesaComponent } from './components/mesa/mesa.component';
+import { PlatoEditComponent } from './components/plato-edit/plato-edit.component';
 import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
 import { PlatoComponent } from './components/plato/plato.component';
 import { ReseniasComponent } from './components/resenias/resenias.component';
@@ -96,7 +97,6 @@ const routes: Routes = [
       allowedRoles: ['cliente'],
     },
   },
-
   {
     path: 'admin',
     component: MenuAdminComponent,
@@ -136,6 +136,15 @@ const routes: Routes = [
   {
     path: 'admin/platos',
     component: PlatoManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/platos/edit/:id',
+    component: PlatoEditComponent,
     canActivate: [authGuard],
     canMatch: [roleGuard],
     data: {

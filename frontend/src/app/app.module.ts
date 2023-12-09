@@ -29,6 +29,7 @@ import { ReservaComponent } from './components/reserva/reserva.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
+import { PlatoEditComponent } from './components/plato-edit/plato-edit.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
     PlatoComponent,
     PlatoManagementComponent,
     ClienteEditComponent,
+    PlatoEditComponent,
   ],
   imports: [
     BrowserModule,

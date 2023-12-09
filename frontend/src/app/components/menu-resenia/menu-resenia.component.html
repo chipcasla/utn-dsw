@@ -1,54 +1,55 @@
-<ul>
-    <li>
-        <button (click)="crear = !crear">Crear reseña</button>
-        <div *ngIf="crear">
-            <div *ngIf="reseniaAgregada">
-                <p class="mensaje-exito">¡Reseña agregada correctamente!</p>
-            </div>
-            <form [formGroup]="reseniaForm" (ngSubmit)="submitResenia()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-
-              <div class="mb-4">
-                <label for="puntaje" class="block text-gray-700 text-sm font-bold mb-2">Puntaje:</label>
-                <select id="puntaje" formControlName="puntaje" class="w-full p-2 border rounded-md">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
+<app-navbar></app-navbar>
+<div class="text-center mt-8">
+  <h1 class="text-3xl font-bold mb-4">Reseñas</h1>
+  <ul class="space-y-2">
+      <li>
+        <button (click)="crear = !crear" class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700">Crear reseña</button>
+          <div *ngIf="crear">
+              <div *ngIf="reseniaAgregada">
+                  <p class="mensaje-exito">¡Reseña agregada correctamente!</p>
               </div>
-            
-              <div class="mb-4">
-                <label for="comentario" class="block text-gray-700 text-sm font-bold mb-2">Comentario:</label>
-                <textarea id="comentario" formControlName="comentario" class="w-full p-2 border rounded-md"></textarea>
-              </div>
-            
-              <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Enviar Reseña</button>
-            </form>
-              <button (click)="crear = !crear">Cerrar</button>
-        </div>
-    </li>
+              <form [formGroup]="reseniaForm" (ngSubmit)="submitResenia()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
 
-    <li>
-        <button><a routerLink='all'>Ver reseñas</a></button>
-    </li>
+                <div class="mb-4">
+                  <label for="puntaje" class="block text-gray-700 text-sm font-bold mb-2">Puntaje:</label>
+                  <select id="puntaje" formControlName="puntaje" class="w-full p-2 border rounded-md">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              
+                <div class="mb-4">
+                  <label for="comentario" class="block text-gray-700 text-sm font-bold mb-2">Comentario:</label>
+                  <textarea id="comentario" formControlName="comentario" class="w-full p-2 border rounded-md"></textarea>
+                </div>
+              
+                <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Enviar Reseña</button>
+              </form>
+                <button (click)="crear = !crear" class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600">Cerrar</button>
+          </div>
+      </li>
 
-    <li>
-        <button (click)= "miResenia = !miResenia">Ver mi reseña</button>
-        <div class="container mx-auto mt-8">
-          <div *ngIf="miResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">
-            <div *ngIf="hasResenia">
+      <li>
+        <button class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700"><a routerLink='all'>Ver reseñas</a></button>
+      </li>
+
+      <li>
+        <button (click)="miResenia = !miResenia" class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700">Ver mi reseña</button>
+        <div class="container mx-auto mt-8 flex justify-center">
+          <div *ngIf="miResenia" class="mb-4 p-4 bg-white shadow-md rounded-md max-w-md flex flex-col items-center">
+            <div *ngIf="hasResenia" class="text-left">
               <p class="text-lg font-bold">Puntaje: {{ resenia.data.puntaje }}</p>
               <p class="text-gray-800">Comentario: {{ resenia.data.comentario }}</p>
-              <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700" (click)="deleteResenia(resenia.data.id)">
+              <p><button class="bg-red-500 text-white p-2 rounded-md hover:bg-red-700 ml-auto text-sm" (click)="deleteResenia(resenia.data.id)">
                 Borrar reseña
-              </button>
+              </button></p>
             </div>
           </div>
-        </div>
-        
-
-          <div *ngIf="!hasResenia">No has realizado una reseña</div>
-    </li>
-
-</ul>
+              <div *ngIf="!hasResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">No has realizado una reseña</div>
+            </div>
+      </li>
+  </ul>
+</div>
