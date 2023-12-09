@@ -3,7 +3,8 @@
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <li *ngFor="let reserva of reservas" class="bg-white p-6 rounded-md shadow-md mb-4">
             <p class="text-lg font-bold mb-2">Reserva {{ reserva.id }}</p>
-            <p>Fecha y Hora: {{ reserva.fechaHora }}</p>
+            <p>Fecha: {{ reserva.fechaHora | date : "dd/MM/yyyy"  }}</p>
+            <p>Hora: {{ reserva.fechaHora | date : "HH:mm" }}</p>
             <p>Cantidad de Personas: {{ reserva.cantidadPersonas }}</p>
             <p>Estado: {{ reserva.estado }}</p>
             <p>ID de Cliente: {{ reserva.idCliente }}</p>
