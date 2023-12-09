@@ -85,7 +85,6 @@ const routes: Routes = [
   {
     path: 'registro',
     component: SignInComponent,
-    canActivate: [authGuard],
   },
 
   {

@@ -13,11 +13,15 @@ export class MenuReseniaComponent {
   reseniaForm: FormGroup
   crear: boolean=false;
   miResenia: boolean=false;
-  reseniaAgregada: boolean=false;
   hasResenia: boolean=false;
   resenia: any;
 
-  constructor(private formBuilder: FormBuilder, private reseñaService: ReseñaService, private clienteService: ClienteService, private toastrService: ToastrService ){
+  constructor(
+    private formBuilder: FormBuilder, 
+    private reseñaService: ReseñaService, 
+    private clienteService: ClienteService, 
+    private toastrService: ToastrService )
+    {
     this.reseniaForm= this.formBuilder.group({
       puntaje: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
       comentario: ['', Validators.required]
@@ -50,11 +54,9 @@ export class MenuReseniaComponent {
         const idCliente = this.clienteService.getUserId();
         const reseñaData = { ...this.reseniaForm.value, idCliente };
         this.reseñaService.addReseña(reseñaData).subscribe(()=>{
-          this.reseniaAgregada=true;
           this.reseniaForm.reset();
-          setTimeout(()=>{
-            this.reseniaAgregada=false;
-          }, 3000);
+          this.toastrService.success('Reseña añadida correctamente!');
+          this.cargarReseña();
         })
       } else {
         this.toastrService.error('Ya ha realizado una reseña', 'Error')

@@ -5,9 +5,6 @@
       <li>
         <button (click)="crear = !crear" class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700">Crear reseña</button>
           <div *ngIf="crear">
-              <div *ngIf="reseniaAgregada">
-                  <p class="mensaje-exito">¡Reseña agregada correctamente!</p>
-              </div>
               <form [formGroup]="reseniaForm" (ngSubmit)="submitResenia()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
 
                 <div class="mb-4">
@@ -47,9 +44,11 @@
                 Borrar reseña
               </button></p>
             </div>
-          </div>
-              <div *ngIf="!hasResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">No has realizado una reseña</div>
+            <div *ngIf="!hasResenia" class="mb-4 p-4 bg-white shadow-md rounded-md">
+              No has realizado una reseña
             </div>
+          </div>
+        </div>
       </li>
   </ul>
 </div>
