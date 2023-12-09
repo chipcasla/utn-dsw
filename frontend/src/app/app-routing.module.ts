@@ -53,6 +53,7 @@ const routes: Routes = [
   { path: 'admin/clientes', component: ClienteManagementComponent},
   { path: 'admin/reservas', component: ReservaManagementComponent},
   { path: 'admin/platos', component: PlatoManagementComponent},
+  { path: 'admin/platos/edit/:id', component: PlatoEditComponent},
     ];
 
 @NgModule({

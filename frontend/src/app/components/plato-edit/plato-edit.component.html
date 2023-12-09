@@ -5,8 +5,8 @@
   <form [formGroup]="editForm" (ngSubmit)="updatePlato()" class="bg-white p-6 rounded-md shadow-md">
 
     <div class="mb-4">
-      <label for="detalle" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Detalle:</label>
-      <input id="detalle" formControlName="detalle" />
+      <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Descripcion:</label>
+      <input id="descripcion" formControlName="descripcion" />
     </div>
 
     <div class="mb-4">
@@ -15,12 +15,12 @@
     </div>
 
     <div class="mb-4">
-      <label for="url" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">URL de imagen:</label>
-      <input id="url"  formControlName="url" />
+      <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">URL de imagen:</label>
+      <input id="imagen"  formControlName="imagen" />
     </div>
 
     <button type="submit" class="w-32 h-full bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700">Guardar Cambios</button>
-    <button class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700"><a routerLink="../">Cancelar</a></button>
+    <button class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700"><a routerLink="../../">Cancelar</a></button>
 
   </form>
 </div>
