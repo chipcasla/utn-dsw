@@ -17,6 +17,7 @@ import { ReseniasComponent } from './components/resenias/resenias.component';
 import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
 import { PlatoComponent } from './components/plato/plato.component';
 import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
+import { PlatoEditComponent } from './components/plato-edit/plato-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -52,6 +53,7 @@ const routes: Routes = [
   { path: 'admin/clientes', component: ClienteManagementComponent},
   { path: 'admin/reservas', component: ReservaManagementComponent},
   { path: 'admin/platos', component: PlatoManagementComponent},
+  { path: 'admin/platos/edit/:id', component: PlatoEditComponent},
     ];
 
 @NgModule({

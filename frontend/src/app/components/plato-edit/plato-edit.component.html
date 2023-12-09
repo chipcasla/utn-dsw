@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container mx-auto mt-8">
+  <h1 class="text-3xl font-bold mb-4">Editar plato</h1>
+
+  <form [formGroup]="editForm" (ngSubmit)="updatePlato()" class="bg-white p-6 rounded-md shadow-md">
+
+    <div class="mb-4">
+      <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Descripcion:</label>
+      <input id="descripcion" formControlName="descripcion" />
+    </div>
+
+    <div class="mb-4">
+      <label for="ingredientes" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Ingredientes:</label>
+      <input id="ingredientes" formControlName="ingredientes" />
+    </div>
+
+    <div class="mb-4">
+      <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">URL de imagen:</label>
+      <input id="imagen"  formControlName="imagen" />
+    </div>
+
+    <button type="submit" class="w-32 h-full bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700">Guardar Cambios</button>
+    <button class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700"><a routerLink="../../">Cancelar</a></button>
+
+  </form>
+</div>

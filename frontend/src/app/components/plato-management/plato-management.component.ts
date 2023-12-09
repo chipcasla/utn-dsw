@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PlatoService } from 'app/services/plato.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class PlatoManagementComponent {
   verPlatos: boolean=false;
   platos: any;
 
-  constructor(private formBuilder: FormBuilder, private platoService: PlatoService){
+  constructor(private formBuilder: FormBuilder, private platoService: PlatoService, private route: ActivatedRoute, private router: Router){
     this.platoForm = this.formBuilder.group({
       descripcion: ['', Validators.required],
       ingredientes: ['', Validators.required],
@@ -45,5 +46,9 @@ export class PlatoManagementComponent {
     this.platoService.deletePlato(idPlato).subscribe(()=>{
       this.loadPlatos();
     })
+  }
+
+  redirect(idPlato: number){
+    this.router.navigate(['edit', idPlato], {relativeTo: this.route})
   }
 }

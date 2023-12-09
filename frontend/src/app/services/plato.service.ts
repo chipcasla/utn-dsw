@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class PlatoService {
   constructor(
     private http: HttpClient
   ) { }
-
+  
+  getOne(idPlato: number){
+    return this.http.get<any>(`${this.URL}/platos/${idPlato}`)
+  }
   getPlatos(){
     return this.http.get<any>(`${this.URL}/platos`)
   }
@@ -22,5 +26,17 @@ export class PlatoService {
 
   deletePlato(idPlato: number){
     return this.http.delete<any>(`${this.URL}/platos/${idPlato}`)
+  }
+
+  updatePlato(idPlato: number, plato:any){
+    return this.http.get<any>(`${this.URL}/platos/${idPlato}`).pipe(
+      switchMap((oldPlato) => {
+        const updatedPlato = { ...oldPlato, ...plato };
+        return this.http.put(
+          `${this.URL}/platos/${idPlato}`,
+          updatedPlato
+        );
+      })
+    );
   }
 }
