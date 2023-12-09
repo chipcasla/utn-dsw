@@ -10,8 +10,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  router.navigate([
+  return router.navigate([
     '/login', //,{ error: { msg: 'Primero debe iniciar sesión' } },
   ]);
-  return false;
 };

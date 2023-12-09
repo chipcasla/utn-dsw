@@ -57,23 +57,22 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
-async function findByCliente(req: Request, res: Response){
-  try{
+async function findByCliente(req: Request, res: Response) {
+  try {
     const idCliente = req.params.idCliente;
 
-    const reseña = await repository.findByCliente(parseInt(idCliente))
-    if(!reseña){
-      return res.status(404).send({msg: 'Cliente sin reseñas'})
+    const reseña = await repository.findByCliente(parseInt(idCliente));
+    if (!reseña) {
+      return res.status(404).send({ message: 'Cliente sin reseñas' });
     }
-    return res.json({data: reseña})
-  } catch(error){
-    return res.status(500).json({message: 'Error al buscar reseña'})
+    return res.json({ data: reseña });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al buscar reseña' });
   }
 }
 
 async function add(req: Request, res: Response) {
-  const { comentario, puntaje, idCliente} =
-    req.body;
+  const { comentario, puntaje, idCliente } = req.body;
   const reseñaInput = {
     comentario,
     puntaje,
@@ -86,9 +85,7 @@ async function add(req: Request, res: Response) {
       .status(201)
       .json({ message: 'Reseña creada', data: nuevaReseña });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: 'Error al crear la reseña', error });
+    return res.status(500).json({ message: 'Error al crear la reseña', error });
   }
 }
 
@@ -122,19 +119,16 @@ async function remove(req: Request, res: Response) {
       res.status(200).send({ message: 'Reseña eliminada correctamente' });
     }
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: 'Error al eliminar reseña', error });
+    return res.status(500).json({ message: 'Error al eliminar reseña', error });
   }
 }
 
 export {
   add,
   findAll,
+  findByCliente,
   findOne,
   remove,
   sanitizeReseñaInput,
   update,
-  findByCliente
 };
-

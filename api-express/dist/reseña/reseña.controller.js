@@ -57,7 +57,7 @@ async function findByCliente(req, res) {
         const idCliente = req.params.idCliente;
         const reseña = await repository.findByCliente(parseInt(idCliente));
         if (!reseña) {
-            return res.status(404).send({ msg: 'Cliente sin reseñas' });
+            return res.status(404).send({ message: 'Cliente sin reseñas' });
         }
         return res.json({ data: reseña });
     }
@@ -80,9 +80,7 @@ async function add(req, res) {
             .json({ message: 'Reseña creada', data: nuevaReseña });
     }
     catch (error) {
-        return res
-            .status(500)
-            .json({ message: 'Error al crear la reseña', error });
+        return res.status(500).json({ message: 'Error al crear la reseña', error });
     }
 }
 async function update(req, res) {
@@ -114,10 +112,8 @@ async function remove(req, res) {
         }
     }
     catch (error) {
-        return res
-            .status(500)
-            .json({ message: 'Error al eliminar reseña', error });
+        return res.status(500).json({ message: 'Error al eliminar reseña', error });
     }
 }
-export { add, findAll, findOne, remove, sanitizeReseñaInput, update, findByCliente };
+export { add, findAll, findByCliente, findOne, remove, sanitizeReseñaInput, update, };
 //# sourceMappingURL=rese%C3%B1a.controller.js.map

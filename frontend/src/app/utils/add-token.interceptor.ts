@@ -1,15 +1,18 @@
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ErrorService } from 'app/services/error.service';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable()
 export class AddTokenInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private router: Router, private errorService: ErrorService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -21,6 +24,15 @@ export class AddTokenInterceptor implements HttpInterceptor {
         setHeaders: { Authorization: `Bearer ${token}` },
       });
     }
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status == 401) {
+          this.errorService.messageError(error);
+          localStorage.removeItem('token');
+          this.router.navigate(['/login']);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 }

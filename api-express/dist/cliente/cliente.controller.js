@@ -4,6 +4,7 @@ import { ClienteRepository } from './cliente.data.js';
 const repository = new ClienteRepository();
 function sanitizeClienteInput(req, res, next) {
     req.body.sanitizedInput = {
+        tipo: req.body.tipo,
         dni: req.body.dni,
         nombre: req.body.nombre,
         apellido: req.body.apellido,

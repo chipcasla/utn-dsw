@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { CanMatchFn, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
-export const roleGuard: CanMatchFn = (route, segments) => {
+export const hasRoleGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const toastr = inject(ToastrService);
   const router = inject(Router);
@@ -17,10 +17,7 @@ export const roleGuard: CanMatchFn = (route, segments) => {
     if (userRole === 'admin') {
       return router.navigate(['/admin']);
     }
-    if (userRole === 'cliente') {
-      return router.navigate(['/home']);
-    }
-    return router.navigate(['/login']);
+    return router.navigate(['/home']);
   }
   return hasRole;
 };

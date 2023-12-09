@@ -1,29 +1,31 @@
 ### obtener todos los clientes
 GET http://localhost:3000/api/clientes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjA0NjE4NywiZXhwIjoxNzAyMDQ5Nzg3fQ.1_g4uRoffldTQ2s78kP1e9tQPSGPTvf2jVeBQITdC_U
 
 ### obtener un cliente
 GET http://localhost:3000/api/clientes/1
 
 ### crear un nuevo cliente
 POST http://localhost:3000/api/clientes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjA0NjE4NywiZXhwIjoxNzAyMDQ5Nzg3fQ.1_g4uRoffldTQ2s78kP1e9tQPSGPTvf2jVeBQITdC_U
 Content-Type: application/json
 
 {
-  "dni": "43378663",
-  "nombre": "Nahuel",
-  "apellido": "Barrios",
-  "telefono": "3413334310",
-  "mail": "nbp@gmail.com",
+  "dni": "10101020",
+  "nombre": "Ruben Dario",
+  "apellido": "Insua",
+  "telefono": "3216545231",
+  "mail": "rdi@gmail.com",
   "password": "asd"
 }
 
 ### modificar un cliente (PUT - recurso completo e idempotente)
 PUT http://localhost:3000/api/clientes/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjA0NjE4NywiZXhwIjoxNzAyMDQ5Nzg3fQ.1_g4uRoffldTQ2s78kP1e9tQPSGPTvf2jVeBQITdC_U
 Content-Type: application/json
 
 {
-  "mail": "alexam@gmail.com"
+  "mail": "at@gm.com"
 }
 
 ### borrar un cliente
@@ -38,6 +40,6 @@ Content-Type: application/json
   "password": "asd"
 }
 
-## findbyDni
+### findbyDni
 GET http://localhost:3000/api/clientes/dni/23232324
 Content-Type: application/json

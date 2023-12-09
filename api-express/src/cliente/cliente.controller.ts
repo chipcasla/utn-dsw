@@ -6,6 +6,7 @@ const repository = new ClienteRepository();
 
 function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
+    tipo: req.body.tipo,
     dni: req.body.dni,
     nombre: req.body.nombre,
     apellido: req.body.apellido,

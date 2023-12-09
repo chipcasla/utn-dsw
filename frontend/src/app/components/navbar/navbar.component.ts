@@ -9,11 +9,20 @@ import { initFlowbite } from 'flowbite';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  isAdmin: boolean = false;
   ngOnInit(): void {
     initFlowbite();
   }
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {
+    if (this.userRole()) {
+      this.isAdmin = true;
+    }
+  }
+
+  userRole() {
+    return this.authService.getUserRole() === 'admin';
+  }
   logout() {
     this.authService.logout();
   }

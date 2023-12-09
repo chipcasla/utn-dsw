@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   goToHome() {
-    this.router.navigate(['']);
+    this.router.navigate(['/home']);
   }
 
   logout(): void {

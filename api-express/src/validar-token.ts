@@ -15,11 +15,11 @@ export const validateToken = (
       next();
     } catch (error: any) {
       if (error.name == 'TokenExpiredError') {
-        return res.status(401).json({ msg: 'Sesión expirada', error });
+        return res.status(401).json({ message: 'Sesión expirada', error });
       }
-      res.status(401).json({ msg: 'Token no valido', error });
+      res.status(401).json({ message: 'Token no valido', error });
     }
   } else {
-    res.status(401).json({ msg: 'Acceso denegado' });
+    res.status(401).json({ message: 'Acceso denegado' });
   }
 };

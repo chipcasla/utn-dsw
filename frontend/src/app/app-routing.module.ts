@@ -1,27 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClienteDetalleComponent } from './components/cliente-detalle/cliente-detalle.component';
+import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
+import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { MesaComponent } from './components/mesa/mesa.component';
-import { ReservaDetalleComponent } from './components/reserva-detalle/reserva-detalle.component';
-import { ReservaComponent } from './components/reserva/reserva.component';
-import { authGuard } from './guards/auth.guard';
 import { MenuAdminComponent } from './components/menu-admin/menu-admin.component';
-import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
-import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
 import { MenuReseniaComponent } from './components/menu-resenia/menu-resenia.component';
-import { ReseniasComponent } from './components/resenias/resenias.component';
+import { MesaManagementComponent } from './components/mesa-management/mesa-management.component';
+import { MesaComponent } from './components/mesa/mesa.component';
 import { PlatoManagementComponent } from './components/plato-management/plato-management.component';
 import { PlatoComponent } from './components/plato/plato.component';
-import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
+import { ReseniasComponent } from './components/resenias/resenias.component';
+import { ReservaDetalleComponent } from './components/reserva-detalle/reserva-detalle.component';
+import { ReservaManagementComponent } from './components/reserva-management/reserva-management.component';
+import { ReservaComponent } from './components/reserva/reserva.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [authGuard] },
+  {
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['cliente'],
+    },
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'reservas', component: ReservaComponent, canActivate: [authGuard] },
+  {
+    path: 'reservas',
+    component: ReservaComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['cliente'],
+    },
+  },
   {
     path: 'reservas/:id',
     component: ReservaDetalleComponent,
@@ -31,28 +49,100 @@ const routes: Routes = [
     path: 'misdatos',
     component: ClienteDetalleComponent,
     canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['cliente'],
+    },
   },
-  { path: 'misdatos/edit', component: ClienteEditComponent},
-  
+  {
+    path: 'misdatos/edit',
+    component: ClienteEditComponent,
+    canActivate: [authGuard],
+  },
+
   {
     path: 'nuevaReserva',
     component: MesaComponent,
     canActivate: [authGuard],
   },
 
-  { path: 'resenias', component: MenuReseniaComponent},
-  { path: 'resenias/all', component: ReseniasComponent},
+  {
+    path: 'resenias',
+    component: MenuReseniaComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['cliente'],
+    },
+  },
+  {
+    path: 'resenias/all',
+    component: ReseniasComponent,
+    canActivate: [authGuard],
+  },
 
-  { path: 'registro', component: SignInComponent},
+  {
+    path: 'registro',
+    component: SignInComponent,
+    canActivate: [authGuard],
+  },
 
-  { path: 'platos', component: PlatoComponent},
+  {
+    path: 'platos',
+    component: PlatoComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['cliente'],
+    },
+  },
 
-  { path: 'admin', component: MenuAdminComponent},
-  { path: 'admin/mesas', component: MesaManagementComponent},
-  { path: 'admin/clientes', component: ClienteManagementComponent},
-  { path: 'admin/reservas', component: ReservaManagementComponent},
-  { path: 'admin/platos', component: PlatoManagementComponent},
-    ];
+  {
+    path: 'admin',
+    component: MenuAdminComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/mesas',
+    component: MesaManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/clientes',
+    component: ClienteManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/reservas',
+    component: ReservaManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/platos',
+    component: PlatoManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

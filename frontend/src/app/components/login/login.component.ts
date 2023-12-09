@@ -41,13 +41,11 @@ export class LoginComponent implements OnInit {
         tap((res) => {
           this.loading = false;
           localStorage.setItem('token', res.token);
-
-          this.router.navigate(['/']);
-          /*
-          .then(() => {
-            window.location.reload();
-          });
-          */
+          if (res.data.tipo === 'admin') {
+            return this.router.navigate(['/admin']);
+          } else {
+            return this.router.navigate(['/home']);
+          }
         }),
         catchError((err) => {
           this.loading = false;
