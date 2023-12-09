@@ -11,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PlatoManagementComponent {
   platoForm: FormGroup
-  verPlatos: boolean=false;
   platos: any;
+  crearPlato: boolean=false;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -27,6 +27,10 @@ export class PlatoManagementComponent {
       imagen: ['', Validators.required]
     }
     )
+  }
+
+  ngOnInit(): void{
+    this.loadPlatos()
   }
 
   loadPlatos(){
