@@ -27,6 +27,7 @@
       <li *ngFor="let plato of platos" class="bg-white p-4 rounded-md shadow-md max-w-xs">
         <p class="font-bold">ID: {{plato.id}}</p>
         <p>Descripción: {{plato.descripcion}}</p>
+        <button (click)="editPlato(plato.id)" class="text-white bg-fakegold-500 p-2 rounded-md hover:bg-fakegold-700">Editar</button>
         <button (click)="deletePlato(plato.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar plato</button>
       </li>
     </ul>
