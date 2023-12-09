@@ -41,4 +41,8 @@ export class ReservaService {
       })
     );
   }
+
+  getPendientes(){
+    return this.http.get<any>(`${this.URL}/reservas/pendientes`);
+  }
 }

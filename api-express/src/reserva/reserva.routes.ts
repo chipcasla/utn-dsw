@@ -5,6 +5,7 @@ import {
   findAll,
   findByUser,
   findOne,
+  findPendientes,
   remove,
   sanitizeReservaInput,
   update,
@@ -13,6 +14,7 @@ import {
 export const reservaRouter = Router();
 
 reservaRouter.get('/', validateToken, findAll);
+reservaRouter.get('/pendientes', validateToken, findPendientes);
 reservaRouter.get('/id/:idCliente', validateToken, findByUser);
 reservaRouter.get('/:id', validateToken, findOne);
 reservaRouter.post('/', validateToken, sanitizeReservaInput, add);

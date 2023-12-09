@@ -7,13 +7,16 @@
             <p>Cantidad de Personas: {{ reserva.cantidadPersonas }}</p>
             <p>Estado: {{ reserva.estado }}</p>
             <p>ID de Cliente: {{ reserva.idCliente }}</p>
-            <div class="mt-4">
-                <button *ngIf="reserva.estado !== 'Completa'" (click)="completarReserva(reserva.id)" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Completar reserva</button>
-                <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Cancelar reserva</button>
+            <div class="space-x-4">
+                <button *ngIf="reserva.estado !== 'Completa'" (click)="completarReserva(reserva.id)" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Completar</button>
+                <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Cancelar</button>
             </div>
         </li>
     </ul>
-
-    <button (click)="redirect()" class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600 mt-4">Volver</button>
+    <div class="space-x-4">
+        <button *ngIf="!pendientes" (click)="verPendientes(); pendientes = !pendientes" class="bg-fakegold-600 text-white p-2 rounded-md hover:bg-fakegold-700">Ver pendientes</button>
+        <button *ngIf="pendientes" (click)="cargarReservas(); pendientes = !pendientes" class="bg-fakegold-600 text-white p-2 rounded-md hover:bg-fakegold-700">Ver todas</button>
+        <button (click)="redirect()" class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600 mt-4">Volver</button>
+    </div>
 </div>
 
