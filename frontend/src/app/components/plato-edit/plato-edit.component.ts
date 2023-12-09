@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlatoService } from 'app/services/plato.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-plato-edit',
@@ -12,7 +13,7 @@ export class PlatoEditComponent {
   plato: any;
   editForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private platoService: PlatoService, private route: ActivatedRoute, private router: Router){
+  constructor(private formBuilder: FormBuilder, private platoService: PlatoService, private route: ActivatedRoute, private toastrService: ToastrService){
     this.editForm= this.formBuilder.group({
       descripcion: ['', Validators.required],
       ingredientes: ['', Validators.required],
@@ -38,7 +39,9 @@ export class PlatoEditComponent {
   updatePlato(){
     if (this.editForm.valid){
       const datosFormulario=this.editForm.value;
-      this.platoService.updatePlato(this.plato.data.id, datosFormulario).subscribe()
+      this.platoService.updatePlato(this.plato.data.id, datosFormulario).subscribe(()=>{
+        this.toastrService.success('Cambios guardados')
+      })
     }
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlatoService } from 'app/services/plato.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-plato-management',
@@ -10,11 +11,16 @@ import { PlatoService } from 'app/services/plato.service';
 })
 export class PlatoManagementComponent {
   platoForm: FormGroup
-  success: boolean=false;
   verPlatos: boolean=false;
   platos: any;
 
-  constructor(private formBuilder: FormBuilder, private platoService: PlatoService, private route: ActivatedRoute, private router: Router){
+  constructor(
+    private formBuilder: FormBuilder, 
+    private platoService: PlatoService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private toastrService: ToastrService)
+    {
     this.platoForm = this.formBuilder.group({
       descripcion: ['', Validators.required],
       ingredientes: ['', Validators.required],
@@ -33,11 +39,8 @@ export class PlatoManagementComponent {
     if(this.platoForm.valid){
       const datosFormulario = this.platoForm.value;
       this.platoService.addPlato(datosFormulario).subscribe(()=>{
-        this.success=true;
         this.platoForm.reset();
-        setTimeout(()=>{
-          this.success=false;
-        }, 3000)
+        this.toastrService.success('Nuevo plato agregado')
       })
     }
   }
@@ -45,6 +48,7 @@ export class PlatoManagementComponent {
   deletePlato(idPlato: number){
     this.platoService.deletePlato(idPlato).subscribe(()=>{
       this.loadPlatos();
+      this.toastrService.success('Plato borrado')
     })
   }
 

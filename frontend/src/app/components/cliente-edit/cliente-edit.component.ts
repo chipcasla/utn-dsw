@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'app/services/cliente.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cliente-edit',
@@ -11,7 +12,7 @@ export class ClienteEditComponent {
   cliente: any;
   editForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService){
+  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService, private toastrService: ToastrService){
     this.editForm= this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -36,7 +37,9 @@ export class ClienteEditComponent {
   updateCliente(){
     if (this.editForm.valid){
       const datosFormulario=this.editForm.value;
-      this.clienteService.updateCliente(this.cliente.data.id, datosFormulario).subscribe()
+      this.clienteService.updateCliente(this.cliente.data.id, datosFormulario).subscribe(()=>{
+        this.toastrService.success('Cambios guardados')
+      })
     }
   }
 }

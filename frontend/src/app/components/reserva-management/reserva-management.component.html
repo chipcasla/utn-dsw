@@ -8,12 +8,12 @@
             <p>Estado: {{ reserva.estado }}</p>
             <p>ID de Cliente: {{ reserva.idCliente }}</p>
             <div class="mt-4">
-                <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Cancelar reserva</button>
                 <button *ngIf="reserva.estado !== 'Completa'" (click)="completarReserva(reserva.id)" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600">Completar reserva</button>
+                <button *ngIf="reserva.estado !== 'Cancelada'" (click)="cancelarReserva(reserva.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Cancelar reserva</button>
             </div>
         </li>
     </ul>
 
-    <button (click)="redirect()" class="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Volver</button>
+    <button (click)="redirect()" class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600 mt-4">Volver</button>
 </div>
 
