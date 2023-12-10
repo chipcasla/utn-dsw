@@ -45,6 +45,7 @@ export class PlatoManagementComponent {
       this.platoService.addPlato(datosFormulario).subscribe(()=>{
         this.platoForm.reset();
         this.toastrService.success('Nuevo plato agregado')
+        this.loadPlatos();
       })
     }
   }
