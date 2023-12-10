@@ -78,11 +78,11 @@ export class MesaComponent {
       .pipe(
         tap((res) => {
           console.log(res);
-          this.confirmaReserva = true; // Mostrar mensaje de confirmación
+          this.confirmaReserva = true;
 
           setTimeout(() => {
-            this.confirmaReserva = false; // Ocultar mensaje después de 3 segundos (ajusta el tiempo según necesites)
-            this.router.navigate(['/reservas', res.data.id]); // Redirigir al detalle de la reserva
+            this.confirmaReserva = false;
+            this.router.navigate(['/reservas', res.data.id]);
           }, 3000);
         }),
         catchError((err) => {

@@ -37,7 +37,6 @@ export class MenuReseniaComponent {
       {
         next: response=>{
           this.resenia=response;
-          console.log(this.resenia)
           this.hasResenia=true;
         },
         error: error=>{

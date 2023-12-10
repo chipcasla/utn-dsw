@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from 'app/services/cliente.service';
 import { ReservaService } from 'app/services/reserva.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class ReservaDetalleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private reservaService: ReservaService
+    private router: Router,
+    private reservaService: ReservaService,
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit() {
@@ -25,15 +28,21 @@ export class ReservaDetalleComponent implements OnInit {
 
   loadReservationDetails(): void {
     this.reservaService.getReservationDetails(this.reservationId).subscribe(
-      (reservation) => {
-        console.log(reservation);
-        this.reservation = reservation.data;
+      {
+      next: reservation => {
+          if (this.clienteService.getUserId() == reservation.data.idCliente){
+            this.reservation = reservation.data
+        } else {
+            this.router.navigate(['../../'], {relativeTo: this.route})
+        }
       },
-      (error) => {
+      error: error => {
         console.error('Error loading reservation details', error);
+      }
       }
     );
   }
+  
 
   formatoTexto(texto: string): string {
     return texto.charAt(0).toUpperCase() + texto.slice(1);
