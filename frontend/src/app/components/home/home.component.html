@@ -1,1 +1,42 @@
 <app-navbar></app-navbar>
+<div class="text-center mt-8">
+    <h1 class="text-3xl font-bold mb-4">Bienvenido {{cliente.data.nombre}}</h1>
+    <ul class="space-y-2">
+        <li>
+            <a routerLink='../reservas'>
+            <button
+              class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700"
+            >
+              Mis reservas
+            </button>
+            </a>
+        </li>
+        <li>
+            <a routerLink='../nuevaReserva'>
+            <button
+              class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700"
+            >
+              Nueva Reserva
+            </button>
+            </a>
+        </li>
+        <li>
+            <a routerLink='../platos'>
+            <button
+              class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700"
+            >
+              Platos
+            </button>
+            </a>
+        </li>
+        <li>
+            <a routerLink='../resenias'>
+            <button
+              class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700"
+            >
+              Reseñas
+            </button>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClienteService } from 'app/services/cliente.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  constructor() {}
+  cliente: any;
+
+  constructor(private clienteService: ClienteService) {}
+
+  ngOnInit(): void{
+    this.loadCliente();
+  }
+
+  loadCliente(){
+    const idCliente = this.clienteService.getUserId(); 
+    this.clienteService.findOne(idCliente).subscribe(cliente =>{
+      this.cliente = cliente
+    })
+  }
 }
