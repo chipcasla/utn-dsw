@@ -13,9 +13,10 @@
 
 ## Sistema de gestión de reservas de restaurantes
 ### Descripción
-Los clientes realizan reservas a través del sistema, ingresando su información personal y buscando el restaurante que prefieran.
-Una vez elegido el restaurante, seleccionan la fecha y hora deseadas y se verifica si hay mesas disponibles en el momento solicitado, confirmando o rechazando la reserva.
-La administración interna permite gestionar las reservaciones existentes y modificarlas según sea necesario, además de poder registrar la llegada del cliente para evaluar cuantas reservas son incumplidas.
+Los clientes realizan reservas a través del sistema. Se registran en el sistema o, si ya estan reigstrados, se loguean ingresando datos personales y contraseña
+Una vez logueados, seleccionan la fecha y hora deseadas y se verifica si hay mesas disponibles en el momento solicitado, confirmando o rechazando la reserva.
+La administración interna permite gestionar las reservaciones existentes y modificarlas según sea necesario, además de poder registrar la llegada del cliente para evaluar cuantas reservas son incumplidas. También pueden cargar los platos disponibles, los cuales podrán visualizar los clientes.
+Además, un cliente puede realizar una reseña del restaurante y a su vez ver las reseñas de otros clientes, asi como también puede borrar su reseña si lo desea.
 
 ### Modelo
 ![Captura de pantalla 2023-06-27 132156](https://github.com/chipcasla/utn-dsw/assets/103225088/3f77d584-03bf-4a2e-a162-7067a63af8de)
@@ -27,10 +28,10 @@ La administración interna permite gestionar las reservaciones existentes y modi
 Regularidad:
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Categoría<br>2. CRUD Cliente<br>3. CRUD Localidad|
-|CRUD dependiente|1. CRUD Restaurante {depende de} CRUD Categoría y Localidad<br>2. CRUD Mesa {depende de} CRUD Restaurante|
-|Listado<br>+<br>detalle|1. Lista de reservas filtrado por dia/rango horario, muestra datos de reserva=> detalles completos de cliente.<br> 2. Listado de restaurantes filtrado categoría, muestra nombre, dirección y horario => detalle adicionales como menús disponibles,capacidad ,facilidades
-|CUU/Epic|1. Reservar una mesa en un restaurante(cliente)<br>2. Realizar el registro de cumplimiento de una reserva(restaurante)|
+|CRUD simple|1. CRUD Plato<br>2. CRUD Cliente<br>3. CRUD Mesa|
+|CRUD dependiente|1. CRUD Reseña {depende de} CRUD Cliente<br>2. CRUD Reserva {depende de} CRUD Cliente y CRUD Mesa|
+|Listado<br>+<br>detalle|1. Lista de reservas filtrado por estado, muestra datos de reserva=> detalles completos de cliente.<br> 2. Listado de mesas filtrado disponibilidad, muestra id y ubicacion
+|CUU/Epic|1. Reservar una mesa en el restaurante(cliente)<br>2. Realizar el registro de cumplimiento de una reserva(restaurante)|
 
 Adicionales para Aprobación
 |Req|Detalle|
