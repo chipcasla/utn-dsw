@@ -19,7 +19,8 @@ La administración interna permite gestionar las reservaciones existentes y modi
 Además, un cliente puede realizar una reseña del restaurante y a su vez ver las reseñas de otros clientes, asi como también puede borrar su reseña si lo desea.
 
 ### Modelo
-![Captura de pantalla 2023-06-27 132156](https://github.com/chipcasla/utn-dsw/assets/103225088/3f77d584-03bf-4a2e-a162-7067a63af8de)
+![image](https://github.com/chipcasla/utn-dsw/assets/103225088/4d914c56-42f3-43b8-a108-c83608c64877)
+
 
 ## Alcance Funcional 
 
