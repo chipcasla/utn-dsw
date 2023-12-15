@@ -37,7 +37,7 @@ Regularidad:
 Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Categoría<br>2. CRUD Cliente<br>3. CRUD Localidad<br>4. CRUD Provincia<br>5. CRUD Mesa<br>6. CRUD Restaurante<br>7. CRUD Reseña<br>7. CRUD Menu|
+|CRUD |1. CRUD Categoría<br>2. CRUD Cliente<br>3. CRUD Localidad<br>4. CRUD Provincia<br>5. CRUD Mesa<br>6. CRUD Restaurante<br>7. CRUD Reseña|
 |CUU/Epic|1. Reservar una mesa en un restaurante<br>2. Realizar el registro de cumplimiento de una reserva<br>3. Realizar reseña de restaurante(cliente)|
 
 
