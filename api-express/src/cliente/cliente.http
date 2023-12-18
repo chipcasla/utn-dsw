@@ -1,21 +1,20 @@
 ### obtener todos los clientes
 GET http://localhost:3000/api/clientes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjA0NjE4NywiZXhwIjoxNzAyMDQ5Nzg3fQ.1_g4uRoffldTQ2s78kP1e9tQPSGPTvf2jVeBQITdC_U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAyODcyNDI2LCJleHAiOjE3MDI4NzYwMjZ9.gJGmor54FF6TZh_767A0e6ACt3lnM0n0cPq8MQ9PT2E
 
 ### obtener un cliente
 GET http://localhost:3000/api/clientes/1
 
 ### crear un nuevo cliente
 POST http://localhost:3000/api/clientes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjA0NjE4NywiZXhwIjoxNzAyMDQ5Nzg3fQ.1_g4uRoffldTQ2s78kP1e9tQPSGPTvf2jVeBQITdC_U
 Content-Type: application/json
 
 {
-  "dni": "10101020",
-  "nombre": "Ruben Dario",
-  "apellido": "Insua",
+  "dni": "20202020",
+  "nombre": "Augusto",
+  "apellido": "Batalla",
   "telefono": "3216545231",
-  "mail": "rdi@gmail.com",
+  "mail": "ab@gmail.com",
   "password": "asd"
 }
 

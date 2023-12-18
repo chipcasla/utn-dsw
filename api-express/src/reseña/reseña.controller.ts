@@ -73,6 +73,9 @@ async function findByCliente(req: Request, res: Response) {
 
 async function add(req: Request, res: Response) {
   const { comentario, puntaje, idCliente } = req.body;
+  if (idCliente != req.body.userId) {
+    return res.status(403).send({ message: 'Reseña no autorizada' });
+  }
   const reseñaInput = {
     comentario,
     puntaje,
@@ -92,12 +95,16 @@ async function add(req: Request, res: Response) {
 async function update(req: Request, res: Response) {
   const { id } = req.params;
   try {
+    const miResenia = await repository.findOne({ id });
+    if (miResenia?.idCliente != req.body.userId) {
+      return res.status(404).send({ message: 'Reseña no encontrada' });
+    }
     const reseñaActualizada = await repository.update(
       id,
       req.body.sanitizedInput
     );
     if (!reseñaActualizada) {
-      return res.status(404).send({ error: 'Reseña no encontrada' });
+      return res.status(404).send({ message: 'Reseña no encontrada' });
     }
     res
       .status(200)

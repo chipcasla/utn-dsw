@@ -1,20 +1,23 @@
 ### Obtener todas las reservas
 GET http://localhost:3000/api/reservas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgwNDQ2OSwiZXhwIjoxNzAxODA4MDY5fQ.n9kkcwfqYqk6PvH1HE6m4iWHatA03bZHSlHfDhXyTDw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAyODc5ODE3LCJleHAiOjE3MDI4ODM0MTd9.Mo2NkDE4zRazPe0ITDkGEn5C0YVRZEs5v5dHTV2KSqs
 
 ### Obtener una reserva
-GET http://localhost:3000/api/reservas/9
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
+GET http://localhost:3000/api/reservas/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3OTkyNiwiZXhwIjoxNzAyODgzNTI2fQ.RkQ1HEYdP2ODYTtYtBv_tD4kHG5ij6FSBEUKgknCrjA
 
 ###Obtener reserva de cliente
 GET http://localhost:3000/api/reservas/id/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3OTkyNiwiZXhwIjoxNzAyODgzNTI2fQ.RkQ1HEYdP2ODYTtYtBv_tD4kHG5ij6FSBEUKgknCrjA
+
 ### Crear una nueva reserva
 POST http://localhost:3000/api/reservas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3OTkyNiwiZXhwIjoxNzAyODgzNTI2fQ.RkQ1HEYdP2ODYTtYtBv_tD4kHG5ij6FSBEUKgknCrjA
 Content-Type: application/json
 
 {
   "fechaHora": "2023-10-29T22:00:00Z",
-  "cantidadPersonas": 10,
+  "cantidadPersonas": 6,
   "estado": "Pendiente",
   "cliente": 2,
   "Mesas": [
@@ -29,12 +32,12 @@ Content-Type: application/json
 
 ### Modificar una reserva (PUT - recurso completo e idempotente)
 
-PUT http://localhost:3000/api/reservas/9
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMTgxNDE3MSwiZXhwIjoxNzAxODE3NzcxfQ.L_7nhku2eHW-QhfkuHxc0w-nPoA0slWwVLEXsCdc2wk
+PUT http://localhost:3000/api/reservas/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3OTkyNiwiZXhwIjoxNzAyODgzNTI2fQ.RkQ1HEYdP2ODYTtYtBv_tD4kHG5ij6FSBEUKgknCrjA
 Content-Type: application/json
 
 {
-  "estado": "Pendiente"
+  "estado": "Completada"
 }
 
 ### Borrar una reserva

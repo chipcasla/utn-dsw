@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const validateToken = (
   req: Request,
@@ -11,7 +11,12 @@ export const validateToken = (
     //tiene token
     try {
       const BearerToken = headerToken.slice(7);
-      jwt.verify(BearerToken, process.env.SECRET_KEY || 'troleado');
+      const decoded = jwt.verify(
+        BearerToken,
+        process.env.SECRET_KEY || 'troleado'
+      ) as JwtPayload;
+      req.body.userId = decoded.id;
+      req.body.userRole = decoded.rol;
       next();
     } catch (error: any) {
       if (error.name == 'TokenExpiredError') {

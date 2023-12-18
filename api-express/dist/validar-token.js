@@ -5,7 +5,9 @@ export const validateToken = (req, res, next) => {
         //tiene token
         try {
             const BearerToken = headerToken.slice(7);
-            jwt.verify(BearerToken, process.env.SECRET_KEY || 'troleado');
+            const decoded = jwt.verify(BearerToken, process.env.SECRET_KEY || 'troleado');
+            req.body.userId = decoded.id;
+            req.body.userRole = decoded.rol;
             next();
         }
         catch (error) {

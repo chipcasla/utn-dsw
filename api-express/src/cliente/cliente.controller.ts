@@ -87,6 +87,15 @@ function convertirACamelCase(str: string | undefined): string {
 async function add(req: Request, res: Response) {
   const { dni, nombre, apellido, telefono, mail, password } =
     req.body.sanitizedInput;
+
+  //validar dni usuario duplicado
+  const user = await repository.findByDni(dni);
+  if (user) {
+    return res
+      .status(400)
+      .json({ message: `El DNI: ${dni} ya está registrado` });
+  }
+
   //encriptacion de contraseña
   const hashedPassword = await bcrypt.hash(password, 10);
   const nombreFormato = convertirACamelCase(nombre);
@@ -164,7 +173,7 @@ async function login(req: Request, res: Response) {
   //Validar dni
   const cliente = await repository.findByDni(dni);
   if (!cliente) {
-    return res.status(401).json({ message: 'DNI no registrado' });
+    return res.status(400).json({ message: 'DNI no registrado' });
   }
   //Validar password
   const passwordValid = await bcrypt.compare(

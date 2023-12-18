@@ -39,13 +39,30 @@ function isValidDateTime(dateTimeString) {
     const [datePart, timePart] = dateTimeString.split('T');
     return !isNaN(dateTime) && datePart && timePart; // Si el resultado no es NaN, es una fecha y hora válidas
 }
+function canAccessById(req, idCliente) {
+    const tokenId = req.body.userId;
+    if (idCliente !== tokenId) {
+        return false;
+    }
+    return true;
+}
 async function findAll(req, res) {
     const reservas = await repository.findAll();
     res.json({ data: reservas });
 }
 async function findByUser(req, res) {
-    const reservas = await repository.findByUser(parseInt(req.params.idCliente));
-    res.json({ data: reservas });
+    try {
+        const reservas = await repository.findByUser(parseInt(req.params.idCliente));
+        if (!canAccessById(req, parseInt(req.params.idCliente))) {
+            return res.status(404).json({ message: 'Reserva no encontrada' });
+        }
+        res.json({ data: reservas });
+    }
+    catch (error) {
+        return res
+            .status(500)
+            .json({ message: 'Error al buscar la reserva', error });
+    }
 }
 async function findOne(req, res) {
     try {
@@ -53,6 +70,9 @@ async function findOne(req, res) {
         const reserva = await repository.findOne({ id });
         if (!reserva) {
             return res.status(404).send({ error: 'Reserva no encontrada' });
+        }
+        if (!canAccessById(req, reserva.idCliente)) {
+            return res.status(404).json({ message: 'Reserva no encontasdsadrada' });
         }
         res.json({ data: reserva });
     }
@@ -64,6 +84,9 @@ async function findOne(req, res) {
 }
 async function add(req, res) {
     const { fechaHora, cantidadPersonas, estado, idCliente, Mesas } = req.body.sanitizedInput;
+    if (req.body.userRole != 'admin' && req.body.userId != idCliente) {
+        return res.status(403).json({ message: 'Reserva no autorizada' });
+    }
     const reservaInput = {
         fechaHora,
         cantidadPersonas,
@@ -87,6 +110,13 @@ async function add(req, res) {
 async function update(req, res) {
     const { id } = req.params;
     try {
+        const miReserva = await repository.findOne({ id });
+        if (!miReserva) {
+            return res.status(404).json({ message: 'Reserva no encontrada' });
+        }
+        if (!canAccessById(req, miReserva.idCliente)) {
+            return res.status(404).json({ message: 'Reserva no encontrada' });
+        }
         const reservaActualizada = await repository.update(id, req.body);
         if (!reservaActualizada) {
             return res.status(404).send({ error: 'Reserva no encontrada' });

@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
@@ -13,7 +14,7 @@ export const reseñaRouter = Router();
 
 reseñaRouter.get('/', findAll);
 reseñaRouter.get('/:id', findOne);
-reseñaRouter.get('/id/:idCliente', findByCliente)
-reseñaRouter.post('/', sanitizeReseñaInput, add);
-reseñaRouter.put('/:id', sanitizeReseñaInput, update);
-reseñaRouter.delete('/:id', remove);
+reseñaRouter.get('/id/:idCliente', validateToken, findByCliente);
+reseñaRouter.post('/', [validateToken, sanitizeReseñaInput], add);
+reseñaRouter.put('/:id', [validateToken, sanitizeReseñaInput], update);
+reseñaRouter.delete('/:id', validateToken, remove);
