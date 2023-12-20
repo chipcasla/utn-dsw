@@ -1,41 +1,100 @@
 <app-navbar></app-navbar>
 <div class="text-center mt-8">
   <h1 class="text-3xl font-bold mb-4">Platos</h1>
-  </div>
+</div>
 
 <div *ngIf="crearPlato">
-    <form [formGroup]="platoForm" (ngSubmit)="submitPlato()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <div class="mb-4">
-        <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción del plato:</label>
-        <textarea id="descripcion" formControlName="descripcion" class="w-full p-2 border rounded-md"></textarea>
-      </div>
-  
-      <div class="mb-4">
-        <label for="ingredientes" class="block text-gray-700 text-sm font-bold mb-2">Ingredientes:</label>
-        <textarea id="ingredientes" formControlName="ingredientes" class="w-full p-2 border rounded-md"></textarea>
-      </div>
-  
-      <div class="mb-4">
-        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">URL de la imagen:</label>
-        <textarea id="imagen" formControlName="imagen" class="w-full p-2 border rounded-md" ></textarea>
-      </div>
-  
-      <button type="submit" [disabled]="platoForm.invalid" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Guardar</button>
-      <button (click)="crearPlato = !crearPlato" class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Cerrar</button>
-    </form>
-  </div>
+  <form
+    (ngSubmit)="submitPlato()"
+    class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+  >
+    <div class="mb-4">
+      <label
+        for="descripcion"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Descripción del plato:</label
+      >
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        [(ngModel)]="plato.descripcion"
+        class="w-full p-2 border rounded-md"
+      ></textarea>
+    </div>
 
-  <div class="container mx-auto my-8 space-y-4">
-    <button *ngIf="!crearPlato" (click)="crearPlato = !crearPlato" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear plato</button>
-    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <li *ngFor="let plato of platos" class="bg-white p-6 rounded-md shadow-md mb-4">
-            <p class="text-lg font-bold mb-2">Plato {{ plato.id }}</p>
-            <p>Descripcion: {{ plato.descripcion  }}</p>
-            <p>Ingredientes: {{ plato.ingredientes }}</p>
-            <div class="space-x-4">
-                <button (click)="redirect(plato.id)" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-600">Editar</button>
-                <button (click)="deletePlato(plato.id)" class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600">Borrar</button>
-            </div>
-        </li>
-    </ul>
-  </div>
+    <div class="mb-4">
+      <label
+        for="ingredientes"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Ingredientes:</label
+      >
+      <textarea
+        id="ingredientes"
+        name="ingredientes"
+        [(ngModel)]="plato.ingredientes"
+        class="w-full p-2 border rounded-md"
+      ></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2"
+        >URL de la imagen:</label
+      >
+      <input
+        type="file"
+        id="imagen"
+        class="w-full p-2 border rounded-md"
+        (change)="onChangeImagen($event)"
+        accept="image/*"
+        requireds
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+    >
+      Guardar
+    </button>
+    <button
+      (click)="crearPlato = !crearPlato"
+      class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4"
+    >
+      Cerrar
+    </button>
+  </form>
+</div>
+
+<div class="container mx-auto my-8 space-y-4">
+  <button
+    *ngIf="!crearPlato"
+    (click)="crearPlato = !crearPlato"
+    class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+  >
+    Crear plato
+  </button>
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <li
+      *ngFor="let plato of platos"
+      class="bg-white p-6 rounded-md shadow-md mb-4"
+    >
+      <p class="text-lg font-bold mb-2">Plato {{ plato.id }}</p>
+      <p>Descripcion: {{ plato.descripcion }}</p>
+      <p>Ingredientes: {{ plato.ingredientes }}</p>
+      <div class="space-x-4">
+        <button
+          (click)="redirect(plato.id)"
+          class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-600"
+        >
+          Editar
+        </button>
+        <button
+          (click)="deletePlato(plato.id)"
+          class="mr-2 bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+        >
+          Borrar
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

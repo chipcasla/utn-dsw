@@ -3,17 +3,16 @@ GET http://localhost:3000/api/platos
 
 
 ### obtener un plato
-GET http://localhost:3000/api/platos/1
+GET http://localhost:3000/api/platos/16
 
 ### crear un plato
 POST http://localhost:3000/api/platos
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAyOTYxODI4LCJleHAiOjE3MDI5NjU0Mjh9.MsWaa-GjUC2KQugIqsPRuRTFrh0U5uQtlkD2O5P5SDY
+Content-Type: multipart/form-data
 
-{
-    "ingredientes": "salchicha, pan",
-    "descripcion": "pancho cuestionable",
-    "imagen": "https://www.misjuguetes.com.ar/wp-content/uploads/2019/10/Pancho1.jpg"
-}
+ingredientes: mijo, lino, chia
+descripcion: mis semillas
+imagen: "c:\\Users\\Windows\\Pictures\\91rDKEtSSIL._AC_SY679_.jpg"
 
 ### modificar un plato 
 PUT http://localhost:3000/api/platos/2
@@ -25,4 +24,5 @@ Content-Type: application/json
 }
 
 ### borrar un plato
-DELETE http://localhost:3000/api/platos/1
+DELETE http://localhost:3000/api/platos/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTA2NjQ4LCJleHAiOjE3MDMxMTAyNDh9.bmg_sFOMhn0iOQ5yt9rkXwSroGN9OiyHEszrwZZCXa8
