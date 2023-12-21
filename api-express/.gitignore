@@ -13,8 +13,8 @@ Thumbs.db
 
 # ignore built ts files
 dist
-.dist/*
-.dist/**/*
+dist/*
+dist/**/*
 
 # vscode
 .vscode/*
