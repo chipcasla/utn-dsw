@@ -5,6 +5,9 @@ GET http://localhost:3000/api/platos
 ### obtener un plato
 GET http://localhost:3000/api/platos/16
 
+###Obtener platos de una categoria
+GET http://localhost:3000/api/platos/cat/1
+
 ### crear un plato
 POST http://localhost:3000/api/platos
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAyOTYxODI4LCJleHAiOjE3MDI5NjU0Mjh9.MsWaa-GjUC2KQugIqsPRuRTFrh0U5uQtlkD2O5P5SDY
@@ -19,10 +22,16 @@ PUT http://localhost:3000/api/platos/2
 Content-Type: application/json
 
 {
-    "ingredientes": "tallarines, salsa de tomate, carne picada",
+    "ingredientes": "",
     "descripcion": "Spaghetti"
 }
 
 ### borrar un plato
+<<<<<<< HEAD
+DELETE http://localhost:3000/api/platos/15
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTA3NjE0LCJleHAiOjE3MDMxMTEyMTR9.Oi5vO2khBgsM1EfAKGXduaFURxL8FWxijzLFKFGE7mA
+Content-Type: application/json
+=======
 DELETE http://localhost:3000/api/platos/17
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTA2NjQ4LCJleHAiOjE3MDMxMTAyNDh9.bmg_sFOMhn0iOQ5yt9rkXwSroGN9OiyHEszrwZZCXa8
+>>>>>>> 0534cf15444d2c2f005620ab41015aa3e0a3d22b

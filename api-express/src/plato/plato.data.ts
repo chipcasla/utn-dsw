@@ -23,6 +23,18 @@ export class PlatoRepository {
     }
   }
 
+  public async findByCategoria(idcategoria: number): Promise<Plato[]|undefined>{
+    try{
+      const platos = await Plato.findAll({where: {idcategoria: idcategoria}});
+      if (!platos){
+        return undefined;
+      }
+      return platos
+    } catch(error) {
+      throw error;
+    }
+  }
+
   public async add(item: any): Promise<Plato | undefined> {
     try {
       const nuevoPlato = await Plato.create(item);

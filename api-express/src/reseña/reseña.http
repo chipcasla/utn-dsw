@@ -13,11 +13,11 @@ GET http://localhost:3000/api/resenias/id/2
 
 ### Crear una nueva reseña
 POST http://localhost:3000/api/resenias/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3OTkyNiwiZXhwIjoxNzAyODgzNTI2fQ.RkQ1HEYdP2ODYTtYtBv_tD4kHG5ij6FSBEUKgknCrjA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTU2NDQ4LCJleHAiOjE3MDMxNjAwNDh9.-09hpyfU3s7IQeRPN2zeBMiCMFHspnB_BXtAocmnOmU
 Content-Type: application/json
 
 {
-  "comentario": "Buena atencion",
+  "comentario": "",
   "puntaje": 3,
   "idCliente": 2
 }

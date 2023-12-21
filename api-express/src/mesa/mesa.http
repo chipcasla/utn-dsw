@@ -1,6 +1,6 @@
 ### obtener todos las mesas
 GET http://localhost:3000/api/mesas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3MjM5OSwiZXhwIjoxNzAyODc1OTk5fQ.8Z-ML8f4KDA0CufqKM7ytAa0N753Gh0TjvvsuzwB0JA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImNsaWVudGUiLCJpYXQiOjE3MDMxMDYwMDIsImV4cCI6MTcwMzEwOTYwMn0.TmcdvtkZ1b1F_m84SioR8IihPnOSr2AHGkjrVCXHIeg
 
 ### obtener una mesa
 GET http://localhost:3000/api/mesas/1
@@ -10,7 +10,7 @@ GET http://localhost:3000/api/mesas/libres/1/2023-10-29T19:00:00/afuera
 
 ### crear una nueva mesa
 POST http://localhost:3000/api/mesas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTcwMjg3MjM5OSwiZXhwIjoxNzAyODc1OTk5fQ.8Z-ML8f4KDA0CufqKM7ytAa0N753Gh0TjvvsuzwB0JA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImNsaWVudGUiLCJpYXQiOjE3MDMxMDYwMDIsImV4cCI6MTcwMzEwOTYwMn0.8Z-ML8f4KDA0CufqKM7ytAa0N753Gh0TjvvsuzwB0JA
 Content-Type: application/json
 
 {

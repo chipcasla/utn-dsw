@@ -8,6 +8,16 @@ function sanitizePlatoInput(req, res, next) {
         ingredientes: req.body.ingredientes,
         descripcion: req.body.descripcion,
     };
+    if (!req.body.sanitizedInput.ingredientes) {
+        return res
+            .status(400)
+            .json({ message: 'Complete los ingredientes' });
+    }
+    if (!req.body.sanitizedInput.descripcion) {
+        return res
+            .status(400)
+            .json({ message: 'Complete la descripcion' });
+    }
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
             delete req.body.sanitizedInput[key];
@@ -36,6 +46,11 @@ async function findOne(req, res) {
     catch (error) {
         return res.status(500).json({ message: 'Error al buscar el plato', error });
     }
+}
+async function findByCategoria(req, res) {
+    const idCategoria = req.params.idcategoria;
+    const platos = await repository.findByCategoria(parseInt(idCategoria));
+    res.json({ data: platos });
 }
 async function add(req, res) {
     const { ingredientes, descripcion } = req.body.sanitizedInput;
@@ -116,5 +131,5 @@ async function remove(req, res) {
       return res.status(500).json({ message: 'Error al buscar el plato', error });
     }
   }*/
-export { add, findAll, findOne, remove, sanitizePlatoInput, update };
+export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update };
 //# sourceMappingURL=plato.controller.js.map

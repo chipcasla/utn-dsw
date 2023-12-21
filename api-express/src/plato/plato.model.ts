@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../shared/conn.js';
+import { Categoria } from '../categoria/categoria.model.js';
 
 export class Plato extends Model {}
 
@@ -17,6 +18,13 @@ Plato.init(
     ingredientes: {
       type: DataTypes.STRING,
       //type: DataTypes.ARRAY(DataTypes.INTEGER),
+    },
+    idcategoria:{
+      type: DataTypes.INTEGER,
+      references: {
+        model: Categoria,
+        key: 'id',
+      }
     },
     descripcion: {
       type: DataTypes.STRING,

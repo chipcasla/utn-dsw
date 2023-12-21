@@ -9,26 +9,27 @@ function sanitizeReseñaInput(req: Request, res: Response, next: NextFunction) {
     puntaje: req.body.puntaje,
     idCliente: req.body.cliente,
   };
-  /*
-  if (
-    !req.body.sanitizedInput.comentario ||
-    !req.body.sanitizedInput.puntaje
-  ) {
-    return res.status(400).json({ message: 'Faltan campos requeridos' });
+
+  if (!req.body.sanitizedInput.comentario) {
+    return res
+      .status(400)
+      .json({ message: 'Complete el comentario' });    
   }
 
   // Verificar si puntaje es un número válido
-  if (
-    !Number.isInteger(req.body.sanitizedInput.puntaje) ||
-    req.body.sanitizedInput.puntaje < 1 ||
-    req.body.sanitizedInput.puntaje > 5
-  ) {
-    return res
-      .status(400)
-      .json({
+  if (req.body.sanitizedInput.puntaje) {
+    if (
+      !Number.isInteger(req.body.sanitizedInput.puntaje) ||
+      req.body.sanitizedInput.puntaje < 1 ||
+      req.body.sanitizedInput.puntaje > 5
+    ) {
+      return res.status(400).json({
         message: 'El puntaje debe ser un número entre 1 y 5',
       });
-  }*/
+    }
+  }
+
+  
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key];
@@ -36,6 +37,7 @@ function sanitizeReseñaInput(req: Request, res: Response, next: NextFunction) {
   });
   next();
 }
+
 
 async function findAll(req: Request, res: Response) {
   const reseñas = await repository.findAll();

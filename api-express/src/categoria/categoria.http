@@ -1,0 +1,25 @@
+###Obtener todas las categorias
+GET http://localhost:3000/api/categorias
+
+###Obtener una categoria
+GET http://localhost:3000/api/categorias/1
+
+###Crear una categoria
+POST http://localhost:3000/api/categorias
+Content-Type: application/json
+
+{
+    "descripcion": "Picadas"
+}
+
+###Modificar una categoria
+PUT http://localhost:3000/api/categorias/1
+Content-Type: application/json
+
+{
+    "descripcion": "Postres"
+}
+
+###Borrar una categoria
+DELETE http://localhost:3000/api/categorias/1
+

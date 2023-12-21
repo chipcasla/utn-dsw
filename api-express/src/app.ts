@@ -10,7 +10,10 @@ import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { reseñaRouter } from './reseña/reseña.routes.js';
+import './categoria/categoria.model.js';
+import { categoriaRouter } from './categoria/categoria.routes.js';
 import { sequelize } from './shared/conn.js';
+
 
 const app = express();
 app.use(cors());
@@ -23,6 +26,7 @@ app.use('/api/mesas', mesaRouter);
 app.use('/api/reservas', reservaRouter);
 app.use('/api/platos', platoRouter);
 app.use('/api/resenias', reseñaRouter);
+app.use('/api/categorias', categoriaRouter);
 
 app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' });
@@ -30,7 +34,7 @@ app.use((_, res) => {
 
 app.listen(3000, async () => {
   try {
-    await sequelize.sync({ alter: false });
+    await sequelize.sync({ alter: true });
     console.log('Server running on http://localhost:3000/');
   } catch (error) {
     console.error('Error synchronizing database:', error);

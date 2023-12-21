@@ -11,7 +11,20 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
     ingredientes: req.body.ingredientes,
     descripcion: req.body.descripcion,
   };
+  
+  if (!req.body.sanitizedInput.ingredientes) {
+    return res
+      .status(400)
+      .json({message: 'Complete los ingredientes'});
+  }
 
+  if (!req.body.sanitizedInput.descripcion) {
+    return res
+      .status(400)
+      .json({ message: 'Complete la descripcion' });
+    
+  }
+  
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key];
@@ -19,6 +32,7 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
   });
   next();
 }
+
 
 async function findAll(req: Request, res: Response) {
   const platos = await repository.findAll();
@@ -43,6 +57,12 @@ async function findOne(req: Request, res: Response) {
   } catch (error) {
     return res.status(500).json({ message: 'Error al buscar el plato', error });
   }
+}
+
+async function findByCategoria(req:Request, res:Response){
+  const idCategoria = req.params.idcategoria;
+  const platos = await repository.findByCategoria(parseInt(idCategoria))
+  res.json({data: platos});
 }
 
 async function add(req: Request, res: Response) {
@@ -131,4 +151,4 @@ async function remove(req: Request, res: Response) {
     }
   }*/
 
-export { add, findAll, findOne, remove, sanitizePlatoInput, update };
+export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update };
