@@ -9,7 +9,20 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
     descripcion: req.body.descripcion,
     imagen: req.body.imagen,
   };
+  
+  if (!req.body.sanitizedInput.ingredientes) {
+    return res
+      .status(400)
+      .json({message: 'Complete los ingredientes'});
+  }
 
+  if (!req.body.sanitizedInput.descripcion) {
+    return res
+      .status(400)
+      .json({ message: 'Complete la descripcion' });
+    
+  }
+  
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key];
@@ -17,6 +30,7 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
   });
   next();
 }
+
 
 async function findAll(req: Request, res: Response) {
   const platos = await repository.findAll();

@@ -7,11 +7,12 @@ GET http://localhost:3000/api/platos/1
 
 ### crear un plato
 POST http://localhost:3000/api/platos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTU2MDU1LCJleHAiOjE3MDMxNTk2NTV9.XSYU50xjQYR5Eo2SSYIzvIX-xEv7g7URCi_ZeQWJ03k
 Content-Type: application/json
 
 {
-    "ingredientes": "salchicha, pan",
-    "descripcion": "pancho cuestionable",
+    "ingredientes": "", 
+    "descripcion": "",
     "imagen": "https://www.misjuguetes.com.ar/wp-content/uploads/2019/10/Pancho1.jpg"
 }
 
@@ -20,9 +21,11 @@ PUT http://localhost:3000/api/platos/2
 Content-Type: application/json
 
 {
-    "ingredientes": "tallarines, salsa de tomate, carne picada",
+    "ingredientes": "",
     "descripcion": "Spaghetti"
 }
 
 ### borrar un plato
-DELETE http://localhost:3000/api/platos/1
+DELETE http://localhost:3000/api/platos/15
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAzMTA3NjE0LCJleHAiOjE3MDMxMTEyMTR9.Oi5vO2khBgsM1EfAKGXduaFURxL8FWxijzLFKFGE7mA
+Content-Type: application/json
