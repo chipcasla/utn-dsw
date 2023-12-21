@@ -5,6 +5,7 @@ import { validateToken } from '../validar-token.js';
 import {
   add,
   findAll,
+  findByCategoria,
   findOne,
   remove,
   sanitizePlatoInput,
@@ -14,6 +15,7 @@ export const platoRouter = Router();
 
 platoRouter.get('/', findAll);
 platoRouter.get('/:id', findOne);
+platoRouter.get('/cat/:id', findByCategoria);
 platoRouter.post(
   '/',
   [

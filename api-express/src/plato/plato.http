@@ -5,6 +5,9 @@ GET http://localhost:3000/api/platos
 ### obtener un plato
 GET http://localhost:3000/api/platos/16
 
+###Obtener platos de una categoria
+GET http://localhost:3000/api/platos/cat/1
+
 ### crear un plato
 POST http://localhost:3000/api/platos
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzAyOTYxODI4LCJleHAiOjE3MDI5NjU0Mjh9.MsWaa-GjUC2KQugIqsPRuRTFrh0U5uQtlkD2O5P5SDY

@@ -42,6 +42,11 @@ async function findOne(req, res) {
         return res.status(500).json({ message: 'Error al buscar el plato', error });
     }
 }
+async function findByCategoria(req, res) {
+    const idCategoria = req.params.idcategoria;
+    const platos = await repository.findByCategoria(parseInt(idCategoria));
+    res.json({ data: platos });
+}
 async function add(req, res) {
     const { ingredientes, descripcion } = req.body.sanitizedInput;
     const platoInput = {
@@ -113,5 +118,5 @@ async function remove(req, res) {
       return res.status(500).json({ message: 'Error al buscar el plato', error });
     }
   }*/
-export { add, findAll, findOne, remove, sanitizePlatoInput, update };
+export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update };
 //# sourceMappingURL=plato.controller.js.map

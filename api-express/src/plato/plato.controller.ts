@@ -52,6 +52,12 @@ async function findOne(req: Request, res: Response) {
   }
 }
 
+async function findByCategoria(req:Request, res:Response){
+  const idCategoria = req.params.idcategoria;
+  const platos = await repository.findByCategoria(parseInt(idCategoria))
+  res.json({data: platos});
+}
+
 async function add(req: Request, res: Response) {
   const { ingredientes, descripcion } = req.body.sanitizedInput;
   const platoInput = {
@@ -128,4 +134,4 @@ async function remove(req: Request, res: Response) {
     }
   }*/
 
-export { add, findAll, findOne, remove, sanitizePlatoInput, update };
+export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update };
