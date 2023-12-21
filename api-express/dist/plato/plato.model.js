@@ -19,9 +19,12 @@ Plato.init({
     descripcion: {
         type: DataTypes.STRING,
     },
-    imagen: {
-        type: DataTypes.STRING
-    }
+    imagen_url: {
+        type: DataTypes.STRING,
+    },
+    public_id: {
+        type: DataTypes.STRING,
+    },
 }, {
     sequelize,
     tableName: 'plato',

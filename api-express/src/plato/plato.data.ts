@@ -1,7 +1,6 @@
 import { Plato } from './plato.model.js';
 //import { Op } from 'sequelize';
 
-
 export class PlatoRepository {
   public async findAll(): Promise<Plato[] | undefined> {
     try {
@@ -71,4 +70,4 @@ export class PlatoRepository {
       throw error;
     }
   }*/
-  }
+}

@@ -15,6 +15,7 @@ export const validateToken = (
         BearerToken,
         process.env.SECRET_KEY || 'troleado'
       ) as JwtPayload;
+      console.log(req.body);
       req.body.userId = decoded.id;
       req.body.userRole = decoded.rol;
       next();

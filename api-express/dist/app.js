@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import './cliente/cliente.model.js';
@@ -13,6 +14,7 @@ import { sequelize } from './shared/conn.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use('/api/clientes', clienteRouter);
 app.use('/api/mesas', mesaRouter);
 // app.use('/api/localidades', localidadRouter);
