@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import { deleteImage, uploadImage } from '../cloudinary.js';
+import { deleteImage, transformImage, uploadImage } from '../cloudinary.js';
 import { PlatoRepository } from './plato.data.js';
 const repository = new PlatoRepository();
 function sanitizePlatoInput(req, res, next) {
@@ -17,6 +17,11 @@ function sanitizePlatoInput(req, res, next) {
 }
 async function findAll(req, res) {
     const platos = await repository.findAll();
+    if (platos) {
+        for (let plt of platos) {
+            plt.dataValues.imagen_url = await transformImage(plt.dataValues.public_id);
+        }
+    }
     res.json({ data: platos });
 }
 async function findOne(req, res) {
@@ -81,10 +86,18 @@ async function remove(req, res) {
             res.status(404).send({ error: 'Plato no encontrado' });
         }
         else {
-            if (platoEliminado && platoEliminado?.dataValues.public_id != '') {
+            console.log(platoEliminado);
+            if (platoEliminado &&
+                platoEliminado.dataValues.public_id &&
+                platoEliminado.dataValues.public_id != '') {
                 await deleteImage(platoEliminado.dataValues.public_id);
             }
-            res.status(200).send({ message: 'Plato eliminado correctamente' });
+            res
+                .status(200)
+                .send({
+                message: 'Plato eliminado correctamente',
+                plato: platoEliminado,
+            });
         }
     }
     catch (error) {

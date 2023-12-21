@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs-extra';
-import { deleteImage, uploadImage } from '../cloudinary.js';
+import { deleteImage, transformImage, uploadImage } from '../cloudinary.js';
 import { PlatoRepository } from './plato.data.js';
 
 const repository = new PlatoRepository();
@@ -22,6 +22,13 @@ function sanitizePlatoInput(req: Request, res: Response, next: NextFunction) {
 
 async function findAll(req: Request, res: Response) {
   const platos = await repository.findAll();
+  if (platos) {
+    for (let plt of platos) {
+      plt.dataValues.imagen_url = await transformImage(
+        plt.dataValues.public_id
+      );
+    }
+  }
   res.json({ data: platos });
 }
 
@@ -91,10 +98,20 @@ async function remove(req: Request, res: Response) {
     if (eliminados == 0) {
       res.status(404).send({ error: 'Plato no encontrado' });
     } else {
-      if (platoEliminado && platoEliminado?.dataValues.public_id != '') {
+      console.log(platoEliminado);
+      if (
+        platoEliminado &&
+        platoEliminado.dataValues.public_id &&
+        platoEliminado.dataValues.public_id != ''
+      ) {
         await deleteImage(platoEliminado.dataValues.public_id);
       }
-      res.status(200).send({ message: 'Plato eliminado correctamente' });
+      res
+        .status(200)
+        .send({
+          message: 'Plato eliminado correctamente',
+          plato: platoEliminado,
+        });
     }
   } catch (error) {
     return res.status(500).json({ message: 'Error al eliminar plato', error });

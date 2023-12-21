@@ -27,30 +27,28 @@ export class ReservaComponent implements OnInit {
 
   loadUserReservations(): void {
     const idCliente = this.clienteService.getUserId();
-    this.reservaService.getByUser(idCliente).subscribe(
-      {
-        next: reservations=>{
-          this.reservations = reservations.data
-        },
+    this.reservaService.getByUser(idCliente).subscribe({
+      next: (reservations) => {
+        this.reservations = reservations.data;
+      },
 
-        error: (error: HttpErrorResponse)=>{
-          console.error('Error loading reservations', error);
-        }
-      }
-    )
+      error: (error: HttpErrorResponse) => {
+        console.error('Error loading reservations', error);
+      },
+    });
   }
 
   cancelReservation(idReserva: number): void {
     if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
-      this.reservaService.cancelarReserva(idReserva, this.reserva).subscribe(
-        () => {
+      this.reservaService.cancelarReserva(idReserva, this.reserva).subscribe({
+        next: () => {
           // Actualizar la lista de reservas después de la cancelación
           this.loadUserReservations();
         },
-        (error) => {
+        error: (error) => {
           console.error('Error canceling reservation', error);
-        }
-      );
+        },
+      });
     }
   }
 }

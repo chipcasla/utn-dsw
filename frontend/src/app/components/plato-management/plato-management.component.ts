@@ -1,6 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http/index.js';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorService } from 'app/services/error.service';
 import { PlatoService } from 'app/services/plato.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -23,7 +25,8 @@ export class PlatoManagementComponent {
     private platoService: PlatoService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -51,16 +54,28 @@ export class PlatoManagementComponent {
     }
 
     this.platoService.addPlato(formData).subscribe(() => {
+      this.plato.descripcion = '';
+      this.plato.ingredientes = '';
+      this.plato.imagen = null;
       this.toastrService.success('Nuevo plato agregado');
       this.loadPlatos();
     });
   }
 
   deletePlato(idPlato: number) {
-    this.platoService.deletePlato(idPlato).subscribe(() => {
-      this.loadPlatos();
-      this.toastrService.success('Plato borrado');
-    });
+    if (confirm(`¿Estás seguro que quieres eliminar el plato ID.${idPlato}?`)) {
+      this.platoService.deletePlato(idPlato).subscribe({
+        next: (data) => {
+          this.toastrService.success(
+            `Plato ${data.plato.descripcion} eliminado`
+          );
+          this.loadPlatos();
+        },
+        error: (e: HttpErrorResponse) => {
+          this.errorService.messageError(e);
+        },
+      });
+    }
   }
 
   redirect(idPlato: number) {

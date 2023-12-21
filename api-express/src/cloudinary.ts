@@ -15,3 +15,13 @@ export const uploadImage = async (filePath: string) => {
 export const deleteImage = async (publicId: string) => {
   return await cloudinary.uploader.destroy(publicId);
 };
+
+export const transformImage = async (url: string) => {
+  return await cloudinary.url(url, {
+    width: 200,
+    height: 150,
+    gravity: 'auto',
+    crop: 'fill',
+    dpr: '3.0',
+  });
+};
