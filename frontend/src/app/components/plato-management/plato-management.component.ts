@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http/index.js';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoriaService } from 'app/services/categoria.service';
 import { ErrorService } from 'app/services/error.service';
 import { PlatoService } from 'app/services/plato.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,9 +17,12 @@ export class PlatoManagementComponent {
   plato = {
     descripcion: '',
     ingredientes: '',
+    categoria: '',
     imagen: null, // Aquí almacenaremos la imagen seleccionada por el usuario
   };
   crearPlato: boolean = false;
+  categorias: any;
+  selectedCategoria: any=null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,11 +30,13 @@ export class PlatoManagementComponent {
     private route: ActivatedRoute,
     private router: Router,
     private toastrService: ToastrService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private categoriaService: CategoriaService,
   ) {}
 
   ngOnInit(): void {
     this.loadPlatos();
+    this.loadCategorias();
   }
 
   loadPlatos() {
@@ -39,9 +45,30 @@ export class PlatoManagementComponent {
     });
   }
 
+  loadCategorias(){
+    this.categoriaService.findAll().subscribe((categorias:any)=>{
+      this.categorias=categorias.data
+    })
+  }
+
   onChangeImagen(event: any) {
     if (event.target.files.length > 0) {
       this.plato.imagen = event.target.files[0];
+    }
+  }
+
+  onCategoriaChange(){
+    if(this.selectedCategoria!==null){
+      this.categoriaService.findAll().subscribe((categoria: any)=>{
+        this.categorias=categoria.data;
+        this.platoService.getByCategoria(this.selectedCategoria).subscribe((platos:any)=>{
+          this.platos=platos.data;
+          
+        })
+      })
+    }
+    else{
+      this.loadPlatos();
     }
   }
 
@@ -49,6 +76,7 @@ export class PlatoManagementComponent {
     const formData = new FormData();
     formData.append('descripcion', this.plato.descripcion);
     formData.append('ingredientes', this.plato.ingredientes);
+    formData.append('categoria', this.plato.categoria);
     if (this.plato.imagen) {
       formData.append('imagen', this.plato.imagen);
     }
@@ -56,6 +84,7 @@ export class PlatoManagementComponent {
     this.platoService.addPlato(formData).subscribe(() => {
       this.plato.descripcion = '';
       this.plato.ingredientes = '';
+      this.plato.categoria = '';
       this.plato.imagen = null;
       this.toastrService.success('Nuevo plato agregado');
       this.loadPlatos();

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoriaService } from 'app/services/categoria.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categoria-management',
@@ -14,7 +15,8 @@ export class CategoriaManagementComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private toastr: ToastrService
   )
   {
     this.createForm=this.formBuilder.group({
@@ -35,6 +37,7 @@ export class CategoriaManagementComponent {
   borrarCategoria(id: number){
     this.categoriaService.removeCategoria(id).subscribe(()=>{
       this.cargarCategorias();
+      this.toastr.success('Categoria borrada');
     });
   }
 
@@ -43,6 +46,7 @@ export class CategoriaManagementComponent {
       const datosCategoria = this.createForm.value;
       this.categoriaService.addCategoria(datosCategoria).subscribe(()=>{
         this.cargarCategorias();
+        this.toastr.success('Categoria agregada');
       });
     }
   }

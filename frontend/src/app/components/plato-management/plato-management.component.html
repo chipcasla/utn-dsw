@@ -35,8 +35,20 @@
     </div>
 
     <div class="mb-4">
+      <label
+        for="idcategoria"
+        class="block text-gray-700 text-sm font-bold mb-2"
+        >Categoria:</label>
+        <select id="idcategoria" [(ngModel)]="plato.categoria" name="idcategoria" class="w-full p-2 border rounded-md text-black">
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id" >
+            {{categoria.descripcion}}
+          </option>
+        </select>
+    </div>
+
+    <div class="mb-4">
       <label for="imagen" class="block text-sm font-bold mb-2"
-        >URL de la imagen:</label
+        >Imagen:</label
       >
       <input
         type="file"
@@ -71,6 +83,17 @@
   >
     Crear plato
   </button>
+  
+  <div>
+    <label for="categoria">Seleccionar categoria:</label>
+    <select id="categoria" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
+      <option [ngValue]="null" [selected]="selectedCategoria === null">Todas las categorias</option>
+      <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+        {{categoria.descripcion}}
+      </option>
+    </select>
+  </div>
+
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <li
       *ngFor="let plato of platos"
