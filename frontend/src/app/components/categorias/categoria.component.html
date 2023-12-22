@@ -1,0 +1,7 @@
+<ul>
+    <div *ngFor="let categoria of categorias">
+    <li>
+        <a [routerLink]="['/categorias', categoria.id]">{{categoria.descripcion}}</a>
+    </li>
+    </div>
+</ul>

@@ -15,7 +15,7 @@ export const platoRouter = Router();
 
 platoRouter.get('/', findAll);
 platoRouter.get('/:id', findOne);
-platoRouter.get('/cat/:id', findByCategoria);
+platoRouter.get('/categoria/:id', findByCategoria);
 platoRouter.post(
   '/',
   [

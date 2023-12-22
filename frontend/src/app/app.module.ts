@@ -30,6 +30,9 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { PlatoEditComponent } from './components/plato-edit/plato-edit.component';
+import { CategoriaPlatoComponent } from './components/categoria-plato/categoria-plato.component';
+import { CategoriaComponent } from './components/categorias/categoria.component';
+import { CategoriaManagementComponent } from './components/categoria-management/categoria-management.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { PlatoEditComponent } from './components/plato-edit/plato-edit.component
     PlatoManagementComponent,
     ClienteEditComponent,
     PlatoEditComponent,
+    CategoriaPlatoComponent,
+    CategoriaComponent,
+    CategoriaManagementComponent
   ],
   imports: [
     BrowserModule,

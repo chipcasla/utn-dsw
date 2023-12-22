@@ -6,7 +6,7 @@ import {
     findOne,
     findAll,
     sanitizeCategoriaInput
-} from "../categoria/categoria.controller";
+} from "../categoria/categoria.controller.js";
 
 export const categoriaRouter = Router();
 

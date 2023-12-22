@@ -1,0 +1,51 @@
+<p>categoria-management works!</p>
+
+<div class="container mx-auto my-8">
+    <div *ngIf="crear">
+        <form
+        [formGroup]="createForm"
+        (ngSubmit)="addCategoria()"
+        class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+      >
+        <div class="mb-4">
+          <label
+            for="descripcion"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Descripcion</label
+          >
+          <input
+            type="text"
+            id="descripcion"
+            name="descripcion"
+            formControlName="descripcion"
+            class="w-full p-2 border rounded-md"
+          />
+        </div>
+          <button
+            type="submit"
+            class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+          >
+            Agregar categoria
+          </button>
+          <button (click)="crear = !crear" class="mt-4 bg-gray-500 text-white p-2 rounded-md hover:bg-gray-700">Cerrar</button>
+        </form>
+       
+    </div>
+
+    <div class="mt-8">
+        <button (click)="crear=!crear" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear mesa</button>
+      
+        <div class="mt-4 flex flex-wrap -mx-2">
+          <div *ngFor="let categoria of categorias" class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 mb-4">
+            <div class="bg-white p-4 rounded-md shadow-md">
+              <p class="font-bold">ID: {{categoria.id}}</p>
+              <p>Descripcion: {{categoria.descripcion}}</p>
+              <button (click)="borrarCategoria(categoria.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar</button>
+              <button>Ver platos</button>
+            </div>
+          </div>
+        </div>
+      
+        <a href="../"><button class="mt-4 bg-stone-600 text-white p-2 rounded-md hover:bg-stone-700">Volver</button></a>
+      </div>
+      </div>

@@ -19,6 +19,8 @@ import { ReservaComponent } from './components/reserva/reserva.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { CategoriaComponent } from './components/categorias/categoria.component';
+import { CategoriaPlatoComponent } from './components/categoria-plato/categoria-plato.component';
 
 const routes: Routes = [
   {
@@ -96,6 +98,19 @@ const routes: Routes = [
       allowedRoles: ['cliente'],
     },
   },
+
+  {
+    path: 'categorias',
+    component: CategoriaComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'categorias/:id',
+    component: CategoriaPlatoComponent,
+    canActivate: [authGuard],
+  },
+  
   {
     path: 'admin',
     component: MenuAdminComponent,

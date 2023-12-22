@@ -17,6 +17,10 @@ export class PlatoService {
     return this.http.get<any>(`${this.URL}/platos`);
   }
 
+  getByCategoria(idCategoria: number){
+    return this.http.get(`${this.URL}/platos/categoria/${idCategoria}`)
+  }
+
   addPlato(datosPlato: any) {
     return this.http.post<any>(`${this.URL}/platos`, datosPlato);
   }

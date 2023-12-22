@@ -60,7 +60,7 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function findByCategoria(req:Request, res:Response){
-  const idCategoria = req.params.idcategoria;
+  const idCategoria = req.params.id;
   const platos = await repository.findByCategoria(parseInt(idCategoria))
   res.json({data: platos});
 }

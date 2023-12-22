@@ -1,0 +1,31 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoriaService {
+
+  private URL = 'http://localhost:3000/api';
+
+  constructor(private http: HttpClient) { }
+
+  findAll(){
+    return this.http.get(`${this.URL}/categorias`);
+  }
+
+  findOne(idCategoria: number){
+    return this.http.get(`${this.URL}/categorias/${idCategoria}`)
+  }
+
+  addCategoria(datosCategoria: any):Observable<any>{
+    return this.http.post<any>(`${this.URL}/categorias`, datosCategoria);
+  }
+
+  removeCategoria(idCategoria: any){
+    return this.http.delete(`${this.URL}/categorias/${idCategoria}`);
+  }
+
+  
+}

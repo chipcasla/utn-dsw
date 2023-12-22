@@ -1,4 +1,4 @@
-import { Categoria } from "./categoria.model";
+import { Categoria } from "./categoria.model.js";
 import { Plato } from "../plato/plato.model";
 
 export class CategoriaRepository {

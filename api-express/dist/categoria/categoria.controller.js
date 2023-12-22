@@ -17,7 +17,7 @@ function sanitizeCategoriaInput(req, res, next) {
 }
 async function findAll(req, res) {
     const categorias = await repository.findAll();
-    res.json({ categorias });
+    res.json({ data: categorias });
 }
 async function findOne(req, res) {
     try {

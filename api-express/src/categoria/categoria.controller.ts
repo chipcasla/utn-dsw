@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CategoriaRepository } from "./categoria.data";
+import { CategoriaRepository } from "./categoria.data.js";
 
 const repository = new CategoriaRepository();
 
@@ -22,7 +22,7 @@ function sanitizeCategoriaInput(req: Request, res:Response, next:NextFunction){
 
 async function findAll(req:Request, res:Response){
     const categorias = await repository.findAll();
-    res.json({categorias});
+    res.json({data: categorias});
 }
 
 async function findOne(req:Request, res:Response){

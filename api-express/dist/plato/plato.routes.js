@@ -6,7 +6,7 @@ import { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, upd
 export const platoRouter = Router();
 platoRouter.get('/', findAll);
 platoRouter.get('/:id', findOne);
-platoRouter.get('/cat/:id', findByCategoria);
+platoRouter.get('/categoria/:id', findByCategoria);
 platoRouter.post('/', [
     validateToken,
     isAdmin,
