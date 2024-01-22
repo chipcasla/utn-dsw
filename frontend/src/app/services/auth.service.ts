@@ -18,7 +18,14 @@ export class AuthService {
   }
 
   goToHome() {
-    this.router.navigate(['/home']);
+    const rol = this.getUserRole();
+    if (rol === 'admin') {
+      this.router.navigate(['/admin']);
+    } else if (rol === 'cliente') {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   logout(): void {

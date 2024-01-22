@@ -19,13 +19,13 @@ export class ReservaRepository {
   }
 
   public async findByUser(idCliente: number): Promise<Reserva[] | undefined> {
-    try{
+    try {
       const reservas = await Reserva.findAll({
         include: [
-          { model: Mesa, through: { attributes: []} },
+          { model: Mesa, through: { attributes: [] } },
           { model: Cliente },
         ],
-        where: { idCliente: idCliente }
+        where: { idCliente: idCliente },
       });
       return reservas;
     } catch (error) {
@@ -79,7 +79,7 @@ export class ReservaRepository {
   public async update(id: string, item: any): Promise<Reserva | undefined> {
     const transaction = await sequelize.transaction();
     try {
-      const {Mesas, ...ReservaRow } = item;
+      const { Mesas, ...ReservaRow } = item;
       await Reserva.update(ReservaRow, {
         where: {
           id: Number.parseInt(id),
@@ -119,6 +119,7 @@ export class ReservaRepository {
         where: {
           estado: 'Pendiente',
         },
+        include: [{ model: Mesa }, { model: Cliente }],
       });
       return reservas;
     } catch (error) {

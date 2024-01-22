@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../shared/conn.js';
 import { Categoria } from '../categoria/categoria.model.js';
+import { sequelize } from '../shared/conn.js';
 
 export class Plato extends Model {}
 
@@ -19,12 +19,12 @@ Plato.init(
       type: DataTypes.STRING,
       //type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
-    idcategoria:{
+    idcategoria: {
       type: DataTypes.INTEGER,
       references: {
         model: Categoria,
         key: 'id',
-      }
+      },
     },
     descripcion: {
       type: DataTypes.STRING,
@@ -42,3 +42,10 @@ Plato.init(
     timestamps: false,
   }
 );
+
+Categoria.hasMany(Plato, {
+  foreignKey: 'idcategoria',
+});
+Plato.belongsTo(Categoria, {
+  foreignKey: 'idcategoria',
+});

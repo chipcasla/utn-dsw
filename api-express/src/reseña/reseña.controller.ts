@@ -4,16 +4,28 @@ import { ReseñaRepository } from './reseña.data.js';
 const repository = new ReseñaRepository();
 
 function sanitizeReseñaInput(req: Request, res: Response, next: NextFunction) {
+  let miPuntaje = null;
+  if (typeof req.body.puntaje === 'string') {
+    try {
+      miPuntaje = parseInt(req.body.puntaje);
+    } catch (error) {
+      return res.status(400).json({ message: 'Error en el puntaje ingresado' });
+    }
+  } else {
+    miPuntaje = req.body.puntaje;
+  }
+
   req.body.sanitizedInput = {
     comentario: req.body.comentario,
-    puntaje: req.body.puntaje,
+    puntaje: miPuntaje,
     idCliente: req.body.cliente,
   };
 
+  console.log(req.body.puntaje);
+  console.log(typeof req.body.puntaje);
+
   if (!req.body.sanitizedInput.comentario) {
-    return res
-      .status(400)
-      .json({ message: 'Complete el comentario' });    
+    return res.status(400).json({ message: 'Complete el comentario' });
   }
 
   // Verificar si puntaje es un número válido
@@ -29,7 +41,6 @@ function sanitizeReseñaInput(req: Request, res: Response, next: NextFunction) {
     }
   }
 
-  
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key];
@@ -37,7 +48,6 @@ function sanitizeReseñaInput(req: Request, res: Response, next: NextFunction) {
   });
   next();
 }
-
 
 async function findAll(req: Request, res: Response) {
   const reseñas = await repository.findAll();

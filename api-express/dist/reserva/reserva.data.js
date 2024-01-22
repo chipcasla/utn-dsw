@@ -24,7 +24,7 @@ export class ReservaRepository {
                     { model: Mesa, through: { attributes: [] } },
                     { model: Cliente },
                 ],
-                where: { idCliente: idCliente }
+                where: { idCliente: idCliente },
             });
             return reservas;
         }
@@ -115,6 +115,7 @@ export class ReservaRepository {
                 where: {
                     estado: 'Pendiente',
                 },
+                include: [{ model: Mesa }, { model: Cliente }],
             });
             return reservas;
         }

@@ -12,11 +12,11 @@ export class AppComponent implements OnInit {
   esPaginaLogin: boolean = false;
   title = 'web-app';
 
-  constructor(private router: Router, private authService: AuthService) {}
-
   ngOnInit(): void {
     initFlowbite();
   }
+
+  constructor(private router: Router, private authService: AuthService) {}
 
   logout() {
     this.authService.logout();

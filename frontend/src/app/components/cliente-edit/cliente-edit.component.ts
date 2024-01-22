@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/cliente.service';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'app/services/error.service'
 
 @Component({
   selector: 'app-cliente-edit',
@@ -12,7 +14,7 @@ export class ClienteEditComponent {
   cliente: any;
   editForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private clienteService: ClienteService, private toastrService: ToastrService){
+  constructor(private router: Router, private formBuilder: FormBuilder, private clienteService: ClienteService, private toastrService: ToastrService, private errorService: ErrorService){
     this.editForm= this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -37,8 +39,14 @@ export class ClienteEditComponent {
   updateCliente(){
     if (this.editForm.valid){
       const datosFormulario=this.editForm.value;
-      this.clienteService.updateCliente(this.cliente.data.id, datosFormulario).subscribe(()=>{
-        this.toastrService.success('Cambios guardados')
+      this.clienteService.updateCliente(this.cliente.data.id, datosFormulario).subscribe({
+        next: () => {
+          this.toastrService.success('Cambios guardados');
+          this.router.navigate(['/misdatos']);
+        },
+        error: (err) => {
+          this.errorService.messageError(err);
+        }
       })
     }
   }

@@ -1,6 +1,7 @@
-<app-navbar></app-navbar>
 <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
-  <h1 class="text-fakegold-400 text-3xl font-bold mb-4">Platos</h1>
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Platos
+  </h1>
 </div>
 
 <div *ngIf="crearPlato">
@@ -38,18 +39,22 @@
       <label
         for="idcategoria"
         class="block text-gray-700 text-sm font-bold mb-2"
-        >Categoria:</label>
-        <select id="idcategoria" [(ngModel)]="plato.categoria" name="idcategoria" class="w-full p-2 border rounded-md text-black">
-          <option *ngFor="let categoria of categorias" [ngValue]="categoria.id" >
-            {{categoria.descripcion}}
-          </option>
-        </select>
+        >Categoria:</label
+      >
+      <select
+        id="idcategoria"
+        [(ngModel)]="plato.categoria"
+        name="idcategoria"
+        class="w-full p-2 border rounded-md text-black"
+      >
+        <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+          {{ categoria.descripcion }}
+        </option>
+      </select>
     </div>
 
     <div class="mb-4">
-      <label for="imagen" class="block text-sm font-bold mb-2"
-        >Imagen:</label
-      >
+      <label for="imagen" class="block text-sm font-bold mb-2">Imagen:</label>
       <input
         type="file"
         id="imagen"
@@ -83,13 +88,19 @@
   >
     Crear plato
   </button>
-  
+
   <div>
     <label for="categoria">Seleccionar categoria:</label>
-    <select id="categoria" (change)="onCategoriaChange()" [(ngModel)]="selectedCategoria">
-      <option [ngValue]="null" [selected]="selectedCategoria === null">Todas las categorias</option>
+    <select
+      id="categoria"
+      (change)="onCategoriaChange()"
+      [(ngModel)]="selectedCategoria"
+    >
+      <option [ngValue]="null" [selected]="selectedCategoria === null">
+        Todas las categorias
+      </option>
       <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
-        {{categoria.descripcion}}
+        {{ categoria.descripcion }}
       </option>
     </select>
   </div>

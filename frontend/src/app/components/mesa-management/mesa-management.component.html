@@ -1,31 +1,34 @@
-<app-navbar></app-navbar>
-<!--Agregar una nueva mesa-->
-<div class="text-center mt-8">
-  <h1 class="text-3xl font-bold mb-4">Mesas</h1>
-  </div>
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">Mesas</h1>
+</div>
 <div class="container mx-auto my-8">
-<div *ngIf="crear">
+  <div *ngIf="crear">
     <form
-    [formGroup]="createForm"
-    (ngSubmit)="addMesa()"
-    class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
-  >
-    <div class="mb-4">
-      <label
-        for="capacidad"
-        class="block text-gray-700 text-sm font-bold mb-2"
-        >Capacidad</label
-      >
-      <input
-        type="number"
-        id="capacidad"
-        name="capacidad"
-        formControlName="capacidad"
-        class="w-full p-2 border rounded-md"
-      />
-    </div>
-    <div class="mb-4">
-        <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
+      [formGroup]="createForm"
+      (ngSubmit)="addMesa()"
+      class="max-w-md md:mx-auto mt-8 p-6 bg-gray-700 rounded-lg shadow-lg shadow-gray-300 mx-2"
+    >
+      <div class="pb-2 border-b border-b-gray-400">
+        <h1
+          class="text-fakegold-100 text-center text-3xl font-poppins font-medium"
+        >
+          Nueva mesa
+        </h1>
+      </div>
+      <div class="mb-4 mt-3">
+        <label for="capacidad" class="block text-white text-sm font-bold mb-2"
+          >Capacidad</label
+        >
+        <input
+          type="number"
+          id="capacidad"
+          name="capacidad"
+          formControlName="capacidad"
+          class="w-full p-2 border rounded-md"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="ubicacion" class="block text-white text-sm font-bold mb-2"
           >Ubicación:</label
         >
         <select
@@ -38,34 +41,58 @@
           <option value="adentro">Adentro</option>
         </select>
       </div>
-  
-      <button
-        type="submit"
-        class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
-      >
-        Agregar mesa
-      </button>
-      <button (click)="crear = !crear" class="mt-4 bg-gray-500 text-white p-2 rounded-md hover:bg-gray-700">Cerrar</button>
+      <div class="flex justify-center md:justify-between mt-5">
+        <button
+          type="submit"
+          class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700 mx-1"
+        >
+          Agregar mesa
+        </button>
+        <button
+          (click)="crear = !crear"
+          class="md:w-1/4 bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mx-1"
+        >
+          Cancelar
+        </button>
+      </div>
     </form>
-   
-</div>
+  </div>
 
-
-<!--Ver todas las mesas y poder borrar una-->
-<div class="mt-8">
-  <button (click)="crear=!crear" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear mesa</button>
-
-  <div class="mt-4 flex flex-wrap -mx-2">
-    <div *ngFor="let mesa of mesas" class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 mb-4">
-      <div class="bg-white p-4 rounded-md shadow-md">
-        <p class="font-bold">ID: {{mesa.id}}</p>
-        <p>Capacidad: {{mesa.capacidad}}</p>
-        <p>Ubicación: {{mesa.ubicacion}}</p>
-        <button (click)="borrarMesa(mesa.id)" class="text-white bg-red-500 p-2 rounded-md hover:bg-red-700">Borrar</button>
+  <!--Ver todas las mesas y poder borrar una-->
+  <div class="mt-8">
+    <div class="flex justify-start ml-2 md:ml-24 mt-5">
+      <button
+        (click)="crear = !crear"
+        class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-600 hover:font-semibold mx-2"
+      >
+        Crear mesa
+      </button>
+      <button
+        (click)="redirect()"
+        class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-700 mx-2"
+      >
+        Volver
+      </button>
+    </div>
+    <div class="mt-4 flex flex-wrap mx-2">
+      <div
+        *ngFor="let mesa of mesas"
+        class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-2 mb-4"
+      >
+        <div
+          class="bg-gray-700 text-white p-4 rounded-md shadow-lg shadow-gray-300"
+        >
+          <p class="font-bold text-fakegold-200">Nro. {{ mesa.id }}</p>
+          <p>Capacidad: {{ mesa.capacidad }}</p>
+          <p>Ubicación: {{ mesa.ubicacion }}</p>
+          <button
+            (click)="borrarMesa(mesa.id)"
+            class="text-red-600 text-sm font-bold px-4 py-1 rounded border border-red-600 hover:bg-red-500 hover:text-white focus:ring focus:ring-red-300 mt-2"
+          >
+            Borrar
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
-  <button (click)="redirect()" class="mt-4 bg-stone-600 text-white p-2 rounded-md hover:bg-stone-700">Volver</button>
-</div>
 </div>

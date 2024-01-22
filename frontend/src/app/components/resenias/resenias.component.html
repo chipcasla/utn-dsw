@@ -1,16 +1,26 @@
-<app-navbar></app-navbar>
-<div class="container mx-auto mt-8">
-    <ul>
-      <li *ngFor="let resenia of resenias" class="mb-4 p-4 bg-white shadow-md rounded-md">
-        <p class="text-lg font-bold">Puntaje: {{ resenia.puntaje }}</p>
-        <p class="text-gray-700">Cliente: {{ resenia.Cliente.nombre }} {{ resenia.Cliente.apellido }}</p>
-        <p class="text-gray-800">{{ resenia.comentario }}</p>
-      </li>
-    </ul>
-    <a routerLink="../">
-    <button class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-600">
-      Volver
-    </button>
-    </a>
-  </div>
-  
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Reseñas
+  </h1>
+</div>
+<a routerLink="../">
+  <button
+    class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-500 mx-2"
+  >
+    Volver
+  </button>
+</a>
+<div class="container mx-auto mt-2">
+  <ul>
+    <li
+      *ngFor="let resenia of resenias"
+      class="mx-1 mb-4 p-4 bg-gray-700 shadow-lg shadow-gray-400 rounded-md border border-gray-200"
+    >
+      <p class="text-white text-lg font-bold">Puntaje: {{ resenia.puntaje }}</p>
+      <p class="text-gray-200">
+        Cliente: {{ resenia.Cliente.nombre }} {{ resenia.Cliente.apellido }}
+      </p>
+      <p class="text-gray-200">{{ resenia.comentario }}</p>
+    </li>
+  </ul>
+</div>

@@ -1,49 +1,47 @@
-<app-navbar></app-navbar>
 <div class="reservations">
-  <div class="flex min-h-full bg-gray-600 mb-4">
-    <h3
-      class="text-2xl text-fakegold-400 font-bold px-8 py-1 ml-0 md:ml-10 md:mt-4"
-    >
-      Mis Reservas
-    </h3>
+  <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+    <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+      Mis reservas
+    </h1>
   </div>
-  <div class="overflow-x-auto align-middle">
+
+  <div class="overflow-x-auto align-middle md:flex md:justify-center">
     <table
-      class="min-w-full border border-gray-500 bg-gray-700 rounded-lg overflow-hidden shadow-lg mx-4 mb-4 sm:mx-0"
+      class="border border-gray-500 bg-gray-700 rounded-lg overflow-hidden shadow-lg shadow-gray-400 mx-2 mb-4 md:mx-5"
     >
       <thead>
         <tr>
           <th
-            class="border-b px-10 py-3 bg-gray-900 text-left text-xs leading-4 font-medium text-fakegold-400 uppercase tracking-wider"
+            class="border-b px-8 py-3 bg-gray-900 text-left text-xs font-medium text-fakegold-400 uppercase tracking-wider"
           >
             Fecha Y Hora
           </th>
           <th
-            class="border-b px-10 py-3 bg-gray-900 text-left text-xs leading-4 font-medium text-fakegold-400 uppercase tracking-wider"
+            class="border-b px-8 py-3 bg-gray-900 text-left text-xs font-medium text-fakegold-400 uppercase tracking-wider"
           >
             Estado
           </th>
-          <th class="border-b px-12 py-3 bg-gray-900"></th>
+          <th class="border-b px-8 py-3 bg-gray-900"></th>
           <!-- Para el botón de ver detalles -->
-          <th class="border-b px-10 py-3 bg-gray-900"></th>
+          <th class="border-b px-8 py-3 bg-gray-900"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let reservation of reservations">
-          <td class="text-white border-b px-10 py-4 whitespace-no-wrap">
+          <td class="text-white border-b px-8 py-4">
             {{ reservation.fechaHora | date : "dd/MM/yyyy HH:mm" }}
           </td>
-          <td class="text-white border-b px-10 py-4 whitespace-no-wrap">
+          <td class="text-white border-b px-8 py-4">
             {{ reservation.estado }}
           </td>
-          <td class="border-b px-12 py-4 whitespace-no-wrap">
-            <a
-              [routerLink]="['/reservas', reservation.id]"
-              class="text-fakegold-400 font-semibold border border-fakegold-600 block px-4 py-1 rounded hover:bg-fakegold-500 hover:text-white focus:ring focus:ring-fakegold-300"
-              >Ver Detalles</a
+          <td class="border-b px-8 py-4 whitespace-no-wrap">
+            <button
+              class="text-fakegold-400 text-sm font-semibold px-4 py-1 border border-fakegold-600 sm:block text-center rounded hover:bg-fakegold-500 hover:text-white focus:ring focus:ring-fakegold-300"
             >
+              <a [routerLink]="['/reservas', reservation.id]">Ver Detalles</a>
+            </button>
           </td>
-          <td class="border-b px-10 py-4 whitespace-no-wrap">
+          <td class="border-b px-8 py-4 whitespace-no-wrap">
             <button
               (click)="cancelReservation(reservation.id)"
               class="text-red-600 text-sm font-bold px-4 py-1 rounded border border-red-600 hover:bg-red-500 hover:text-white focus:ring focus:ring-red-300"

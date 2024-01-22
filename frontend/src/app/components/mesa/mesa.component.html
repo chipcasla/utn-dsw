@@ -1,9 +1,13 @@
-<app-navbar></app-navbar>
 <div *ngIf="!confirmaReserva">
+  <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+    <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+      Nueva reserva
+    </h1>
+  </div>
   <form
     [formGroup]="formulario"
     (ngSubmit)="buscarMesasLibres()"
-    class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
+    class="md:max-w-md md:mx-auto bg-gray-700 mx-1 mt-8 p-5 rounded-lg shadow-lg shadow-gray-300"
   >
     <div
       *ngIf="errorMessage"
@@ -12,9 +16,7 @@
       {{ errorMessage }}
     </div>
     <div class="mb-4">
-      <label
-        for="cantPersonas"
-        class="block text-gray-700 text-sm font-bold mb-2"
+      <label for="cantPersonas" class="text-white block text-sm font-bold mb-2"
         >Cantidad de Personas:</label
       >
       <input
@@ -29,7 +31,7 @@
     </div>
 
     <div class="mb-4">
-      <label for="fechaHora" class="block text-gray-700 text-sm font-bold mb-2"
+      <label for="fechaHora" class="text-white block text-sm font-bold mb-2"
         >Fecha y Hora:</label
       >
       <input
@@ -44,7 +46,7 @@
     </div>
 
     <div class="mb-4">
-      <label for="ubicacion" class="block text-gray-700 text-sm font-bold mb-2"
+      <label for="ubicacion" class="text-white block text-sm font-bold mb-2"
         >Ubicación:</label
       >
       <select
@@ -68,13 +70,24 @@
   </form>
 
   <div *ngIf="mesasDisponibles" class="mt-8 max-w-md mx-auto">
-    <h2 class="text-white text-2xl font-bold mb-4">Mesas Disponibles:</h2>
+    <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+      <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+        Mesas disponibles
+      </h1>
+    </div>
     <ul>
-      <li *ngFor="let mesa of mesasDisponibles" class="mb-2 bg-white text-black p-4 rounded-md flex justify-between items-center">
+      <li
+        *ngFor="let mesa of mesasDisponibles"
+        class="mb-2 bg-gray-700 text-white p-4 rounded-md flex justify-between items-center mx-1 shadow-sm shadow-gray-300"
+      >
         <div>
-          <span class="font-bold">Mesa {{ mesa.id }}</span> - Capacidad: {{ mesa.capacidad }}
+          <span class="font-bold">Mesa {{ mesa.id }}</span> - Capacidad:
+          {{ mesa.capacidad }}
         </div>
-        <button class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700" (click)="reservarMesa(mesa.id)">
+        <button
+          class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
+          (click)="reservarMesa(mesa.id)"
+        >
           Reservar
         </button>
       </li>

@@ -1,55 +1,184 @@
-<app-navbar></app-navbar>
-<div class="text-center mt-8">
-<h1 class="text-3xl font-bold mb-4">Clientes</h1>
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Clientes
+  </h1>
 </div>
-<div *ngIf="crear">
-    <form [formGroup]="createForm" (ngSubmit)="addCliente()" class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+<div *ngIf="crear" class="mb-8">
+  <form
+    [formGroup]="createForm"
+    (ngSubmit)="addCliente()"
+    class="max-w-md md:mx-auto mt-8 p-6 bg-gray-700 rounded-lg shadow-lg shadow-gray-300 mx-1"
+  >
+    <div class="pb-2 border-b border-b-gray-400">
+      <h1
+        class="text-fakegold-100 text-center text-3xl font-poppins font-medium"
+      >
+        Nuevo cliente
+      </h1>
+    </div>
+    <div class="my-4">
+      <label for="dni" class="block text-white text-sm font-bold mb-2"
+        >DNI:</label
+      >
+      <input
+        type="text"
+        id="dni"
+        formControlName="dni"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
 
-        <div class="mb-4">
-          <label for="dni" class="block text-gray-700 text-sm font-bold mb-2">DNI:</label>
-          <input type="text" id="dni" formControlName="dni" class="w-full p-2 border rounded-md" required>
-        </div>
+    <div class="mb-4">
+      <label for="password" class="block text-white text-sm font-bold mb-2"
+        >Contraseña:</label
+      >
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
 
-        <div class="mb-4">
-            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Contraseña:</label>
-            <input type="password" id="password" formControlName="password" class="w-full p-2 border rounded-md" required>
-        </div>
-      
-        <div class="mb-4">
-          <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-          <input type="text" id="nombre" formControlName="nombre" class="w-full p-2 border rounded-md" required>
-        </div>
-      
-        <div class="mb-4">
-          <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido:</label>
-          <input type="text" id="apellido" formControlName="apellido" class="w-full p-2 border rounded-md" required>
-        </div>
-      
-        <div class="mb-4">
-          <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
-          <input type="tel" id="telefono" formControlName="telefono" class="w-full p-2 border rounded-md" required>
-        </div>
-      
-        <div class="mb-4">
-          <label for="mail" class="block text-gray-700 text-sm font-bold mb-2">Correo Electrónico:</label>
-          <input type="email" id="mail" formControlName="mail" class="w-full p-2 border rounded-md" required>
-        </div>
-            
-        <button type="submit" class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Registrar</button>
-        <button (click)="crear = !crear" class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Cerrar</button>
-      </form>
-      
+    <div class="mb-4">
+      <label for="nombre" class="block text-white text-sm font-bold mb-2"
+        >Nombre:</label
+      >
+      <input
+        type="text"
+        id="nombre"
+        formControlName="nombre"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="apellido" class="block text-white text-sm font-bold mb-2"
+        >Apellido:</label
+      >
+      <input
+        type="text"
+        id="apellido"
+        formControlName="apellido"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="telefono" class="block text-white text-sm font-bold mb-2"
+        >Teléfono:</label
+      >
+      <input
+        type="tel"
+        id="telefono"
+        formControlName="telefono"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="mail" class="block text-white text-sm font-bold mb-2"
+        >Correo Electrónico:</label
+      >
+      <input
+        type="email"
+        id="mail"
+        formControlName="mail"
+        class="w-full p-2 border rounded-md"
+        required
+      />
+    </div>
+    <div class="flex justify-center md:justify-between mt-5">
+      <button
+        type="submit"
+        class="w-full md:w-2/4 bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700 mx-1"
+      >
+        Registrar
+      </button>
+      <button
+        (click)="crear = !crear"
+        class="md:w-1/4 bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mx-1"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
 </div>
-<div class="container mx-auto my-8">
-  <button (click)="crear = !crear" class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Crear cliente</button>
-
-  <ul class="mt-4">
-      <li *ngFor="let cliente of clientes" class="bg-white p-6 rounded-md shadow-md mb-4">
-          <p><span class="font-bold">{{ cliente.id }}</span> - Tipo: {{ cliente.tipo }} - DNI: {{ cliente.dni }} - Nombre: {{ cliente.nombre }} {{ cliente.apellido }}
-          Teléfono: {{ cliente.telefono }} - Email: {{ cliente.mail }} </p>
-          <p><button (click)="deleteCliente(cliente.id)" class="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 ml-auto">Borrar cliente</button></p>
-      </li>
-  </ul>
-
-  <button (click)="redirect()" class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4">Volver</button>
+<div class="flex justify-start mx-2 md:ml-64 my-4">
+  <button
+    (click)="crear = !crear"
+    class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700 mx-2"
+  >
+    Crear cliente
+  </button>
+  <button
+    (click)="redirect()"
+    class="bg-stone-600 text-white p-2 rounded-md hover:bg-stone-700 mx-2"
+  >
+    Volver
+  </button>
+</div>
+<div class="overflow-x-auto align-middle md:flex md:justify-center">
+  <table
+    class="border border-gray-500 bg-gray-700 rounded-lg overflow-hidden shadow-lg shadow-gray-400 mx-2 mb-4 md:mx-5"
+  >
+    <thead>
+      <tr class="text-left text-xs font-medium text-fakegold-400">
+        <th class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider">
+          ID
+        </th>
+        <th class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider">
+          Tipo
+        </th>
+        <th class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider">
+          DNI
+        </th>
+        <th class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider">
+          Nombre
+        </th>
+        <th class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider">
+          Apellido
+        </th>
+        <th
+          class="border-b px-8 py-3 bg-gray-900 uppercase tracking-wider"
+        ></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let cliente of clientes"
+        class="text-left text-white hover:bg-gray-800"
+      >
+        <td (click)="abrirDetalle(cliente.id)" class="px-8 py-3 border-b">
+          {{ cliente.id }}
+        </td>
+        <td (click)="abrirDetalle(cliente.id)" class="px-8 py-3 border-b">
+          {{ cliente.tipo }}
+        </td>
+        <td (click)="abrirDetalle(cliente.id)" class="px-8 py-3 border-b">
+          {{ cliente.dni }}
+        </td>
+        <td (click)="abrirDetalle(cliente.id)" class="px-8 py-3 border-b">
+          {{ cliente.nombre }}
+        </td>
+        <td (click)="abrirDetalle(cliente.id)" class="px-8 py-3 border-b">
+          {{ cliente.apellido }}
+        </td>
+        <td class="px-8 py-3 border-b">
+          <button
+            *ngIf="cliente.tipo != 'admin'"
+            (click)="deleteCliente(cliente.id)"
+            class="text-red-600 text-sm font-bold px-4 py-1 rounded border border-red-600 hover:bg-red-500 hover:text-white focus:ring focus:ring-red-300"
+          >
+            Borrar cliente
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

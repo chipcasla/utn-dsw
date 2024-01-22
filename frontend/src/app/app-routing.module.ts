@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClienteComponent } from './components/cliente/cliente.component';
 import { ClienteDetalleComponent } from './components/cliente-detalle/cliente-detalle.component';
 import { ClienteEditComponent } from './components/cliente-edit/cliente-edit.component';
 import { ClienteManagementComponent } from './components/cliente-management/cliente-management.component';
@@ -133,6 +134,15 @@ const routes: Routes = [
   {
     path: 'admin/clientes',
     component: ClienteManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data: {
+      allowedRoles: ['admin'],
+    },
+  },
+  {
+    path: 'admin/clientes/:id',
+    component: ClienteComponent,
     canActivate: [authGuard],
     canMatch: [roleGuard],
     data: {

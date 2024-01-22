@@ -1,10 +1,11 @@
-<app-navbar></app-navbar>
 <div class="flex min-h-full justify-center mt-5">
   <div
-    class="w-full max-w-md p-4 bg-gray-800 border border-gray-600 rounded-lg shadow sm:p-8 dark:bg-gray-500 dark:border-gray-700"
+    class="w-full max-w-md p-4 bg-gray-800 border border-gray-600 rounded-lg shadow-lg shadow-gray-400 sm:p-8 dark:bg-gray-500 dark:border-gray-700 mx-1"
   >
     <div class="flex items-center justify-between mb-4">
-      <h5 class="text-xl font-bold leading-none text-white">RESERVA</h5>
+      <h5 class="text-xl font-bold leading-none text-fakegold-400">
+        RESERVA #{{ reservation.id }}
+      </h5>
       <a
         [routerLink]="['/reservas']"
         class="text-sm font-medium text-fakegold-300 hover:underline hover:text-fakegold-500"

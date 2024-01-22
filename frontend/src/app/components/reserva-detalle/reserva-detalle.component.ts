@@ -27,22 +27,19 @@ export class ReservaDetalleComponent implements OnInit {
   }
 
   loadReservationDetails(): void {
-    this.reservaService.getReservationDetails(this.reservationId).subscribe(
-      {
-      next: reservation => {
-          if (this.clienteService.getUserId() == reservation.data.idCliente){
-            this.reservation = reservation.data
+    this.reservaService.getReservationDetails(this.reservationId).subscribe({
+      next: (reservation) => {
+        if (this.clienteService.getUserId() == reservation.data.idCliente) {
+          this.reservation = reservation.data;
         } else {
-            this.router.navigate(['../../'], {relativeTo: this.route})
+          this.router.navigate(['../../'], { relativeTo: this.route });
         }
       },
-      error: error => {
+      error: (error) => {
         console.error('Error loading reservation details', error);
-      }
-      }
-    );
+      },
+    });
   }
-  
 
   formatoTexto(texto: string): string {
     return texto.charAt(0).toUpperCase() + texto.slice(1);

@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../shared/conn.js";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../shared/conn.js';
 export class Categoria extends Model {
 }
 Categoria.init({

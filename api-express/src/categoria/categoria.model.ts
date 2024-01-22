@@ -1,23 +1,23 @@
-import { DataType, DataTypes, Model } from "sequelize";
-import { sequelize } from "../shared/conn.js";
+import { DataTypes, Model } from 'sequelize';
+import { sequelize } from '../shared/conn.js';
 
-export class Categoria extends Model{}
+export class Categoria extends Model {}
 
 Categoria.init(
-    {
-        id : {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-
-        descripcion: {
-            type: DataTypes.STRING,
-        },
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        sequelize,
-        tableName: 'categoria',
-        timestamps: false,
-    }
+
+    descripcion: {
+      type: DataTypes.STRING,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'categoria',
+    timestamps: false,
+  }
 );

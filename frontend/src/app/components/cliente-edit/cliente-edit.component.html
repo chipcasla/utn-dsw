@@ -1,31 +1,64 @@
-<app-navbar></app-navbar>
-<div class="container mx-auto mt-8">
-  <h1 class="text-3xl font-bold mb-4">Editar Cliente</h1>
-
-  <form [formGroup]="editForm" (ngSubmit)="updateCliente()" class="bg-white p-6 rounded-md shadow-md">
-
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Editar mis datos
+  </h1>
+</div>
+<div class="mx-auto mt-8">
+  <form
+    [formGroup]="editForm"
+    (ngSubmit)="updateCliente()"
+    class="md:max-w-md md:mx-auto bg-gray-700 mx-1 mt-8 p-5 rounded-lg shadow-lg shadow-gray-300"
+  >
     <div class="mb-4">
-      <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Nombre:</label>
-      <input id="nombre"  class="w-1/5" formControlName="nombre" />
+      <label
+        for="nombre"
+        class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+        >Nombre:</label
+      >
+      <input id="nombre" class="w-full" formControlName="nombre" />
     </div>
 
     <div class="mb-4">
-      <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Apellido:</label>
-      <input id="apellido" class="w-1/5" formControlName="apellido" />
+      <label
+        for="apellido"
+        class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+        >Apellido:</label
+      >
+      <input id="apellido" class="w-full" formControlName="apellido" />
     </div>
 
     <div class="mb-4">
-      <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Telefono:</label>
-      <input id="telefono" class="w-1/5"  formControlName="telefono" />
+      <label
+        for="telefono"
+        class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+        >Telefono:</label
+      >
+      <input id="telefono" class="w-full" formControlName="telefono" />
     </div>
 
     <div class="mb-4">
-      <label for="mail" class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1">Correo Electrónico:</label>
-      <input id="mail" class="w-1/5" formControlName="mail" />
+      <label
+        for="mail"
+        class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+        >Correo Electrónico:</label
+      >
+      <input id="mail" class="w-full" formControlName="mail" />
     </div>
-    <div class= "space-x-4">
-    <button type="submit" class="w-32 h-full bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700">Guardar</button>
-    <a routerLink="../"><button type="button" class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700">Cancelar</button></a>
+    <div class="space-x-4 mt-8">
+      <button
+        type="submit"
+        class="w-32 h-full font-semibold bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700"
+      >
+        Guardar
+      </button>
+      <a routerLink="../"
+        ><button
+          type="button"
+          class="w-32 h-full font-semibold bg-gray-500 text-white p-3 rounded-md hover:bg-gray-600"
+        >
+          Cancelar
+        </button></a
+      >
     </div>
   </form>
 </div>

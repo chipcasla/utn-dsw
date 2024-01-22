@@ -1,13 +1,24 @@
-<app-navbar></app-navbar>
-<div class="container mx-auto mt-8">
-    <h1 class="text-3xl font-bold mb-4">Detalles del Cliente</h1>
-    
-    <div class="bg-white p-6 rounded-md shadow-md">
-      <p><strong>DNI:</strong> {{ cliente.data.dni }}</p>
-      <p><strong>Nombre:</strong> {{ cliente.data.nombre }}</p>
-      <p><strong>Apellido:</strong> {{ cliente.data.apellido }}</p>
-      <p><strong>Telefono:</strong> {{cliente.data.telefono}}</p>
-      <p><strong>Correo Electrónico:</strong> {{ cliente.data.mail }}</p>
-      <p><a routerLink="edit"><button class="w-32 bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700">Editar datos</button></a> </p>
-    </div>
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Mis datos
+  </h1>
+</div>
+<div class="mt-8 mx-auto md:w-2/5">
+
+  <div class="bg-gray-700 p-6 rounded-md shadow-lg shadow-gray-300 mx-1 border border-gray-400">
+    <p class="mt-1 text-white"><span class="font-bold">DNI:</span> {{ cliente.data.dni }}</p>
+    <p class="mt-1 text-white"><span class="font-bold">Nombre:</span> {{ cliente.data.nombre }}</p>
+    <p class="mt-1 text-white"><span class="font-bold">Apellido:</span> {{ cliente.data.apellido }}</p>
+    <p class="mt-1 text-white"><span class="font-bold">Telefono:</span> {{ cliente.data.telefono }}</p>
+    <p class="mt-1 text-white"><span class="font-bold">Correo Electrónico:</span> {{ cliente.data.mail }}</p>
+    <p class="mt-5">
+      <a routerLink="edit"
+        ><button
+          class="w-full text-fakegold-600 text-md font-semibold px-4 py-1 rounded border border-fakegold-600 hover:bg-fakegold-500 hover:text-white focus:ring focus:ring-fakegold-300"
+        >
+          Editar datos
+        </button></a
+      >
+    </p>
   </div>
+</div>

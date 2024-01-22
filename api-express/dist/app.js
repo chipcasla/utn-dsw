@@ -1,6 +1,8 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import './categoria/categoria.model.js';
+import { categoriaRouter } from './categoria/categoria.routes.js';
 import './cliente/cliente.model.js';
 import { clienteRouter } from './cliente/cliente.routes.js';
 import './mesa/mesa.model.js';
@@ -10,8 +12,6 @@ import './reserva/reserva.model.js';
 import { reservaRouter } from './reserva/reserva.routes.js';
 import './reserva/reserva_mesa.entity.js';
 import { reseñaRouter } from './reseña/reseña.routes.js';
-import './categoria/categoria.model.js';
-import { categoriaRouter } from './categoria/categoria.routes.js';
 import { sequelize } from './shared/conn.js';
 const app = express();
 app.use(cors());
@@ -29,7 +29,7 @@ app.use((_, res) => {
 });
 app.listen(3000, async () => {
     try {
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ alter: false });
         console.log('Server running on http://localhost:3000/');
     }
     catch (error) {

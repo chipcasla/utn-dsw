@@ -81,7 +81,16 @@ async function findOne(req: Request, res: Response) {
 
 function convertirACamelCase(str: string | undefined): string {
   if (!str) return '';
-  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  const palabras = str.split(' ');
+  // Capitalizar la primera letra de cada palabra y convertir el resto a minúsculas
+  const nombre = palabras
+    .map(
+      (palabra) =>
+        palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase()
+    )
+    .join(' ');
+
+  return nombre;
 }
 
 async function add(req: Request, res: Response) {
@@ -131,9 +140,8 @@ async function update(req: Request, res: Response) {
     if (!clienteActualizado) {
       return res.status(404).send({ error: 'Cliente no encontrado' });
     }
-    res
-      .status(200)
-      .send({ message: 'Cliente actualizado', data: clienteActualizado });
+    const { password, ...cliente } = clienteActualizado.dataValues;
+    res.status(200).send({ message: 'Cliente actualizado', data: cliente });
   } catch (error) {
     return res
       .status(500)
@@ -204,5 +212,6 @@ export {
   login,
   remove,
   sanitizeClienteInput,
-  update,
+  update
 };
+

@@ -1,1 +1,101 @@
-<p>cliente works!</p>
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Datos cliente
+  </h1>
+</div>
+<button
+  (click)="redirect()"
+  class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4 mx-3"
+>
+  Volver
+</button>
+<div *ngIf="!editar" class="mt-8 mx-auto md:w-2/5">
+  <div
+    class="bg-gray-700 p-6 rounded-md shadow-lg shadow-gray-300 mx-1 border border-gray-400"
+  >
+    <p class="mt-1 text-white">
+      <span class="font-bold">ID:</span> {{ cliente.id }}
+    </p>
+    <p class="mt-1 text-white">
+      <span class="font-bold">DNI:</span> {{ cliente.dni }}
+    </p>
+    <p class="mt-1 text-white">
+      <span class="font-bold">Nombre:</span> {{ cliente.nombre }}
+    </p>
+    <p class="mt-1 text-white">
+      <span class="font-bold">Apellido:</span> {{ cliente.apellido }}
+    </p>
+    <p class="mt-1 text-white">
+      <span class="font-bold">Telefono:</span> {{ cliente.telefono }}
+    </p>
+    <p class="mt-1 text-white">
+      <span class="font-bold">Correo Electrónico:</span> {{ cliente.mail }}
+    </p>
+    <p class="mt-5">
+      <button
+        (click)="editClient()"
+        class="w-full text-fakegold-600 text-md font-semibold px-4 py-1 rounded border border-fakegold-600 hover:bg-fakegold-500 hover:text-white focus:ring focus:ring-fakegold-300"
+      >
+        Editar datos
+      </button>
+    </p>
+  </div>
+</div>
+
+<form
+  *ngIf="editar"
+  [formGroup]="editForm"
+  (ngSubmit)="updateCliente()"
+  class="md:max-w-md md:mx-auto bg-gray-700 mx-1 mt-8 p-5 rounded-lg shadow-lg shadow-gray-300"
+>
+  <div class="mb-4">
+    <label
+      for="nombre"
+      class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+      >Nombre:</label
+    >
+    <input id="nombre" class="w-full" formControlName="nombre" />
+  </div>
+
+  <div class="mb-4">
+    <label
+      for="apellido"
+      class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+      >Apellido:</label
+    >
+    <input id="apellido" class="w-full" formControlName="apellido" />
+  </div>
+
+  <div class="mb-4">
+    <label
+      for="telefono"
+      class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+      >Telefono:</label
+    >
+    <input id="telefono" class="w-full" formControlName="telefono" />
+  </div>
+
+  <div class="mb-4">
+    <label
+      for="mail"
+      class="text-white block text-sm font-semibold mb-2 border-b border-gray-300"
+      >Correo Electrónico:</label
+    >
+    <input id="mail" class="w-full" formControlName="mail" />
+  </div>
+  <div class="space-x-4 mt-8">
+    <button
+      type="submit"
+      class="w-32 h-full font-semibold bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700"
+    >
+      Guardar
+    </button>
+    ><button
+      type="button"
+      (click)="editar = !editar"
+      class="w-32 h-full font-semibold bg-gray-500 text-white p-3 rounded-md hover:bg-gray-600"
+    >
+      Cancelar
+    </button>
+  </div>
+</form>

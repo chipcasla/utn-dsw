@@ -1,7 +1,7 @@
-<nav class="bg-gray-900">
-  <div class="w-full mx-auto">
+<nav>
+  <div class="fixed w-full mx-auto bg-gray-900">
     <div class="flex flex-wrap items-center justify-between">
-      <a routerLink="/" class="flex">
+      <a (click)="goToHome()" class="flex">
         <span
           class="text-amber-500 self-center text-lg font-semibold whitespace-nowrap"
           >FlowBite</span
@@ -9,8 +9,8 @@
       </a>
       <div class="flex md:hidden md:order-2">
         <button
-          data-collapse-toggle="mobile-menu-3"
           type="button"
+          (click)="toggleMenu()"
           class="md:hidden text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center"
           aria-controls="mobile-menu-3"
           aria-expanded="false"
@@ -43,60 +43,65 @@
         </button>
       </div>
       <div
-        class="bg-white w-full hidden md:flex justify-between items-end md:w-auto md:bg-gray-900 md:px-2 md:order-1"
+        class="bg-fakegold-50 w-full hidden md:flex justify-between items-end md:w-auto md:bg-gray-900 md:px-2 md:order-1 transition-max-height"
         id="mobile-menu-3"
       >
         <ul
-          *ngIf="!isAdmin"
-          class="bg-white md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium"
+          *ngIf="checkUserRole('cliente')"
+          class="bg-white md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 mt-1 md:mt-0 md:text-sm md:font-medium"
         >
           <li>
             <a
               routerLink=""
-              class="bg-gray-900 md:bg-transparent text-white block pl-3 pr-4 py-2 md:text-amber-500 md:p-0 rounded"
+              class="bg-fakegold-600 text-white font-semibold md:bg-transparent block pl-3 pr-4 py-2 md:text-amber-500 md:p-0 rounded"
               aria-current="page"
               >Home</a
             >
           </li>
           <li>
             <a
-              routerLink="/nuevaReserva"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              routerLink="/nuevaReserva" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 rounded"
               >Nueva Reserva</a
             >
           </li>
           <li>
             <a
               routerLink="/reservas"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              routerLinkActive="text-white bg-gray-900 font-medium"
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 rounded"
               >Reservas</a
             >
           </li>
           <li>
             <a
-              routerLink="/resenias"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              routerLink="/resenias" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 rounded"
               >Reseñas</a
             >
           </li>
           <li>
             <a
-              routerLink="/platos"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              routerLink="/platos" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 rounded"
               >Platos</a
             >
           </li>
           <li>
             <a
-              routerLink="/misdatos"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              routerLink="/misdatos" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 rounded"
               >Mis datos</a
             >
           </li>
         </ul>
         <ul
-          *ngIf="isAdmin"
-          class="bg-white md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium"
+          *ngIf="checkUserRole('admin')"
+          class="bg-white md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 mt-1 md:mt-0 md:text-sm md:font-medium"
         >
           <li>
             <a
@@ -108,41 +113,65 @@
           </li>
           <li>
             <a
-              routerLink="/admin/clientes"
+              routerLink="/admin/clientes" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
               class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
               >Clientes</a
             >
           </li>
           <li>
             <a
-              routerLink="/admin/mesas"
+              routerLink="/admin/mesas" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
               class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
               >Mesas</a
             >
           </li>
           <li>
             <a
-              routerLink="/admin/reservas"
+              routerLink="/admin/reservas" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
               class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
               >Reservas</a
             >
           </li>
           <li>
             <a
-              routerLink="/admin/platos"
+              routerLink="/admin/platos" 
+              routerLinkActive="text-white bg-gray-900 font-medium" 
               class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
               >Platos</a
             >
           </li>
         </ul>
         <ul
-          class="border-t-2 border-gray-600 md:border-0 md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium md:mx-8"
+          *ngIf="checkUserRole('')"
+          class="bg-white border-t-2 border-gray-600 md:border-0 md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 md:mt-0 md:text-sm md:font-medium md:mx-8"
         >
           <li>
             <a
               (click)="logout()"
-              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              class="text-gray-700 hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0 cursor-pointer"
               >Salir</a
+            >
+          </li>
+        </ul>
+        <ul
+          *ngIf="!checkUserRole('')"
+          class="bg-gray-600 border-t-2 border-gray-600 md:border-0 md:bg-gray-900 flex-col md:flex-row flex md:space-x-8 md:mt-0 md:text-sm md:font-medium md:mx-8"
+        >
+          <li>
+            <a
+              routerLink="/login"
+              class="text-white font-medium hover:bg-gray-50 border-b border-gray-500 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              >Iniciar sesión</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/registro"
+              class="text-white font-medium hover:bg-gray-50 border-b border-gray-500 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2 md:hover:text-amber-500 md:p-0"
+              >Registrarme</a
             >
           </li>
         </ul>

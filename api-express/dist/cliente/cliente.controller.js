@@ -72,7 +72,12 @@ async function findOne(req, res) {
 function convertirACamelCase(str) {
     if (!str)
         return '';
-    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+    const palabras = str.split(' ');
+    // Capitalizar la primera letra de cada palabra y convertir el resto a minúsculas
+    const nombre = palabras
+        .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase())
+        .join(' ');
+    return nombre;
 }
 async function add(req, res) {
     const { dni, nombre, apellido, telefono, mail, password } = req.body.sanitizedInput;
@@ -115,9 +120,8 @@ async function update(req, res) {
         if (!clienteActualizado) {
             return res.status(404).send({ error: 'Cliente no encontrado' });
         }
-        res
-            .status(200)
-            .send({ message: 'Cliente actualizado', data: clienteActualizado });
+        const { password, ...cliente } = clienteActualizado.dataValues;
+        res.status(200).send({ message: 'Cliente actualizado', data: cliente });
     }
     catch (error) {
         return res
@@ -170,5 +174,5 @@ async function login(req, res) {
     });
     return res.status(200).json({ token, data: cliente });
 }
-export { add, findAll, findByDni, findOne, login, remove, sanitizeClienteInput, update, };
+export { add, findAll, findByDni, findOne, login, remove, sanitizeClienteInput, update };
 //# sourceMappingURL=cliente.controller.js.map
