@@ -7,16 +7,16 @@ function sanitizePlatoInput(req, res, next) {
     req.body.sanitizedInput = {
         ingredientes: req.body.ingredientes,
         descripcion: req.body.descripcion,
+        idcategoria: req.body.categoria,
     };
     if (!req.body.sanitizedInput.ingredientes) {
-        return res
-            .status(400)
-            .json({ message: 'Complete los ingredientes' });
+        return res.status(400).json({ message: 'Complete los ingredientes' });
     }
     if (!req.body.sanitizedInput.descripcion) {
-        return res
-            .status(400)
-            .json({ message: 'Complete la descripcion' });
+        return res.status(400).json({ message: 'Complete la descripcion' });
+    }
+    if (!req.body.sanitizedInput.idcategoria) {
+        return res.status(400).json({ message: 'Complete la categoria' });
     }
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
@@ -53,10 +53,11 @@ async function findByCategoria(req, res) {
     res.json({ data: platos });
 }
 async function add(req, res) {
-    const { ingredientes, descripcion } = req.body.sanitizedInput;
+    const { ingredientes, descripcion, idcategoria } = req.body.sanitizedInput;
     const platoInput = {
         ingredientes,
         descripcion,
+        idcategoria,
         imagen_url: '',
         public_id: '',
     };
@@ -78,10 +79,24 @@ async function add(req, res) {
 async function update(req, res) {
     const { id } = req.params;
     try {
-        const platoActualizado = await repository.update(id, req.body.sanitizedInput);
-        if (!platoActualizado) {
+        const { ingredientes, descripcion, idcategoria } = req.body.sanitizedInput;
+        const miPlato = await repository.findOne({ id });
+        if (!miPlato) {
             return res.status(404).send({ error: 'Plato no encontrado' });
         }
+        if (req.files?.imagen && !Array.isArray(req.files.imagen)) {
+            await deleteImage(miPlato.dataValues.public_id);
+            const path = req.files.imagen.tempFilePath;
+            const result = await uploadImage(path);
+            miPlato.dataValues.imagen_url = result.secure_url;
+            miPlato.dataValues.public_id = result.public_id;
+            await fs.unlink(req.files.imagen.tempFilePath);
+        }
+        miPlato.dataValues.descripcion = descripcion;
+        miPlato.dataValues.ingredientes = ingredientes;
+        miPlato.dataValues.idcategoria = idcategoria;
+        console.log(miPlato);
+        const platoActualizado = await repository.update(id, miPlato.dataValues);
         res
             .status(200)
             .send({ message: 'Plato actualizado', data: platoActualizado });
@@ -107,9 +122,7 @@ async function remove(req, res) {
                 platoEliminado.dataValues.public_id != '') {
                 await deleteImage(platoEliminado.dataValues.public_id);
             }
-            res
-                .status(200)
-                .send({
+            res.status(200).send({
                 message: 'Plato eliminado correctamente',
                 plato: platoEliminado,
             });
@@ -131,5 +144,5 @@ async function remove(req, res) {
       return res.status(500).json({ message: 'Error al buscar el plato', error });
     }
   }*/
-export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update };
+export { add, findAll, findByCategoria, findOne, remove, sanitizePlatoInput, update, };
 //# sourceMappingURL=plato.controller.js.map

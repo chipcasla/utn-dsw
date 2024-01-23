@@ -16,6 +16,14 @@ platoRouter.post('/', [
     }),
     sanitizePlatoInput,
 ], add);
-platoRouter.put('/:id', [validateToken, isAdmin, sanitizePlatoInput], update);
+platoRouter.put('/:id', [
+    validateToken,
+    isAdmin,
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: './uploads',
+    }),
+    sanitizePlatoInput,
+], update);
 platoRouter.delete('/:id', [validateToken, isAdmin], remove);
 //# sourceMappingURL=plato.routes.js.map

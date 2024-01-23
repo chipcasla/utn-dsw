@@ -18,11 +18,11 @@ export class PlatoManagementComponent {
     descripcion: '',
     ingredientes: '',
     categoria: '',
-    imagen: null, // Aquí almacenaremos la imagen seleccionada por el usuario
+    imagen: '', // Aquí almacenaremos la imagen seleccionada por el usuario
   };
   crearPlato: boolean = false;
   categorias: any;
-  selectedCategoria: any=null;
+  selectedCategoria: any = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +31,7 @@ export class PlatoManagementComponent {
     private router: Router,
     private toastrService: ToastrService,
     private errorService: ErrorService,
-    private categoriaService: CategoriaService,
+    private categoriaService: CategoriaService
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +45,10 @@ export class PlatoManagementComponent {
     });
   }
 
-  loadCategorias(){
-    this.categoriaService.findAll().subscribe((categorias:any)=>{
-      this.categorias=categorias.data
-    })
+  loadCategorias() {
+    this.categoriaService.findAll().subscribe((categorias: any) => {
+      this.categorias = categorias.data;
+    });
   }
 
   onChangeImagen(event: any) {
@@ -57,17 +57,14 @@ export class PlatoManagementComponent {
     }
   }
 
-  onCategoriaChange(){
-    if(this.selectedCategoria!==null){
-      this.categoriaService.findAll().subscribe((categoria: any)=>{
-        this.categorias=categoria.data;
-        this.platoService.getByCategoria(this.selectedCategoria).subscribe((platos:any)=>{
-          this.platos=platos.data;
-          
-        })
-      })
-    }
-    else{
+  onCategoriaChange() {
+    if (this.selectedCategoria !== null) {
+      this.platoService
+        .getByCategoria(this.selectedCategoria)
+        .subscribe((platos: any) => {
+          this.platos = platos.data;
+        });
+    } else {
       this.loadPlatos();
     }
   }
@@ -85,7 +82,7 @@ export class PlatoManagementComponent {
       this.plato.descripcion = '';
       this.plato.ingredientes = '';
       this.plato.categoria = '';
-      this.plato.imagen = null;
+      this.plato.imagen = '';
       this.toastrService.success('Nuevo plato agregado');
       this.loadPlatos();
     });

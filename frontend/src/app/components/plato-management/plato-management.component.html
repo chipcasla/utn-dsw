@@ -9,7 +9,14 @@
     (ngSubmit)="submitPlato()"
     class="max-w-md mx-auto mt-8 p-6 bg-gray-700 rounded-lg shadow-md shadow-gray-400 text-white"
   >
-    <div class="mb-4">
+    <div class="pb-2 border-b border-b-gray-400">
+      <h1
+        class="text-fakegold-100 text-center text-3xl font-poppins font-medium"
+      >
+        Nuevo plato
+      </h1>
+    </div>
+    <div class="my-4">
       <label for="descripcion" class="block text-sm font-bold mb-2"
         >Descripción del plato:</label
       >
@@ -17,28 +24,24 @@
         id="descripcion"
         name="descripcion"
         [(ngModel)]="plato.descripcion"
-        class="w-full p-2 border rounded-md"
+        class="w-full p-2 border rounded-md text-gray-950"
       ></textarea>
     </div>
 
     <div class="mb-4">
-      <label
-        for="ingredientes"
-        class="block text-gray-700 text-sm font-bold mb-2"
+      <label for="ingredientes" class="block text-sm font-bold mb-2"
         >Ingredientes:</label
       >
       <textarea
         id="ingredientes"
         name="ingredientes"
         [(ngModel)]="plato.ingredientes"
-        class="w-full p-2 border rounded-md"
+        class="w-full p-2 border rounded-md text-gray-950"
       ></textarea>
     </div>
 
     <div class="mb-4">
-      <label
-        for="idcategoria"
-        class="block text-gray-700 text-sm font-bold mb-2"
+      <label for="idcategoria" class="block text-sm font-bold mb-2"
         >Categoria:</label
       >
       <select
@@ -54,29 +57,32 @@
     </div>
 
     <div class="mb-4">
-      <label for="imagen" class="block text-sm font-bold mb-2">Imagen:</label>
+      <label class="block mb-2 text-sm font-medium text-white" for="imagen"
+        >Seleccionar archivo</label
+      >
       <input
-        type="file"
-        id="imagen"
-        class="w-full p-2 border rounded-md"
+        class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
         (change)="onChangeImagen($event)"
+        id="imagen"
+        type="file"
         accept="image/*"
         requireds
       />
     </div>
-
-    <button
-      type="submit"
-      class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700"
-    >
-      Guardar
-    </button>
-    <button
-      (click)="crearPlato = !crearPlato"
-      class="bg-stone-600 text-white p-2 rounded-md hover:bg-gray-600 mt-4"
-    >
-      Cerrar
-    </button>
+    <div class="flex justify-center md:justify-between mt-5">
+      <button
+        type="submit"
+        class="w-full bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-700 mx-1"
+      >
+        Guardar
+      </button>
+      <button
+        (click)="crearPlato = !crearPlato"
+        class="md:w-1/4 bg-stone-500 text-white p-2 rounded-md hover:bg-gray-600 mx-1"
+      >
+        Cerrar
+      </button>
+    </div>
   </form>
 </div>
 
@@ -90,9 +96,12 @@
   </button>
 
   <div>
-    <label for="categoria">Seleccionar categoria:</label>
+    <label for="categoria" class="block mb-2 text-sm font-medium text-white"
+      >Filtrar por categoría</label
+    >
     <select
       id="categoria"
+      class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
       (change)="onCategoriaChange()"
       [(ngModel)]="selectedCategoria"
     >
@@ -113,7 +122,7 @@
       <p class="text-white text-lg font-bold mb-2">Plato {{ plato.id }}</p>
       <p>Descripcion: {{ plato.descripcion }}</p>
       <p>Ingredientes: {{ plato.ingredientes }}</p>
-      <div class="space-x-4 mt-2">
+      <div class="flex align-bottom space-x-4 mt-2">
         <button
           (click)="redirect(plato.id)"
           class="mr-2 text-fakegold-600 text-sm font-bold px-4 py-1 rounded border border-fakegold-600 hover:bg-fakegold-500 hover:text-white focus:ring focus:ring-fakegold-300"

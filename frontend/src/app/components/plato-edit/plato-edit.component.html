@@ -1,48 +1,59 @@
-<div class="container mx-auto mt-8">
-  <h1 class="text-3xl font-bold mb-4">Editar plato</h1>
-
+<div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+  <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">
+    Editar Plato
+  </h1>
+</div>
+<div class="flex justify-center mt-8 mx-1">
   <form
-    [formGroup]="editForm"
     (ngSubmit)="updatePlato()"
-    class="bg-white p-6 rounded-md shadow-md"
+    class="max-w-md md:mx-auto mt-8 p-6 bg-gray-700 rounded-lg shadow-lg shadow-gray-300 mx-1"
   >
-    <div class="mb-4">
-      <label
-        for="descripcion"
-        class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1"
-        >Descripcion:</label
+    <div class="my-4">
+      <label for="descripcion" class="block text-white text-sm font-bold mb-2"
+        >Descripción:</label
       >
-      <input id="descripcion" formControlName="descripcion" />
+      <textarea
+        id="descripcion"
+        name="descripcion"
+        [(ngModel)]="plato.descripcion"
+        class="w-full p-2 border rounded-md"
+      ></textarea>
     </div>
-
-    <div class="mb-4">
-      <label
-        for="ingredientes"
-        class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1"
+    <div class="my-4">
+      <label for="ingredientes" class="block text-white text-sm font-bold mb-2"
         >Ingredientes:</label
       >
-      <input id="ingredientes" formControlName="ingredientes" />
+      <textarea
+        id="ingredientes"
+        name="ingredientes"
+        [(ngModel)]="plato.ingredientes"
+        class="w-full p-2 border rounded-md"
+      ></textarea>
     </div>
-
-    <div class="mb-4">
-      <label
-        for="imagen"
-        class="block text-gray-700 text-sm font-bold mb-2 border-b border-gray-300 pb-1"
-        >URL de imagen:</label
+    <div class="my-4">
+      <label for="imagen" class="block text-white text-sm font-bold mb-2"
+        >Imagen:</label
       >
-      <input id="imagen" formControlName="imagen" />
+      <input
+        class="block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none bg-gray-700 border-gray-600 placeholder-gray-400"
+        (change)="onChangeImagen($event)"
+        id="imagen"
+        type="file"
+        accept="image/*"
+        requireds
+      />
     </div>
 
     <div class="space-x-4">
       <button
         type="submit"
-        class="w-32 h-full bg-fakegold-500 text-white p-3 rounded-md hover:bg-fakegold-700"
+        class="w-32 bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-600"
       >
         Guardar
       </button>
       <button
         type="button"
-        class="w-32 h-full bg-gray-500 text-white p-3 rounded-md hover:bg-fakegold-700"
+        class="w-32 bg-gray-500 text-white p-2 rounded-md hover:bg-stone-700"
       >
         <a routerLink="../../">Cancelar</a>
       </button>
