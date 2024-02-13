@@ -5,7 +5,7 @@ import { ReservaService } from 'app/services/reserva.service';
 @Component({
   selector: 'app-reserva-management',
   templateUrl: './reserva-management.component.html',
-  styleUrls: ['./reserva-management.component.css'],
+  //styleUrls: ['./reserva-management.component.css'],
 })
 export class ReservaManagementComponent {
   reservas: any;

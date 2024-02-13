@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-plato-edit',
   templateUrl: './plato-edit.component.html',
-  styleUrls: ['./plato-edit.component.css'],
+  //styleUrls: ['./plato-edit.component.css'],
 })
 export class PlatoEditComponent {
   plato = {

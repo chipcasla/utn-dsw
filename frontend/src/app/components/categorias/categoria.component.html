@@ -1,7 +1,18 @@
-<ul>
+<div class="text-center mt-8">
+    <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
+        <h1 class="text-fakegold-400 text-3xl font-black mb-4 py-1 font-poppins">
+            Seleccione una categoria
+        </h1>
+        </div>
+<ul class="space-y-2 mt-8">
     <div *ngFor="let categoria of categorias">
     <li>
-        <a [routerLink]="['/categorias', categoria.id]">{{categoria.descripcion}}</a>
+        <a [routerLink]="['/categorias', categoria.id]">
+            <button
+          class="w-32 bg-fakegold-500 text-white p-1 rounded-md hover:bg-fakegold-700">
+          {{categoria.descripcion}}
+            </button>
+        </a>
     </li>
     </div>
 </ul>

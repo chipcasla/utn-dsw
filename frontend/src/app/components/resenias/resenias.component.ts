@@ -5,7 +5,7 @@ import { ReseñaService } from 'app/services/reseña.service';
 @Component({
   selector: 'app-resenias',
   templateUrl: './resenias.component.html',
-  styleUrls: ['./resenias.component.css']
+  //styleUrls: ['./resenias.component.css']
 })
 export class ReseniasComponent {
   resenias: any;
@@ -13,7 +13,7 @@ export class ReseniasComponent {
   constructor(private reseñaService: ReseñaService){}
 
   ngOnInit(): void{
-    this.resenias=this.reseñaService.getReseñas().subscribe(resenias=>{
+    this.reseñaService.getReseñas().subscribe(resenias=>{
       this.resenias=resenias.data;
     }
     )}

@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-plato-management',
   templateUrl: './plato-management.component.html',
-  styleUrls: ['./plato-management.component.css'],
+  //styleUrls: ['./plato-management.component.css'],
 })
 export class PlatoManagementComponent {
   platos: any;

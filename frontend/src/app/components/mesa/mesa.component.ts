@@ -8,7 +8,7 @@ import { catchError, of, tap } from 'rxjs';
 @Component({
   selector: 'app-mesa',
   templateUrl: './mesa.component.html',
-  styleUrls: ['./mesa.component.css'],
+  //styleUrls: ['./mesa.component.css'],
 })
 export class MesaComponent {
   formulario: FormGroup;

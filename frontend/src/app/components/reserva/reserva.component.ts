@@ -7,7 +7,7 @@ import { ReservaService } from 'app/services/reserva.service';
 @Component({
   selector: 'app-reserva',
   templateUrl: './reserva.component.html',
-  styleUrls: ['./reserva.component.css'],
+  //styleUrls: ['./reserva.component.css'],
 })
 export class ReservaComponent implements OnInit {
   reservations: any[] = [];

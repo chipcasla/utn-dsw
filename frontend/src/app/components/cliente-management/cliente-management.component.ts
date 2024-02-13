@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cliente-management',
   templateUrl: './cliente-management.component.html',
-  styleUrls: ['./cliente-management.component.css'],
 })
 export class ClienteManagementComponent {
   crear: boolean = false;

@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-resenia',
   templateUrl: './menu-resenia.component.html',
-  styleUrls: ['./menu-resenia.component.css'],
+  //styleUrls: ['./menu-resenia.component.css'],
 })
 export class MenuReseniaComponent {
   reseniaForm: FormGroup;

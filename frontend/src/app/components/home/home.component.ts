@@ -4,7 +4,6 @@ import { ClienteService } from 'app/services/cliente.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
   cliente: any;

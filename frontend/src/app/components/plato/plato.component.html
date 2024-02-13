@@ -3,6 +3,26 @@
     Platos
   </h1>
 </div>
+
+<div>
+  <label for="categoria" class="block mb-2 text-sm font-medium text-white"
+    >Filtrar por categoría</label
+  >
+  <select
+    id="categoria"
+    class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
+    (change)="onCategoriaChange()"
+    [(ngModel)]="selectedCategoria"
+  >
+    <option [ngValue]="null" [selected]="selectedCategoria === null">
+      Todas las categorias
+    </option>
+    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+      {{ categoria.descripcion }}
+    </option>
+  </select>
+</div>
+
 <div class="container mx-auto my-8">
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <li
