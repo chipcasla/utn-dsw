@@ -58,7 +58,6 @@ export class PlatoEditComponent {
     if (this.plato.imagen) {
       formData.append('imagen', this.plato.imagen);
     }
-    console.log(formData);
     this.platoService.updatePlato(this.idPlato, formData).subscribe({
       next: () => {
         this.toastrService.success('Cambios guardados');

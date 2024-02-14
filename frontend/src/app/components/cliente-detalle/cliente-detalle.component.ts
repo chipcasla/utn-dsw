@@ -23,7 +23,7 @@ export class ClienteDetalleComponent {
         this.cliente=cliente
       },
       error: error=>{
-        console.log("ERROR", error)
+        //this.error.messageError(error)
       }
      });
   }

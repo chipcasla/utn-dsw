@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http/index.js';
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'app/services/cliente.service';
+import { ErrorService } from 'app/services/error.service';
 import { ReservaService } from 'app/services/reserva.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ReservaComponent implements OnInit {
   constructor(
     private reservaService: ReservaService,
     private datePipe: DatePipe,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private errorService: ErrorService,
   ) {}
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class ReservaComponent implements OnInit {
       },
 
       error: (error: HttpErrorResponse) => {
-        console.error('Error loading reservations', error);
+        this.errorService.messageError(error);
       },
     });
   }
@@ -46,7 +48,7 @@ export class ReservaComponent implements OnInit {
           this.loadUserReservations();
         },
         error: (error) => {
-          console.error('Error canceling reservation', error);
+          this.errorService.messageError(error);
         },
       });
     }

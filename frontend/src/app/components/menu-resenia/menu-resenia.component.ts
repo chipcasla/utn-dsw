@@ -79,7 +79,6 @@ export class MenuReseniaComponent {
   }
 
   deleteResenia(idReseña: number) {
-    console.log(idReseña);
     this.reseñaService.deleteReseña(idReseña).subscribe(() => {
       this.cargarReseña();
     });

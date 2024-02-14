@@ -18,7 +18,7 @@ export class CategoriaComponent {
   cargarCategorias(){
     this.categoriaService.findAll().subscribe((response: any)=>{
       this.categorias=response.data;
-      console.log(this.categorias)
+      
     });
   }
 }

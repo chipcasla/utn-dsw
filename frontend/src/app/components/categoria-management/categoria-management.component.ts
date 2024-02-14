@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-categoria-management',
   templateUrl: './categoria-management.component.html',
-  styleUrls: ['./categoria-management.component.css']
+  //styleUrls: ['./categoria-management.component.css']
 })
 export class CategoriaManagementComponent {
   crear: boolean=false;

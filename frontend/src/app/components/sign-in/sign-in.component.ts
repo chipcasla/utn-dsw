@@ -89,7 +89,6 @@ export class SignInComponent {
       const dni = this.formularioRegistro?.get('dni')?.value;
       this.itExists(dni).subscribe({
         next: (exists) => {
-          console.log(exists);
           if (exists) {
             if (this.verifyPassword() == null) {
               const datosFormulario = this.formularioRegistro.value;

@@ -30,7 +30,6 @@ export class ReservaManagementComponent {
   verPendientes() {
     this.reservaService.getPendientes().subscribe((reservas: any) => {
       this.reservas = reservas.data;
-      console.log(this.reservas);
     });
   }
 

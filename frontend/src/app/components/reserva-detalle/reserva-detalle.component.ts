@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from 'app/services/cliente.service';
 import { ReservaService } from 'app/services/reserva.service';
+import { ErrorService } from 'app/services/error.service';
 
 @Component({
   selector: 'app-reserva-detalle',
@@ -16,7 +17,8 @@ export class ReservaDetalleComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private reservaService: ReservaService,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private errorService: ErrorService,
   ) {}
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class ReservaDetalleComponent implements OnInit {
         }
       },
       error: (error) => {
-        console.error('Error loading reservation details', error);
+        this.errorService.messageError(error);
       },
     });
   }
