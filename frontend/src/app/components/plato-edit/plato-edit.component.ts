@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriaService } from 'app/services/categoria.service';
 import { ErrorService } from 'app/services/error.service';
 import { PlatoService } from 'app/services/plato.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,15 +19,18 @@ export class PlatoEditComponent {
   };
   idPlato: any;
   imagen: any;
+  categorias: any;
 
   constructor(
     private platoService: PlatoService,
+    private categoriaService: CategoriaService,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
+    this.loadCategorias();
     this.route.params.subscribe((params) => {
       const idPlato = +params['id'];
       this.platoService.getOne(idPlato).subscribe({
@@ -48,6 +52,12 @@ export class PlatoEditComponent {
     if (event.target.files.length > 0) {
       this.plato.imagen = event.target.files[0];
     }
+  }
+
+  loadCategorias() {
+    this.categoriaService.findAll().subscribe((categorias: any) => {
+      this.categorias = categorias.data;
+    });
   }
 
   updatePlato() {

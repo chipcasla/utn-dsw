@@ -101,7 +101,7 @@
     >
     <select
       id="categoria"
-      class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
+      class="border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
       (change)="onCategoriaChange()"
       [(ngModel)]="selectedCategoria"
     >
@@ -119,8 +119,8 @@
       *ngFor="let plato of platos"
       class="bg-gray-700 p-6 rounded-md shadow-md shadow-gray-400 mb-4 text-fakegold-100"
     >
-      <p class="text-white text-lg font-bold mb-2">Plato {{ plato.id }}</p>
-      <p>Descripcion: {{ plato.descripcion }}</p>
+      <p class="text-white text-lg font-bold mb-2"> {{ plato.descripcion }}</p>
+      <p>ID: {{ plato.id }}</p>
       <p>Ingredientes: {{ plato.ingredientes }}</p>
       <div class="flex align-bottom space-x-4 mt-2">
         <button

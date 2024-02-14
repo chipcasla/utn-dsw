@@ -4,38 +4,40 @@
   </h1>
 </div>
 
-<div>
-  <label for="categoria" class="block mb-2 text-sm font-medium text-white"
-    >Filtrar por categoría</label
-  >
-  <select
-    id="categoria"
-    class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
-    (change)="onCategoriaChange()"
-    [(ngModel)]="selectedCategoria"
-  >
-    <option [ngValue]="null" [selected]="selectedCategoria === null">
-      Todas las categorias
-    </option>
-    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
-      {{ categoria.descripcion }}
-    </option>
-  </select>
-</div>
+<div class="container mx-auto my-8 space-y-4">
+  <div>
+    <label for="categoria" class="block mb-2 text-sm font-medium text-white"
+      >Filtrar por categoría</label>
 
-<div class="container mx-auto my-8">
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <li
-      *ngFor="let plato of platos"
-      class="bg-gray-700 p-6 rounded-md shadow-lg shadow-gray-300 mx-1"
+    <select
+      id="categoria"
+      class="border text-sm rounded-lg block p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-fakegold-500 focus:border-fakegold-500 hover:bg-gray-800"
+      (change)="onCategoriaChange()"
+      [(ngModel)]="selectedCategoria"
     >
-      <p class="text-white text-xl font-bold mb-2">{{ plato.descripcion }}</p>
-      <p class="text-gray-200">{{ plato.ingredientes }}</p>
-      <img
-        [src]="plato.imagen_url"
-        alt="{{ plato.descripcion }}"
-        class="mt-4 w-full h-auto border border-gray-400"
-      />
-    </li>
-  </ul>
+      <option [ngValue]="null" [selected]="selectedCategoria === null">
+        Todas las categorias
+      </option>
+      <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+        {{ categoria.descripcion }}
+      </option>
+    </select>
+  </div>
+
+  <div class="container mx-auto my-8">
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <li
+        *ngFor="let plato of platos"
+        class="bg-gray-700 p-6 rounded-md shadow-lg shadow-gray-300 mx-1"
+      >
+        <p class="text-white text-xl font-bold mb-2">{{ plato.descripcion }}</p>
+        <p class="text-gray-200">{{ plato.ingredientes }}</p>
+        <img
+          [src]="plato.imagen_url"
+          alt="{{ plato.descripcion }}"
+          class="mt-4 w-full h-auto border border-gray-400"
+        />
+      </li>
+    </ul>
+  </div>
 </div>
