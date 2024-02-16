@@ -48,6 +48,10 @@ export class ReservaManagementComponent {
     });
   }
 
+  tieneMesas(mesas: any[]): boolean {
+    return mesas.length > 0;
+  }
+
   isPendiente(estado: string): boolean {
     if (estado.toLowerCase() == 'pendiente') {
       return true;

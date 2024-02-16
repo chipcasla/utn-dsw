@@ -123,5 +123,19 @@ export class ReservaRepository {
             throw error;
         }
     }
+    async findPendientesMesa(idMesa) {
+        try {
+            const reservas = await Reserva.findAll({
+                where: {
+                    estado: 'Pendiente',
+                },
+                include: [{ model: Mesa, where: { id: idMesa } }, { model: Cliente }],
+            });
+            return reservas;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
 }
 //# sourceMappingURL=reserva.data.js.map

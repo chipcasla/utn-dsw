@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'environments/environment';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
   private isAuthenticated: boolean = false;
   private userRole: string = '';
-  private URL = 'http://localhost:3000/api';
+  private URL = environment.URL_API;
 
   constructor(private http: HttpClient, private router: Router) {}
 

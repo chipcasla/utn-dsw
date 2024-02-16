@@ -71,14 +71,21 @@
             <p>Mesas</p>
           </div>
           <div class="ml-3 p-2 border-l border-l-gray-300">
-            <div *ngFor="let mesa of reserva.Mesas">
+            <div *ngIf="!tieneMesas(reserva.Mesas)">
               <div class="mb-1 text-bold text-left">
-                <p class="text-base font-medium text-white">
-                  Nro. {{ mesa.id }}
-                </p>
-                <p class="text-sm text-gray-400">
-                  Ubicación: {{ mesa.ubicacion }}
-                </p>
+                <p class="text-sm text-gray-400">La mesa ya no existe.</p>
+              </div>
+            </div>
+            <div *ngIf="tieneMesas(reserva.Mesas)">
+              <div *ngFor="let mesa of reserva.Mesas">
+                <div class="mb-1 text-bold text-left">
+                  <p class="text-base font-medium text-white">
+                    Nro. {{ mesa.id }}
+                  </p>
+                  <p class="text-sm text-gray-400">
+                    Ubicación: {{ mesa.ubicacion }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

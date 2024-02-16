@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlatoService {
-  private URL = 'http://localhost:3000/api';
+  private URL = environment.URL_API;
 
   constructor(private http: HttpClient) {}
 

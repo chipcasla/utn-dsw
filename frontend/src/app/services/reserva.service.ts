@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservaService {
-  private URL = 'http://localhost:3000/api';
+  private URL = environment.URL_API;
 
   constructor(private http: HttpClient) {}
 
@@ -14,8 +15,8 @@ export class ReservaService {
     return this.http.get<any>(this.URL + '/reservas');
   }
 
-  getByUser(idCliente: number){
-    return this.http.get<any>(`${this.URL}/reservas/id/${idCliente}`)
+  getByUser(idCliente: number) {
+    return this.http.get<any>(`${this.URL}/reservas/id/${idCliente}`);
   }
 
   getReservationDetails(id: string) {
@@ -42,7 +43,7 @@ export class ReservaService {
     );
   }
 
-  getPendientes(){
+  getPendientes() {
     return this.http.get<any>(`${this.URL}/reservas/pendientes`);
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ClienteService {
-  private URL = 'http://localhost:3000/api';
+  private URL = environment.URL_API;
 
   constructor(private http: HttpClient) {}
 

@@ -1,6 +1,6 @@
 ### obtener todos las mesas
 GET http://localhost:3000/api/mesas
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsInJvbCI6ImNsaWVudGUiLCJpYXQiOjE3MDMxMDYwMDIsImV4cCI6MTcwMzEwOTYwMn0.TmcdvtkZ1b1F_m84SioR8IihPnOSr2AHGkjrVCXHIeg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzA4MDI5MzM3LCJleHAiOjE3MDgwMzI5Mzd9.lxyvyxyekpbUAM2z3SVHbJDTPJ2c8rrKVjrye_HOPg0
 
 ### obtener una mesa
 GET http://localhost:3000/api/mesas/1
@@ -29,4 +29,5 @@ Content-Type: application/json
 }
 
 ### borrar una mesa
-DELETE http://localhost:3000/api/mesas/15
+DELETE http://localhost:3000/api/mesas/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsInJvbCI6ImFkbWluIiwiaWF0IjoxNzA4MDMzMjU4LCJleHAiOjE3MDgwMzY4NTh9.aA45xN2-hUpEnPIVamtYCADP7aJLSlCMGo_l7597z4M

@@ -51,10 +51,11 @@ function isValidDateTime(dateTimeString: string) {
 
 function canAccessById(req: Request, idCliente: Number) {
   const tokenId = req.body.userId;
-  if (idCliente !== tokenId) {
-    return false;
+  const role = req.body.userRole;
+  if (idCliente === tokenId || role == 'admin') {
+    return true;
   }
-  return true;
+  return false;
 }
 
 async function findAll(req: Request, res: Response) {
@@ -86,7 +87,7 @@ async function findOne(req: Request, res: Response) {
       return res.status(404).send({ error: 'Reserva no encontrada' });
     }
     if (!canAccessById(req, reserva.idCliente)) {
-      return res.status(404).json({ message: 'Reserva no encontasdsadrada' });
+      return res.status(404).json({ message: 'Reserva no encontada' });
     }
     res.json({ data: reserva });
   } catch (error) {

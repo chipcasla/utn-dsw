@@ -1,28 +1,31 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorService } from 'app/services/error.service';
 import { MesaService } from 'app/services/mesa.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mesa-management',
   templateUrl: './mesa-management.component.html',
-  styleUrls: ['./mesa-management.component.css']
+  styleUrls: ['./mesa-management.component.css'],
 })
 export class MesaManagementComponent {
-  crear: boolean=false;
+  crear: boolean = false;
   mesas: any;
   createForm: FormGroup;
 
-
   constructor(
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private mesaService: MesaService,
     private formBuilder: FormBuilder,
-    ){
-      this.createForm = this.formBuilder.group({
-        capacidad: [
-          '',
+    private toastrService: ToastrService,
+    private errorService: ErrorService
+  ) {
+    this.createForm = this.formBuilder.group({
+      capacidad: [
+        '',
         [
           Validators.required,
           Validators.pattern('^[0-9]+$'),
@@ -31,35 +34,46 @@ export class MesaManagementComponent {
         ],
       ],
       ubicacion: ['', Validators.required],
-      });
-    }
+    });
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cargarMesas();
   }
 
-  cargarMesas(){
-    this.mesaService.findAll().subscribe((response:any)=>{
-      this.mesas=response.data;
-    })
+  cargarMesas() {
+    this.mesaService.findAll().subscribe((response: any) => {
+      this.mesas = response.data;
+    });
   }
 
-  addMesa(){
-    if (this.createForm.valid){
+  addMesa() {
+    if (this.createForm.valid) {
       const datosFormulario = this.createForm.value;
-      this.mesaService.addMesa(datosFormulario).subscribe(()=>{
-        this.cargarMesas();
+      this.mesaService.addMesa(datosFormulario).subscribe({
+        next: () => {
+          this.cargarMesas();
+        },
+        error: (err) => {
+          this.errorService.messageError(err);
+        },
       });
     }
   }
 
   borrarMesa(idMesa: number) {
-    this.mesaService.deleteMesa(idMesa).subscribe(()=>{
-      this.cargarMesas();
-    })
+    this.mesaService.deleteMesa(idMesa).subscribe({
+      next: (res: any) => {
+        this.toastrService.success(res.message || 'Mesa eliminada');
+        this.cargarMesas();
+      },
+      error: (err) => {
+        this.errorService.messageError(err);
+      },
+    });
   }
 
-  redirect(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+  redirect() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

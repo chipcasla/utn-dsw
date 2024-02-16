@@ -1,5 +1,7 @@
+import { ReservaRepository } from '../reserva/reserva.data.js';
 import { MesaRepository } from './mesa.data.js';
 const repository = new MesaRepository();
+const reservaRepo = new ReservaRepository();
 function sanitizeMesaInput(req, res, next) {
     req.body.sanitizedInput = {
         capacidad: req.body.capacidad,
@@ -124,6 +126,15 @@ async function update(req, res) {
 async function remove(req, res) {
     try {
         const id = req.params.id;
+        const mesa = await repository.findOne({ id });
+        if (!mesa) {
+            return res.status(404).send({ error: 'Mesa no encontrada' });
+        }
+        if (await tieneReservasPendientes(id)) {
+            return res.status(404).send({
+                message: `No es posible eliminar la mesa ${id} ya que tiene reservas pendientes.`,
+            });
+        }
         const mesaEliminada = await repository.delete({ id });
         if (mesaEliminada == 0) {
             res.status(404).send({ error: 'Mesa no encontrada' });
@@ -135,6 +146,13 @@ async function remove(req, res) {
     catch (error) {
         return res.status(500).json({ message: 'Error al eliminar mesa', error });
     }
+}
+async function tieneReservasPendientes(idMesa) {
+    const pendientes = await reservaRepo.findPendientesMesa(parseInt(idMesa));
+    if (pendientes?.length && pendientes?.length > 0) {
+        return true;
+    }
+    return false;
 }
 async function findMesasLibres(req, res) {
     const { cantidadPersonas, fechaHora, ubicacion } = req.body.sanitizedInputReservar;

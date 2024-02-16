@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ClienteService } from './cliente.service';
 //Habria que cambiar el nombre del servicio a otra cosa, no solo mesa.
@@ -7,7 +8,7 @@ import { ClienteService } from './cliente.service';
   providedIn: 'root',
 })
 export class MesaService {
-  private URL = 'http://localhost:3000/api';
+  private URL = environment.URL_API;
 
   constructor(
     private http: HttpClient,
@@ -31,15 +32,15 @@ export class MesaService {
     return this.http.post<any>(this.URL + `/reservas`, reservation);
   }
 
-  findAll(){
+  findAll() {
     return this.http.get<any>(this.URL + `/mesas`);
   }
 
-  addMesa(datosMesa: any){
+  addMesa(datosMesa: any) {
     return this.http.post(`${this.URL}/mesas`, datosMesa);
   }
 
-  deleteMesa(idMesa: number){
-    return this.http.delete(`${this.URL}/mesas/${idMesa}`)
+  deleteMesa(idMesa: number) {
+    return this.http.delete(`${this.URL}/mesas/${idMesa}`);
   }
 }

@@ -126,4 +126,20 @@ export class ReservaRepository {
       throw error;
     }
   }
+
+  public async findPendientesMesa(
+    idMesa: number
+  ): Promise<Reserva[] | undefined> {
+    try {
+      const reservas = await Reserva.findAll({
+        where: {
+          estado: 'Pendiente',
+        },
+        include: [{ model: Mesa, where: { id: idMesa } }, { model: Cliente }],
+      });
+      return reservas;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
