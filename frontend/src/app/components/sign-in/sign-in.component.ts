@@ -130,7 +130,6 @@ export class SignInComponent {
         },
       });
     } else {
-      console.log(this.formularioRegistro);
       if (
         this.formularioRegistro?.get('dni')?.errors?.['required'] ||
         this.formularioRegistro?.get('password')?.errors?.['required'] ||

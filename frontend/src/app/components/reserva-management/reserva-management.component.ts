@@ -51,14 +51,14 @@ export class ReservaManagementComponent {
     return mesas.length > 0;
   }
 
-  isPendiente(estado: string): boolean {
+  estaPendiente(estado: string): boolean {
     if (estado.toLowerCase() == 'pendiente') {
       return true;
     }
     return false;
   }
 
-  showMore(id: number) {
+  verMas(id: number) {
     const detalles = document.getElementById(`detalles-${id}`);
     if (detalles) {
       detalles.classList.toggle('hidden');

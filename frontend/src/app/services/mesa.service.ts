@@ -20,7 +20,6 @@ export class MesaService {
     fechaHora: Date;
     ubicacion: String;
   }) {
-    console.log(typeof this.clienteService.getUserId());
     return this.http.get<any>(
       this.URL +
         `/mesas/libres/${params.cantPersonas}/${params.fechaHora}/${params.ubicacion}`

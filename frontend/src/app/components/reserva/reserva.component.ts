@@ -11,7 +11,7 @@ import { ReservaService } from 'app/services/reserva.service';
   //styleUrls: ['./reserva.component.css'],
 })
 export class ReservaComponent implements OnInit {
-  reservations: any[] = [];
+  reservas: any[] = [];
   reserva = {
     estado: 'Cancelada',
   };
@@ -20,18 +20,18 @@ export class ReservaComponent implements OnInit {
     private reservaService: ReservaService,
     private datePipe: DatePipe,
     private clienteService: ClienteService,
-    private errorService: ErrorService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {
-    this.loadUserReservations();
+    this.cargarReservasCliente();
   }
 
-  loadUserReservations(): void {
+  cargarReservasCliente(): void {
     const idCliente = this.clienteService.getUserId();
     this.reservaService.getByUser(idCliente).subscribe({
-      next: (reservations) => {
-        this.reservations = reservations.data;
+      next: (reservas) => {
+        this.reservas = reservas.data;
       },
 
       error: (error: HttpErrorResponse) => {
@@ -40,12 +40,12 @@ export class ReservaComponent implements OnInit {
     });
   }
 
-  cancelReservation(idReserva: number): void {
+  cancelarReserva(idReserva: number): void {
     if (confirm('¿Estás seguro de que quieres cancelar esta reserva?')) {
       this.reservaService.cancelarReserva(idReserva, this.reserva).subscribe({
         next: () => {
           // Actualizar la lista de reservas después de la cancelación
-          this.loadUserReservations();
+          this.cargarReservasCliente();
         },
         error: (error) => {
           this.errorService.messageError(error);
