@@ -5,7 +5,7 @@ import { ReservaService } from 'app/services/reserva.service';
 @Component({
   selector: 'app-reserva-management',
   templateUrl: './reserva-management.component.html',
-  styleUrls: ['./reserva-management.component.css'],
+  //styleUrls: ['./reserva-management.component.css'],
 })
 export class ReservaManagementComponent {
   reservas: any;
@@ -30,7 +30,6 @@ export class ReservaManagementComponent {
   verPendientes() {
     this.reservaService.getPendientes().subscribe((reservas: any) => {
       this.reservas = reservas.data;
-      console.log(this.reservas);
     });
   }
 

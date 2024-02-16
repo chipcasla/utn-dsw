@@ -8,7 +8,7 @@ import { catchError, of, tap } from 'rxjs';
 @Component({
   selector: 'app-mesa',
   templateUrl: './mesa.component.html',
-  styleUrls: ['./mesa.component.css'],
+  //styleUrls: ['./mesa.component.css'],
 })
 export class MesaComponent {
   formulario: FormGroup;
@@ -77,7 +77,6 @@ export class MesaComponent {
       .addReservation(this.reserva)
       .pipe(
         tap((res) => {
-          console.log(res);
           this.confirmaReserva = true;
 
           setTimeout(() => {
@@ -87,10 +86,7 @@ export class MesaComponent {
         }),
         catchError((err) => {
           if (err.error.msg) {
-            console.log(err.error.msg);
-          } else {
-            console.log(err);
-          }
+          } 
           return of(null);
         })
       )

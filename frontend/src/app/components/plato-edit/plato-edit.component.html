@@ -30,6 +30,23 @@
         class="w-full p-2 border rounded-md"
       ></textarea>
     </div>
+
+    <div class="mb-4">
+      <label for="idcategoria" class="block text-sm font-bold mb-2"
+        >Categoria:</label
+      >
+      <select
+        id="idcategoria"
+        [(ngModel)]="plato.categoria"
+        name="idcategoria"
+        class="w-full p-2 border rounded-md text-black"
+      >
+        <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+          {{ categoria.descripcion }}
+        </option>
+      </select>
+    </div>
+
     <div class="my-4">
       <label for="imagen" class="block text-white text-sm font-bold mb-2"
         >Imagen:</label
@@ -55,7 +72,7 @@
         type="button"
         class="w-32 bg-gray-500 text-white p-2 rounded-md hover:bg-stone-700"
       >
-        <a routerLink="../../">Cancelar</a>
+        <a routerLink="../../">Cerrar</a>
       </button>
     </div>
   </form>

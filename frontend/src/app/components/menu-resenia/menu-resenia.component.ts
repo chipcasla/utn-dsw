@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-resenia',
   templateUrl: './menu-resenia.component.html',
-  styleUrls: ['./menu-resenia.component.css'],
+  //styleUrls: ['./menu-resenia.component.css'],
 })
 export class MenuReseniaComponent {
   reseniaForm: FormGroup;
@@ -79,7 +79,6 @@ export class MenuReseniaComponent {
   }
 
   deleteResenia(idReseña: number) {
-    console.log(idReseña);
     this.reseñaService.deleteReseña(idReseña).subscribe(() => {
       this.cargarReseña();
     });

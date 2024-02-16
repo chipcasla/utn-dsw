@@ -50,7 +50,7 @@ export class ClienteComponent implements OnInit {
         this.cliente = cliente.data;
       },
       error: (error) => {
-        console.error('Error loading client details', error);
+       
         this.errorService.messageError(error);
       },
     });

@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-mesa-management',
   templateUrl: './mesa-management.component.html',
-  styleUrls: ['./mesa-management.component.css'],
+  //styleUrls: ['./mesa-management.component.css']
 })
 export class MesaManagementComponent {
   crear: boolean = false;

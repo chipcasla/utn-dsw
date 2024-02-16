@@ -1,7 +1,7 @@
 <div class="text-center mt-5 mx-2 bg-gray-600 rounded-md">
   <h1 class="text-fakegold-400 text-2xl font-black mb-4 font-poppins">Mesas</h1>
 </div>
-<div class="container mx-auto my-8">
+<div class="container mx-auto my-8 space-y-4 space-x-4">
   <div *ngIf="crear">
     <form
       [formGroup]="createForm"
@@ -60,7 +60,6 @@
 
   <!--Ver todas las mesas y poder borrar una-->
   <div class="mt-8">
-    <div class="flex justify-start ml-2 md:ml-24 mt-5">
       <button
         (click)="crear = !crear"
         class="bg-fakegold-500 text-white p-2 rounded-md hover:bg-fakegold-600 hover:font-semibold mx-2"
@@ -73,7 +72,6 @@
       >
         Volver
       </button>
-    </div>
     <div class="mt-4 flex flex-wrap mx-2">
       <div
         *ngFor="let mesa of mesas"

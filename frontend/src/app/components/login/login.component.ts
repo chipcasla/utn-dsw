@@ -9,9 +9,9 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  //styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   user = {
     dni: '',
     password: '',
@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
     private errorService: ErrorService
   ) {}
 
-  ngOnInit() {}
 
   login() {
     if (this.user.dni == '' || this.user.password == '') {

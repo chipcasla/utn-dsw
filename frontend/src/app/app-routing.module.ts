@@ -20,7 +20,6 @@ import { ReservaComponent } from './components/reserva/reserva.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
-import { CategoriaComponent } from './components/categorias/categoria.component';
 import { CategoriaPlatoComponent } from './components/categoria-plato/categoria-plato.component';
 import { CategoriaManagementComponent } from './components/categoria-management/categoria-management.component';
 
@@ -99,12 +98,6 @@ const routes: Routes = [
     data: {
       allowedRoles: ['cliente'],
     },
-  },
-
-  {
-    path: 'categorias',
-    component: CategoriaComponent,
-    canActivate: [authGuard],
   },
 
   {

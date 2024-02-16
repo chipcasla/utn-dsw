@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriaService } from 'app/services/categoria.service';
 import { ErrorService } from 'app/services/error.service';
 import { PlatoService } from 'app/services/plato.service';
 import { ToastrService } from 'ngx-toastr';
@@ -7,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-plato-edit',
   templateUrl: './plato-edit.component.html',
-  styleUrls: ['./plato-edit.component.css'],
+  //styleUrls: ['./plato-edit.component.css'],
 })
 export class PlatoEditComponent {
   plato = {
@@ -18,15 +19,18 @@ export class PlatoEditComponent {
   };
   idPlato: any;
   imagen: any;
+  categorias: any;
 
   constructor(
     private platoService: PlatoService,
+    private categoriaService: CategoriaService,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private errorService: ErrorService
   ) {}
 
   ngOnInit(): void {
+    this.loadCategorias();
     this.route.params.subscribe((params) => {
       const idPlato = +params['id'];
       this.platoService.getOne(idPlato).subscribe({
@@ -50,6 +54,12 @@ export class PlatoEditComponent {
     }
   }
 
+  loadCategorias() {
+    this.categoriaService.findAll().subscribe((categorias: any) => {
+      this.categorias = categorias.data;
+    });
+  }
+
   updatePlato() {
     const formData = new FormData();
     formData.append('descripcion', this.plato.descripcion);
@@ -58,7 +68,6 @@ export class PlatoEditComponent {
     if (this.plato.imagen) {
       formData.append('imagen', this.plato.imagen);
     }
-    console.log(formData);
     this.platoService.updatePlato(this.idPlato, formData).subscribe({
       next: () => {
         this.toastrService.success('Cambios guardados');
