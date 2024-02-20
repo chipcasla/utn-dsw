@@ -10,6 +10,7 @@ export class ReservaRepository {
                     { model: Mesa, through: { attributes: [] } },
                     { model: Cliente },
                 ],
+                order: [['fechaHora', 'DESC']],
             });
             return reservas;
         }
@@ -25,6 +26,7 @@ export class ReservaRepository {
                     { model: Cliente },
                 ],
                 where: { idCliente: idCliente },
+                order: [['fechaHora', 'DESC']],
             });
             return reservas;
         }
@@ -116,6 +118,7 @@ export class ReservaRepository {
                     estado: 'Pendiente',
                 },
                 include: [{ model: Mesa }, { model: Cliente }],
+                order: [['fechaHora', 'DESC']],
             });
             return reservas;
         }

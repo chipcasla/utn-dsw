@@ -75,7 +75,16 @@
         Mesas disponibles
       </h1>
     </div>
-    <ul>
+    <div *ngIf="!hayMesasDisponibles()">
+      <div
+        class="text-center bg-gray-600 rounded-md m-2 shadow-sm shadow-red-300"
+      >
+        <h1 id="sin-mesas" class="text-red-400 font-semibold">
+          No hay mesas disponibles
+        </h1>
+      </div>
+    </div>
+    <ul *ngIf="hayMesasDisponibles()">
       <li
         *ngFor="let mesa of mesasDisponibles"
         class="mb-2 bg-gray-700 text-white p-4 rounded-md flex justify-between items-center mx-1 shadow-sm shadow-gray-300"

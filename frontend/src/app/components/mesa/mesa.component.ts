@@ -69,6 +69,10 @@ export class MesaComponent {
       .subscribe();
   }
 
+  hayMesasDisponibles() {
+    return this.mesasDisponibles.length > 0;
+  }
+
   reservarMesa(idMesa: number) {
     this.reserva.Mesas = [];
     this.reserva.Mesas.push({ id: idMesa });
@@ -86,7 +90,7 @@ export class MesaComponent {
         }),
         catchError((err) => {
           if (err.error.msg) {
-          } 
+          }
           return of(null);
         })
       )
