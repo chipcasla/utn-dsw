@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from "@playwright/test"
 
 const CANTIDAD_PERSONAS = 2;
 const FECHA_HORA = '22/02/2024 19:00';
@@ -8,8 +8,8 @@ test('Nueva reserva', async ({ page }) => {
   // Navego a la página de login
   await page.goto('http://localhost:4200/login');
 
-  await page.fill('#dni', '43378663');
-  await page.fill('#password', 'asd');
+  await page.fill('#dni', '98789876');
+  await page.fill('#password', '123');
   // Envío el formulario
   await page.click('button[type="submit"]');
 
