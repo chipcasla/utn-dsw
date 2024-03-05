@@ -60,3 +60,10 @@ Instrucciones para la ejecucion:
 - Instalar los modulos necesarios mediante 'npm install'. En caso de error, realizar 'npm install --peer-legacy-deps'
 - Inicializar el backend mediante 'npm run start:dev'
 - Inicializar el frontend mediante 'ng serve --o'
+
+Contributors
+--------------------
+
+- Alejandro Foresi [@chipcasla](https://github.com/chipcasla)
+- Lucio Pecoraro [@pecorarolucio](https://github.com/pecorarolucio)
+- Leandro Berto [@leandroberto2010](https://github.com/leandroberto2010)
