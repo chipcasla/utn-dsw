@@ -30,7 +30,7 @@ pnpm start:dev
 ```
 El servidor se ejecutará en `http://localhost:3000/`.
 
-### ### Frontend (Angular)
+### Frontend (Angular)
 
 1. Abre una nueva terminal.
 2. Navega al directorio del frontend:
