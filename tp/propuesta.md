@@ -21,6 +21,12 @@ Además, un cliente puede realizar una reseña del restaurante y a su vez ver la
 ### Modelo
 ![image](https://github.com/chipcasla/utn-dsw/blob/main/Diagrama%20dsw.drawio.png)
 
+### Reglas de negocio
+1. Los usuarios se registran mediante su dni y se les asigna un id
+2. Un usuario puede realizar una reseña del restaurante, con un puntaje entre 1 y 5
+3. Se considera que una mesa esta disponible cuando, en el momento indicado, no tiene reservas o sólo tiene reservas canceladas
+4. Los platos se clasifican en categorías
+5. Las mesas tienen dos ubicaciones posibles: afuera y adentro
 
 ## Alcance Funcional 
 
