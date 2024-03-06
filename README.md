@@ -7,24 +7,20 @@ Este proyecto consiste en una aplicación web para la gestión de un restaurante
 
 ### Backend (API Express)
 
-1. Clona este repositorio en tu máquina local:
+1. Clonar este repositorio:
 ```bash
 git clone https://github.com/chipcasla/utn-dsw.git
 ```
 
-2. Navega al directorio del backend:
+2. Navegar al directorio del backend:
 ```bash
 cd utn-dsw/api-express
 ```
-3. Instala las dependencias del backend:
+3. Instalar las dependencias del backend:
 ```bash
 pnpm install
 ```
-> Asegúrate de tener pnpm instalado en tu sistema antes de seguir estos pasos. Puedes instalarlo globalmente usando npm con el siguiente comando:
-> ```bash
-> npm install -g pnpm
->  ```
-4. Ejecuta el servidor:
+4. Ejecutar el servidor:
 ```bash
 pnpm start:dev
 ```
@@ -32,16 +28,15 @@ El servidor se ejecutará en `http://localhost:3000/`.
 
 ### Frontend (Angular)
 
-1. Abre una nueva terminal.
-2. Navega al directorio del frontend:
+1. Navegar al directorio del frontend:
 ```bash
 cd utn-dsw/frontend
 ```
-3. Instala las dependencias del frontend:
+3. Instalar las dependencias del frontend:
 ```bash
 npm install
 ```
-4. Inicia la aplicación Angular:
+4. Iniciar la aplicación Angular:
 ```bash
 ng serve --o
 ```
