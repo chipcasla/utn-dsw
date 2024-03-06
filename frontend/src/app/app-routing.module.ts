@@ -22,6 +22,7 @@ import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { CategoriaPlatoComponent } from './components/categoria-plato/categoria-plato.component';
 import { CategoriaManagementComponent } from './components/categoria-management/categoria-management.component';
+import { ReseniaManagementComponent } from './components/resenia-management/resenia-management.component';
 
 const routes: Routes = [
   {
@@ -177,6 +178,16 @@ const routes: Routes = [
     canMatch: [roleGuard],
     data: {
       allowedRoles: ['admin'],
+    },
+  },
+
+  {
+    path:'admin/resenias',
+    component: ReseniaManagementComponent,
+    canActivate: [authGuard],
+    canMatch: [roleGuard],
+    data:{
+      allowedRoles: ['admin']
     },
   },
 ];

@@ -32,6 +32,7 @@ import { AddTokenInterceptor } from './utils/add-token.interceptor';
 import { PlatoEditComponent } from './components/plato-edit/plato-edit.component';
 import { CategoriaPlatoComponent } from './components/categoria-plato/categoria-plato.component';
 import { CategoriaManagementComponent } from './components/categoria-management/categoria-management.component';
+import { ReseniaManagementComponent } from './components/resenia-management/resenia-management.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CategoriaManagementComponent } from './components/categoria-management/
     ClienteEditComponent,
     PlatoEditComponent,
     CategoriaPlatoComponent,
-    CategoriaManagementComponent
+    CategoriaManagementComponent,
+    ReseniaManagementComponent
   ],
   imports: [
     BrowserModule,
