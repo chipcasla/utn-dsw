@@ -3,8 +3,8 @@
 ## Grupo
 ### Integrantes
 * Foresi, Alejandro
-* Pecoraro, Lucio
-* Berto, Leandro
+* Pecoraro, Lucio. Legajo: 50239
+* Berto, Leandro. Legajo: 45368
 
 ### Repositorios
 * [frontend app](http://hyperlinkToGihubOrGitlab)
