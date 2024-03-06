@@ -52,8 +52,7 @@ Adicionales para Aprobación
 
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Promociones |
-|Listados | 1. Listado con promociones o descuentos disponibles en un momento dado de restaurantes.<br>2. Un listado especial para identificar a aquellos clientes que visitan regularmente el restaurante o gastan una cantidad significativa.<br>3. Reservas filtradas por cliente muestra datos del cliente y de cada reserve fechas, estado, cantidad de personas|
-|CUU/Epic|1. Realizar reserva de evento especial (aniversario,cumpleaños,etc)(cliente)<br>2. Cancelación de reserva|
-|Otros|1. Envío de confirmacion/recordatorio de reserva por email|
+|Listados | 1. Reservas filtradas por estado |
+|CUU/Epic|1. Cancelación de reserva|
+|Otros|1. Manejo de archivos de imagenes de platos|
 
