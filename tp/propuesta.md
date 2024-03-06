@@ -7,8 +7,8 @@
 * Berto, Leandro. Legajo: 45368
 
 ### Repositorios
-* [frontend app](http://hyperlinkToGihubOrGitlab)
-* [backend app](http://hyperlinkToGihubOrGitlab)
+* [frontend app](https://github.com/chipcasla/utn-dsw/tree/main/frontend)
+* [backend app](https://github.com/chipcasla/utn-dsw/tree/main/api-express)
 
 
 ## Sistema de gestión de reservas de restaurantes
