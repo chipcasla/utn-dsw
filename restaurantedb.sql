@@ -97,7 +97,7 @@ CREATE TABLE `persona` (
   UNIQUE KEY `dni_10` (`dni`),
   UNIQUE KEY `dni_11` (`dni`),
   UNIQUE KEY `dni_12` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +106,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'cliente','23232324','Alex','Turner','5055055057','alexam@gmail.com','asd','2023-10-20 07:32:24','2023-10-27 19:41:14'),(2,'cliente','32323232','Adam','Bareiro','3413334387','ab9@gmail.com','asd','2023-10-27 19:42:35','2023-10-27 19:42:35'),(5,'admin','12312313','Arbiter','Garion','2222222222','head@city.com','$2b$10$NKWoJFCSRBJfbtdecyaLf.wOrgGM5ro9mvGVdaDJiYw0Dbciwp1Za','2023-12-08 16:36:06','2023-12-09 16:02:17'),(6,'cliente','98789876','Kali','RedMist','4324235614','excolor@fixer.com','$2b$10$2utzStLTwqToQV11XpUiMuHNAdbQ.Jg7HkrGYVN2qK5D4zSWu0h8u','2023-12-09 21:49:01','2023-12-11 15:21:32');
+INSERT INTO `persona` VALUES (1,'cliente','23232324','Alex','Turner','5055055057','alexam@gmail.com','asd','2023-10-20 07:32:24','2023-10-27 19:41:14'),(2,'cliente','32323232','Adam','Bareiro','3413334387','ab9@gmail.com','asd','2023-10-27 19:42:35','2023-10-27 19:42:35'),(5,'admin','12312313','Arbiter','Garion','2222222222','head@city.com','$2b$10$NKWoJFCSRBJfbtdecyaLf.wOrgGM5ro9mvGVdaDJiYw0Dbciwp1Za','2023-12-08 16:36:06','2023-12-09 16:02:17'),(6,'cliente','98789876','Kali','RedMist','4324235614','excolor@fixer.com','$2b$10$2utzStLTwqToQV11XpUiMuHNAdbQ.Jg7HkrGYVN2qK5D4zSWu0h8u','2023-12-09 21:49:01','2023-12-11 15:21:32'),(7,'cliente','87654321','Ayin','Lobcorp','1238888888','Ayin@Lcorp.city','$2b$10$qhgS.25E0W4fgnbiTXWWIOfgreMMHvaQPgNfLrG41thMK2yZLK/xO','2024-03-06 13:40:13','2024-03-06 13:42:27');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ CREATE TABLE `reserva` (
   PRIMARY KEY (`id`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `persona` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `reserva` (
 
 LOCK TABLES `reserva` WRITE;
 /*!40000 ALTER TABLE `reserva` DISABLE KEYS */;
-INSERT INTO `reserva` VALUES (4,'2023-10-12 17:00:00',2,'Cancelada',1),(7,'2023-10-29 15:00:00',6,'Completa',1),(8,'2023-10-19 12:00:00',5,'Completa',1),(9,'2023-10-29 22:00:00',5,'Pendiente',2),(11,'2023-12-22 21:52:00',1,'Cancelada',6),(12,'2023-12-28 14:49:00',3,'Cancelada',6),(13,'2024-02-14 20:59:00',4,'Pendiente',6),(14,'2024-03-22 22:00:00',2,'Pendiente',6);
+INSERT INTO `reserva` VALUES (4,'2023-10-12 17:00:00',2,'Cancelada',1),(7,'2023-10-29 15:00:00',6,'Completa',1),(8,'2023-10-19 12:00:00',5,'Completa',1),(9,'2023-10-29 22:00:00',5,'Pendiente',2),(11,'2023-12-22 21:52:00',1,'Cancelada',6),(12,'2023-12-28 14:49:00',3,'Cancelada',6),(13,'2024-02-14 20:59:00',4,'Cancelada',6),(14,'2024-03-22 22:00:00',2,'Cancelada',6),(15,'2024-03-22 22:00:00',2,'Cancelada',6),(16,'2024-03-22 22:00:00',2,'Pendiente',6),(17,'2024-03-21 01:40:00',2,'Pendiente',7);
 /*!40000 ALTER TABLE `reserva` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +192,7 @@ CREATE TABLE `reserva_mesa` (
 
 LOCK TABLES `reserva_mesa` WRITE;
 /*!40000 ALTER TABLE `reserva_mesa` DISABLE KEYS */;
-INSERT INTO `reserva_mesa` VALUES (2,4),(2,7),(2,8),(2,9),(2,11),(2,12),(6,14);
+INSERT INTO `reserva_mesa` VALUES (2,4),(2,7),(2,8),(2,9),(2,11),(2,12),(6,14),(7,15),(6,16),(3,17);
 /*!40000 ALTER TABLE `reserva_mesa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ CREATE TABLE `reseña` (
   PRIMARY KEY (`id`),
   KEY `idCliente` (`idCliente`),
   CONSTRAINT `reseña_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `persona` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -222,7 +222,7 @@ CREATE TABLE `reseña` (
 
 LOCK TABLES `reseña` WRITE;
 /*!40000 ALTER TABLE `reseña` DISABLE KEYS */;
-INSERT INTO `reseña` VALUES (1,'Buena atencion',3,2,'2023-12-06 13:34:43','2023-12-06 13:34:43'),(8,'Horrible, mala atencion y mala comida',1,5,'2023-12-09 16:02:42','2023-12-09 16:02:42'),(14,'Muy buena atencion',4,6,'2024-02-14 20:28:39','2024-02-14 20:28:39');
+INSERT INTO `reseña` VALUES (1,'Buena atencion',3,2,'2023-12-06 13:34:43','2023-12-06 13:34:43'),(14,'Muy buena atencion',4,6,'2024-02-14 20:28:39','2024-02-14 20:28:39'),(15,'No es lo mejor pero se come bien',3,7,'2024-03-06 13:41:52','2024-03-06 13:41:52');
 /*!40000 ALTER TABLE `reseña` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -235,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-06  9:34:51
+-- Dump completed on 2024-03-06 11:21:03
