@@ -52,7 +52,7 @@ Adicionales para Aprobación
 
 |Req|Detalle|
 |:-|:-|
-|Listados | 1. Reservas filtradas por estado |
+|Listados | 1. Reservas filtradas por estado<br> 2. Platos filtrados por categoría |
 |CUU/Epic|1. Cancelación de reserva|
 |Otros|1. Manejo de archivos de imagenes de platos|
 
