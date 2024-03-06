@@ -13,8 +13,8 @@ test('Nueva reserva', async ({ page }) => {
   // Envío el formulario
   await page.click('button[type="submit"]');
 
-  const mensaje = await page.textContent('#bienvenida');
-  expect(mensaje).toContain('Bienvenido');
+  const mensaje = await page.locator('#bienvenida');
+  await expect(mensaje).toContainText("Bienvenido");
   // Verifico que no haya mensajes de error
   const error = await page.$$eval(
     '.text-red-500',
